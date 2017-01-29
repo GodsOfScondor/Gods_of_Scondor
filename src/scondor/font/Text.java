@@ -16,19 +16,17 @@ public class Text {
 	private boolean center = false;
 	private int x,y;
 	private float transparency;
-	private int mode;
 	private int vbo1;
 	private int vbo2;
 	
-	public Text(String text, int x, int y, float size, int mode) {
+	public Text(String text, int x, int y, float size) {
 		this.text = text;
 		this.size = size;
 		this.x = x;
 		this.y = y;
 		this.line_size = 1;
 		this.transparency = 1;
-		this.mode = mode;
-		TextMaster.addText(this, mode);
+		TextMaster.addText(this,1);
 	}
 
 	public void setColor(float r, float g, float b) {
@@ -130,8 +128,8 @@ public class Text {
 	public void recreate() {
 		if (old.equalsIgnoreCase(text)) return;
 		old = text;
-		TextMaster.removeText(this, mode);
-		TextMaster.addText(this, mode);
+		TextMaster.removeText(this,1);
+		TextMaster.addText(this,1);
 	}
 
 	public float getTransparency() {

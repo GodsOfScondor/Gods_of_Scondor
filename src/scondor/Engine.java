@@ -10,10 +10,9 @@ public class Engine {
 	
 	public static void init() {
 		
-//		TextMaster.init();
-		
 		Window.init();
 		RenderMaster.init();
+		TextMaster.init();
 		KeyBoard.init();
 		Mouse.init();
 	}

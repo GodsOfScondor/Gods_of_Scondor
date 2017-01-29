@@ -18,7 +18,7 @@ public abstract class ShaderProgram {
 	private int vertexShaderID;
 	private int fragmentShaderID;
 	private static FloatBuffer matrixBuffer = BufferUtils.createFloatBuffer(16);
-	private static final String PATH = "src/untitled/render/";
+	private static final String PATH = "src/scondor/render/";
 	
 	public ShaderProgram(String vertexFile, String fragmentFile) {
 		vertexShaderID = loadShader(PATH + vertexFile, GL20.GL_VERTEX_SHADER);
