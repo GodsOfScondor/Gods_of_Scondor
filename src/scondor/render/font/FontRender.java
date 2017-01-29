@@ -1,5 +1,7 @@
 package scondor.render.font;
 
+import java.util.List;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
@@ -27,12 +29,12 @@ public class FontRender implements Render{
 		shader.start();
 	}
 	
-	@Override
-	public void render() {
+	public void render(List<Text> list) {
 		prepare();
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, TextMaster.getFont().getTextureAtlas());
-		for (Text text : TextMaster.getTexts()) {
+		
+		for (Text text : list) {
 			GL30.glBindVertexArray(text.getMesh());
 			GL20.glEnableVertexAttribArray(0);
 			GL20.glEnableVertexAttribArray(1);

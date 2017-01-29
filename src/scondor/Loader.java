@@ -32,10 +32,10 @@ public class Loader {
 	
 	public static int[] loadToVAO(float[] vertexPositions, float[] textureCoords) {
 		int vaoID = createVAO();
-		int vbo1 = storeDataInAttributeList(0, 2, vertexPositions);
-		int vbo2 = storeDataInAttributeList(1, 2, textureCoords);
+		storeDataInAttributeList(0, 2, vertexPositions);
+		storeDataInAttributeList(1, 2, textureCoords);
 		unbindVAO();
-		return new int[]{vaoID, vbo1, vbo2};
+		return new int[]{vaoID, vertexPositions.length/2};
 	}
 	
 	public static void addInstancedAttribute(int vao, int vbo, int attribute, int dataSize, int instancedDataLength,

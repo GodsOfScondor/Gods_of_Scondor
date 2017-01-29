@@ -1,31 +1,32 @@
 package scondor.font;
 
 import java.io.File;
-import java.util.List;
 
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL30;
 
 import scondor.Loader;
 import scondor.image.Texture;
+import scondor.render.RenderMaster;
 
 public class TextMaster {
 	
 	private static FontType font;
 	private static TextMeshData data;
-	private static List<Text> texts;
 	
 	public static void init() {
-		font = new FontType(new Texture("res/font/Font").getID(), new File("res/font/pixel.fnt"));
+		font = new FontType(new Texture("font/field").getID(), new File("res/font/field.fnt"));
+		addText(new Text("Hallo", 0, 0, 7), 4);
 	}
 	
-	public static void addText(Text text, int mode) {
+	public static void addText(Text text, int priority) {
 		data = font.loadText(text);
 		int[] xdata = Loader.loadToVAO(data.getVertexPositions(), data.getTextureCoords());
 		text.setMeshInfo(xdata[0], xdata[1]);
+		RenderMaster.addText(text, priority);
 	}
 	
-	public static void removeText(Text text, int mode) {
+	public static void removeText(Text text, int priority) {
 		destroy(text);
 		text.destroy();
 	}
@@ -45,13 +46,5 @@ public class TextMaster {
 	public static FontType getFont() {
 		return font;
 	}
-	
-	public static void update() {
-		
-	}
 
-	public static List<Text> getTexts() {
-		return texts;
-	}
-	
 }
