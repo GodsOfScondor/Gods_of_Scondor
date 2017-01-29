@@ -1,0 +1,2 @@
+# Gods of Scondor
+Cardgame
