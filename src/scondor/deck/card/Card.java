@@ -3,8 +3,14 @@ package scondor.deck.card;
 public abstract class Card {
 	
 	private int mana_cost;
-	
+	/**
+	 * I bin dumm 
+	 * @author Langs
+	 */
 	public Card(int mana_cost){
+		
+		
+		
 		this.mana_cost = mana_cost;
 	}
 	
