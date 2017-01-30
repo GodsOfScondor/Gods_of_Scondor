@@ -7,7 +7,6 @@ import org.lwjgl.opengl.GL30;
 
 import scondor.Loader;
 import scondor.image.Texture;
-import scondor.render.RenderMaster;
 
 public class TextMaster {
 	
@@ -16,14 +15,12 @@ public class TextMaster {
 	
 	public static void init() {
 		font = new FontType(new Texture("font/field").getID(), new File("res/font/field.fnt"));
-		addText(new Text("Hallo", 0, 0, 7), 4);
 	}
 	
 	public static void addText(Text text, int priority) {
 		data = font.loadText(text);
 		int[] xdata = Loader.loadToVAO(data.getVertexPositions(), data.getTextureCoords());
 		text.setMeshInfo(xdata[0], xdata[1]);
-		RenderMaster.addText(text, priority);
 	}
 	
 	public static void removeText(Text text, int priority) {

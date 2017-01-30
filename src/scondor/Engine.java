@@ -1,6 +1,5 @@
 package scondor;
 
-import scondor.font.TextMaster;
 import scondor.inputs.KeyBoard;
 import scondor.inputs.Mouse;
 import scondor.render.RenderMaster;
@@ -12,7 +11,7 @@ public class Engine {
 		
 		Window.init();
 		RenderMaster.init();
-		TextMaster.init();
+		
 		KeyBoard.init();
 		Mouse.init();
 	}

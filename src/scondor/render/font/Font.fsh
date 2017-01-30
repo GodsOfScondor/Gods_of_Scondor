@@ -9,7 +9,7 @@ uniform vec3 color;
 uniform float transparency;
 
 const float width = 0.5;
-const float edge = 0.15;
+const float edge = 0.1;
 
 void main(void){
 	

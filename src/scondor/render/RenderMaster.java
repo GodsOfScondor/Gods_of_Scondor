@@ -6,6 +6,7 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 import scondor.font.Text;
+import scondor.font.TextMaster;
 import scondor.image.Image;
 import scondor.image.Texture;
 import scondor.render.font.FontRender;
@@ -19,15 +20,18 @@ public class RenderMaster {
 	
 	public static void init() {
 		
+		TextMaster.init();
+		
 		for (int n = 0;n<5;n++) image_priorities[n] = new Priority(new ArrayList<Image>());
 		for (int n = 0;n<5;n++) text_priorities[n] = new Priority(new ArrayList<Text>());
-		
-		addImage(new Image(new Texture("bg"), 0, 0, 1000, 563), 2);
 		
 		renders.add(new ImageRender());
 		renders.add(new FontRender());
 		
 		for (Render render : renders) render.setup();
+		
+		addImage(new Image(new Texture("bg"), 0, 0, 1000, 563), 2);
+		addText(new Text("Hallo, ich heiﬂe Langsi Mausi!", 500, 450, 2f), 4);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -49,6 +53,7 @@ public class RenderMaster {
 	
 	@SuppressWarnings("unchecked")
 	public static void addText(Text text, int priority) {
+		TextMaster.addText(text, priority);
 		((List<Text>)text_priorities[priority].getList()).add(text);
 	}
 	
