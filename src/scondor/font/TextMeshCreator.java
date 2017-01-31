@@ -64,9 +64,9 @@ public class TextMeshCreator {
 		List<Float> vertices = new ArrayList<Float>();
 		List<Float> textureCoords = new ArrayList<Float>();
 		for (Line line : lines) {
-			if (text.isCentered()) {
-				curserX = (line.getMaxLength() - line.getLineLength()) / 2;
-			}
+//			if (text.isCentered()) {
+//				curserX = (line.getMaxLength() - line.getLineLength()) / 2;
+//			}
 			for (Word word : line.getWords()) {
 				for (Character letter : word.getCharacters()) {
 					addVerticesForCharacter(curserX, curserY, letter, text.getSize(), vertices);

@@ -5,18 +5,24 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
+import scondor.font.GlowEffect;
+import scondor.font.ShadowEffect;
 import scondor.font.Text;
 import scondor.font.TextMaster;
 import scondor.image.Image;
 import scondor.image.Texture;
 import scondor.render.font.FontRender;
 import scondor.render.image.ImageRender;
+import scondor.util.Color;
 
 public class RenderMaster {
 	
 	private static List<Render> renders = new ArrayList<>();
 	private static Priority[] image_priorities = new Priority[5];
 	private static Priority[] text_priorities = new Priority[5];
+	private static Text text;
+	private static float glow = 1;
+	private static Text text2;
 	
 	public static void init() {
 		
@@ -31,7 +37,11 @@ public class RenderMaster {
 		for (Render render : renders) render.setup();
 		
 		addImage(new Image(new Texture("bg"), 0, 0, 1000, 563), 2);
-		addText(new Text("Hallo, ich heiﬂe Langsi Mausi!", 500, 450, 2f), 4);
+		text = new Text("Lorem ipsum dolor sit amet", 0, 0, 5f, new GlowEffect(new Color(0, 1, 0), 1));
+		text2 = new Text("Lorem ipsum dolor sit amet", 0, 200, 5f, new ShadowEffect(new Color(0, 0, 0), 1));
+		text2.setColor(1, 0, 0);
+		addText(text,4);
+		addText(text2,4);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -39,6 +49,11 @@ public class RenderMaster {
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 		GL11.glClearColor(0, 1, 0, 1);
+		
+		glow = (float) (2f+Math.sin(System.currentTimeMillis()/100));
+		System.out.println(glow);
+		((GlowEffect)text.getEffect()).setGlow(glow);
+		((ShadowEffect)text2.getEffect()).setOffset(glow);
 		
 		for (int n = 0;n<5;n++) for (Render render : renders) {
 			if (render instanceof ImageRender) ((ImageRender)render).render((List<Image>) image_priorities[n].getList());

@@ -2,6 +2,8 @@ package scondor.font;
 
 import org.lwjgl.opengl.Display;
 
+import scondor.render.font.FontShader;
+
 public class Text {
 
 	private String text;
@@ -13,11 +15,12 @@ public class Text {
 	private float r=0,g=0,b=0;
 	private float line_size;
 	private int lines;
-	private boolean center = false;
 	private int x,y;
 	private float transparency;
 	private int vbo1;
 	private int vbo2;
+	
+	private FontEffect effect;
 	
 	public Text(String text, int x, int y, float size) {
 		this.text = text;
@@ -26,6 +29,17 @@ public class Text {
 		this.y = y;
 		this.line_size = 1;
 		this.transparency = 1;
+		TextMaster.addText(this,1);
+	}
+	
+	public Text(String text, int x, int y, float size, FontEffect effect) {
+		this.text = text;
+		this.size = size;
+		this.x = x;
+		this.y = y;
+		this.line_size = 1;
+		this.transparency = 1;
+		this.effect = effect;
 		TextMaster.addText(this,1);
 	}
 
@@ -104,9 +118,32 @@ public class Text {
 	protected void setLines(int number) {
 		this.lines = number;
 	}
-
-	protected boolean isCentered() {
-		return center;
+	
+	/**
+	 * 
+	 * change current font effect
+	 * 
+	 */
+	public void setEffect(FontEffect effect) {
+		this.effect = effect;
+	}
+	
+	/**
+	 * 
+	 * uploads font effect data to fragment shader
+	 * 
+	 */
+	public void effectFont(FontShader shader) {
+		if (effect!= null) effect.loadToShader(shader);
+	}
+	
+	/**
+	 * 
+	 * @return current active effect
+	 * 
+	 */
+	public FontEffect getEffect() {
+		return effect;
 	}
 
 	public String getText() {
@@ -125,6 +162,13 @@ public class Text {
 		}
 	}
 	
+	/**
+	 * 
+	 * recreates all meshes of the new text and destroys the old ones
+	 * 
+	 * - works only if text has changed
+	 * 
+	 */
 	public void recreate() {
 		if (old.equalsIgnoreCase(text)) return;
 		old = text;

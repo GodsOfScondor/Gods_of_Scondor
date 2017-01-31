@@ -38,9 +38,9 @@ public class FontRender implements Render{
 			GL30.glBindVertexArray(text.getMesh());
 			GL20.glEnableVertexAttribArray(0);
 			GL20.glEnableVertexAttribArray(1);
-			shader.loadColor(text.getRedColor(), text.getGreenColor(), text.getBlueColor());
+			shader.loadColor(text.getRedColor(), text.getGreenColor(), text.getBlueColor(), text.getTransparency());
+			text.effectFont(shader);
 			shader.loadTranslation(text.getX(), text.getY());
-			shader.loadTransparency(text.getTransparency());
 			GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, text.getVertices());
 			GL20.glEnableVertexAttribArray(1);
 			GL20.glEnableVertexAttribArray(0);
