@@ -3,11 +3,13 @@ package scondor;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
+import scondor.server.Client;
+
 public class GodsOfScondor {
 	
 	/**
 	 * 
-	 * @author Bernhard Sccharrer
+	 * @author Bernhard Scharrer
 	 * 
 	 */
 	public static void main(String[] args) {
