@@ -37,10 +37,11 @@ public class ImageRender implements Render {
 			
 			GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
 			GL13.glActiveTexture(GL13.GL_TEXTURE0);
-			GL11.glBindTexture(GL11.GL_TEXTURE_2D, img.getTexture().getID());
+			GL11.glBindTexture(GL11.GL_TEXTURE_2D, img.getTex().getID());
 			
 			shader.loadTM(Maths.createTM(img.getX(), img.getY(), img.getWidth(), img.getHeight()));
-			shader.loadData(img.getTexture());
+			shader.loadData(img.getTex());
+			shader.loadTransparency(img.getTransparency());
 			GL11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 0, vc);
 		}
 		shader.stop();

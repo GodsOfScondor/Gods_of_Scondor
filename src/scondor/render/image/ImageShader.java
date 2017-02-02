@@ -12,6 +12,7 @@ public class ImageShader extends ShaderProgram {
 	private int loc_rows;
 	private int loc_columns;
 	private int loc_offset;
+	private int loc_transparency;
 	private Vector2f offset;
 
 	public ImageShader() {
@@ -25,6 +26,7 @@ public class ImageShader extends ShaderProgram {
 		loc_rows = super.getUniformLocation("rows");
 		loc_columns = super.getUniformLocation("columns");
 		loc_offset = super.getUniformLocation("offset");
+		loc_transparency = super.getUniformLocation("transparency");
 	}
 
 	@Override
@@ -42,6 +44,10 @@ public class ImageShader extends ShaderProgram {
 		super.loadVector2f(loc_offset, offset);
 		super.loadFloat(loc_columns, texture.getColumns());
 		super.loadFloat(loc_rows, texture.getRows());
+	}
+	
+	public void loadTransparency(float transparency) {
+		super.loadFloat(loc_transparency, transparency);
 	}
 	
 }

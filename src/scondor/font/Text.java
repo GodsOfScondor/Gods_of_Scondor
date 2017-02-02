@@ -2,6 +2,7 @@ package scondor.font;
 
 import org.lwjgl.opengl.Display;
 
+import scondor.render.RenderMaster;
 import scondor.render.font.FontShader;
 
 public class Text {
@@ -22,17 +23,17 @@ public class Text {
 	
 	private FontEffect effect;
 	
-	public Text(String text, int x, int y, float size) {
+	public Text(String text, int x, int y, float size, int priority) {
 		this.text = text;
 		this.size = size;
 		this.x = x;
 		this.y = y;
 		this.line_size = 1;
 		this.transparency = 1;
-		TextMaster.addText(this,1);
+		RenderMaster.addText(this,priority);
 	}
 	
-	public Text(String text, int x, int y, float size, FontEffect effect) {
+	public Text(String text, int x, int y, float size, FontEffect effect, int priority) {
 		this.text = text;
 		this.size = size;
 		this.x = x;
@@ -40,7 +41,7 @@ public class Text {
 		this.line_size = 1;
 		this.transparency = 1;
 		this.effect = effect;
-		TextMaster.addText(this,1);
+		RenderMaster.addText(this,priority);
 	}
 
 	public void setColor(float r, float g, float b) {
@@ -135,6 +136,9 @@ public class Text {
 	 */
 	public void effectFont(FontShader shader) {
 		if (effect!= null) effect.loadToShader(shader);
+		else {
+			shader.loadEffectData(0.5f, 0.1f, 0.4f, 0.1f, 0, 0);
+		}
 	}
 	
 	/**

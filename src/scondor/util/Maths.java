@@ -12,7 +12,7 @@ public class Maths {
 	public static Matrix4f createTM(int x, int y, int s_x, int s_y) {
 		TM.setIdentity();
 		scale.x = s_x/1000f;
-		scale.y = (s_y/1000f)*((float) Display.getWidth()/Display.getHeight());
+		scale.y = s_y/1000f;
 		translation.x = scale.x - 1 + (x/500f);
 		translation.y = -scale.y + 1 - (y/500f)*((float) Display.getWidth()/Display.getHeight());
 		Matrix4f.translate(translation, TM, TM);

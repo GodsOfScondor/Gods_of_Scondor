@@ -83,6 +83,16 @@ public class FontShader extends ShaderProgram {
 		super.loadVector2f(loc_offset, offset);
 	}
 	
+	public void loadEffectData(float width, float edge, float border_width, float border_edge, float o_x, float o_y) {
+		super.loadFloat(loc_width, width);
+		super.loadFloat(loc_edge, edge);
+		super.loadFloat(loc_border_width, border_width);
+		super.loadFloat(loc_border_edge, border_edge);
+		offset.x = o_x;
+		offset.y = o_y;
+		super.loadVector2f(loc_offset, offset);
+	}
+	
 	public void loadTranslation(int x, int y) {
 		translation.x = (2*x)/1000f;
 		translation.y = (-2*y)/(1000f*Display.getHeight()/Display.getWidth());

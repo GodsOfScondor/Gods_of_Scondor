@@ -37,7 +37,10 @@ public class Window {
 			
 			for (int i=0;i<modes.length;i++) {
 			    if (best != null) {
-			    	if (best.getWidth()*best.getHeight()<modes[i].getWidth()*modes[i].getHeight()) best = modes[i];
+			    	if (best.getWidth()*best.getHeight()<modes[i].getWidth()*modes[i].getHeight()) {
+			    		best = modes[i];
+			    		if (best.getWidth()*best.getHeight()==1920*1080) return best;
+			    	}
 			    } else {
 			    	best = modes[i];
 			    }

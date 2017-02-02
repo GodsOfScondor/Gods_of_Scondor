@@ -1,5 +1,8 @@
 package scondor;
 
+import scondor.font.Text;
+import scondor.image.Image;
+import scondor.image.Texture;
 import scondor.inputs.KeyBoard;
 import scondor.inputs.Mouse;
 import scondor.render.RenderMaster;
@@ -19,6 +22,10 @@ public class Engine {
 		
 		KeyBoard.init();
 		Mouse.init();
+		
+//		new Image(new Texture("bg"), 0, 0, 1000, 900, 4);
+		new Text("Hallo du da!", 0, 0, 1, 4).setTransparency(0.5f);
+		
 	}
 	
 	public static void update() {

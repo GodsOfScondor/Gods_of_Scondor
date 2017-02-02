@@ -28,6 +28,6 @@ void main(void){
 	float final_alpha = alpha + (1.0 - alpha) * alpha2;
 	vec3 final_color = mix(outline_color, color, alpha / final_alpha);
 	
-	out_color = vec4(final_color ,final_alpha);
+	out_color = vec4(final_color ,min(transparency,final_alpha));
 	
 }
