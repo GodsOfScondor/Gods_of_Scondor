@@ -3,7 +3,7 @@ package scondor;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
-import scondor.server.Client;
+//import scondor.server.Client;
 
 public class GodsOfScondor {
 	
