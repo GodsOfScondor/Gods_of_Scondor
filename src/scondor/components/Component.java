@@ -7,14 +7,7 @@ public abstract class Component {
 	
 	protected List<Component> comps;
 	protected int x,y,width,height;
-	
-	public Component() {
-		comps = new ArrayList<>();
-		this.x=0;
-		this.y=0;
-		this.width=0;
-		this.height=0;
-	}
+	private boolean visible;
 	
 	public Component(int x,int y,int width,int height) {
 		comps = new ArrayList<>();
@@ -22,9 +15,12 @@ public abstract class Component {
 		this.y=y;
 		this.width=width;
 		this.height=height;
+		ComponentMaster.comps.add(this);
+		setVisible(false);
 	}
 	
 	public void setVisible(boolean visible) {
+		this.visible = visible;
 		for (Component comp : comps) {
 			comp.setVisible(visible);
 		}
@@ -57,5 +53,9 @@ public abstract class Component {
 	}
 
 	protected abstract void update();
+	
+	public boolean isVisible() {
+		return visible;
+	}
 	
 }

@@ -6,6 +6,7 @@ import scondor.image.Texture;
 public class Panel extends Component {
 	
 	private Image background;
+	private boolean visible;
 	
 	public Panel(int x, int y, int width, int height) {
 		super(x, y, width, height);
@@ -13,24 +14,24 @@ public class Panel extends Component {
 	
 	public void setBackground(Texture tex, int priority) {
 		if (background!=null) {
-			background.remove();
+			background.destroy();
 		}
 		this.background = new Image(tex, x, y, width, height, priority);
 	}
 	
 	@Override
 	protected void discard() {
-		background.setTransparency(0f);
+		if (background!=null) background.setTransparency(0f);
 	}
 
 	@Override
 	protected void showup() {
-		background.setTransparency(1f);
+		if (background!=null) background.setTransparency(1f);
 	}
 	
 	@Override
 	protected void destroyComp() {
-		background.remove();
+		if (background!=null) background.destroy();
 	}
 
 	@Override

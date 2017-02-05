@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ComponentMaster {
 	
-	private static List<Component> comps = new ArrayList<>();
+	protected static List<Component> comps = new ArrayList<>();
 	
 	public static void init() {
 		

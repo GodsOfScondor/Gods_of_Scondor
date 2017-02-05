@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL30;
 import scondor.font.Text;
 import scondor.font.TextMaster;
 import scondor.render.Render;
+import scondor.util.Maths;
 
 public class FontRender implements Render{
 
@@ -40,7 +41,7 @@ public class FontRender implements Render{
 			GL20.glEnableVertexAttribArray(1);
 			shader.loadColor(text.getRedColor(), text.getGreenColor(), text.getBlueColor(), text.getTransparency());
 			text.effectFont(shader);
-			shader.loadTranslation(text.getX(), text.getY());
+			shader.loadTranslation(text.getX(), (int) (text.getY()/Maths.getScreenRatio()));
 			GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, text.getVertices());
 			GL20.glEnableVertexAttribArray(1);
 			GL20.glEnableVertexAttribArray(0);

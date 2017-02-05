@@ -14,7 +14,7 @@ public class TextMaster {
 	private static TextMeshData data;
 	
 	public static void init() {
-		font = new FontType(new Texture("font/field").getID(), new File("res/font/field.fnt"));
+		font = new FontType(new Texture("font/font2").getID(), new File("res/font/font2.fnt"));
 	}
 	
 	public static void addText(Text text) {

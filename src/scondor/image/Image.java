@@ -68,7 +68,7 @@ public class Image {
 		this.transparency = transparency;
 	}
 	
-	public void remove() {
+	public void destroy() {
 		RenderMaster.removeImage(this, priority);
 	}
 	

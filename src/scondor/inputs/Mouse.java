@@ -13,7 +13,7 @@ public class Mouse {
 	private static boolean[] typed = new boolean[2];
 	private static boolean[] released = new boolean[2];
 	private static int wheel;
-	private static boolean debug = true;
+	private static boolean debug = false;
 	
 	public static void init() {
 		for (n=0;n<2;n++) released[n] = true;
@@ -24,7 +24,7 @@ public class Mouse {
 		for (n=0;n<2;n++) typed[n] = false;
 		
 		X = (int) (org.lwjgl.input.Mouse.getX()*(1000f/Display.getWidth()));
-		Y = (int) ((Display.getHeight()-org.lwjgl.input.Mouse.getY()*(1000f/Display.getWidth())));
+		Y = 1000-(int) (org.lwjgl.input.Mouse.getY()*(1000f/Display.getHeight()));
 		pressed[M_LEFT] = org.lwjgl.input.Mouse.isButtonDown(0);
 		pressed[M_RIGHT] = org.lwjgl.input.Mouse.isButtonDown(1);
 		

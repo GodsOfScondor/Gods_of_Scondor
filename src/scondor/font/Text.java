@@ -4,6 +4,7 @@ import org.lwjgl.opengl.Display;
 
 import scondor.render.RenderMaster;
 import scondor.render.font.FontShader;
+import scondor.util.Maths;
 
 public class Text {
 
@@ -193,11 +194,11 @@ public class Text {
 		for (Line line : TextMaster.getFont().getBuilder().createStructure(this)) {
 			for (Word word : line.getWords()) {
 				for (Character c : word.getCharacters()) {
-					width+=c.getxAdvance()*Display.getWidth()*size;
+					width+=c.getxAdvance()*Display.getWidth()*size*(1/Maths.getScreenRatio());
 				}
 			}
 		}
-		return width;
+		return (int) (width);
 	}
 
 }

@@ -8,7 +8,7 @@ import org.lwjgl.opengl.Display;
 
 public class TextMeshCreator {
 
-	protected static final double LINE_HEIGHT = 32f/Display.getHeight();
+	public static final double LINE_HEIGHT = 32f/Display.getHeight();
 	protected static final int SPACE_ASCII = 32;
 
 	private MetaFile metaData;

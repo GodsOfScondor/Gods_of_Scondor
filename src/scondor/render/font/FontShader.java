@@ -11,6 +11,7 @@ public class FontShader extends ShaderProgram {
 	private Vector2f translation = new Vector2f();
 	private Vector2f offset = new Vector2f();
 	private Vector3f color = new Vector3f();
+	private Vector3f outline_color = new Vector3f();
 	
 	private int loc_color;
 	private int loc_translation;
@@ -56,31 +57,19 @@ public class FontShader extends ShaderProgram {
 	}
 	
 	public void loadGlowEffect(float r, float g, float b, float glow) {
-		color.x = r;
-		color.y = g;
-		color.z = b;
-		super.loadVector3f(loc_outline_color, color);
-		offset.x = 0;
-		offset.y = 0;
-		super.loadFloat(loc_width, 0.5f);
-		super.loadFloat(loc_edge, 0.1f);
-		super.loadFloat(loc_border_width, 0.15f-glow*0.4f);
-		super.loadFloat(loc_border_edge, 0.5f+glow*0.52f);
-		super.loadVector2f(loc_offset, offset);
+		outline_color.x = r;
+		outline_color.y = g;
+		outline_color.z = b;
+		super.loadVector3f(loc_outline_color, outline_color);
+		loadEffectData(0.5f, 0.1f, 0.15f-glow*0.4f, 0.5f+glow*0.52f, 0, 0);
 	}
 	
 	public void loadShadowEffect(float r, float g, float b, float o) {
-		color.x = r;
-		color.y = g;
-		color.z = b;
-		super.loadVector3f(loc_outline_color, color);
-		offset.x = 0.001f*o;
-		offset.y = -0.001f*o;
-		super.loadFloat(loc_width, 0.5f);
-		super.loadFloat(loc_edge, 0.1f);
-		super.loadFloat(loc_border_width, 0.5f);
-		super.loadFloat(loc_border_edge, 0.1f);
-		super.loadVector2f(loc_offset, offset);
+		outline_color.x = r;
+		outline_color.y = g;
+		outline_color.z = b;
+		super.loadVector3f(loc_outline_color, outline_color);
+		loadEffectData(0.5f, 0.1f, 0.5f, 0.1f, 0.001f*o, -0.001f*o);
 	}
 	
 	public void loadEffectData(float width, float edge, float border_width, float border_edge, float o_x, float o_y) {
@@ -97,6 +86,14 @@ public class FontShader extends ShaderProgram {
 		translation.x = (2*x)/1000f;
 		translation.y = (-2*y)/(1000f*Display.getHeight()/Display.getWidth());
 		super.loadVector2f(loc_translation, translation);
+	}
+
+	public void loadOutlineEffect(float r, float g, float b, float outline) {
+		outline_color.x = r;
+		outline_color.y = g;
+		outline_color.z = b;
+		super.loadVector3f(loc_outline_color, outline_color);
+		loadEffectData(0.5f, 0.1f, 0.5f + 0.1f*outline, 0.1f, 0, 0);
 	}
 	
 }

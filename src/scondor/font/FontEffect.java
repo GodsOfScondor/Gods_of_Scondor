@@ -8,9 +8,9 @@ public abstract class FontEffect {
 	protected float r,g,b;
 
 	public FontEffect(Color color) {
-		r = 1f/color.getR();
-		g = 1f/color.getG();
-		b = 1f/color.getB();
+		r = 1f/(256-color.getR());
+		g = 1f/(256-color.getG());
+		b = 1f/(256-color.getB());
 	}
 
 	public Color getColor() {
