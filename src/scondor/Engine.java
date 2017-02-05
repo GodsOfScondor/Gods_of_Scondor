@@ -1,5 +1,6 @@
 package scondor;
 
+import scondor.components.Panel;
 import scondor.font.Text;
 import scondor.image.Image;
 import scondor.image.Texture;
@@ -23,8 +24,9 @@ public class Engine {
 		KeyBoard.init();
 		Mouse.init();
 		
-		new Image(new Texture("bg"), 0, 0, 1000, 1000, 4);
-		new Text("Hallo du da!", 0, 0, 1, 4).setColor(1, 1, 1);
+		Panel panel = new Panel(0, 0, 100, 100);
+		panel.setBackground(new Texture("bg"), 1);
+//		new Text("Hallo du da!", 0, 0, 1, 4).setColor(1, 1, 1);
 		
 	}
 	

@@ -12,12 +12,16 @@ public class Maths {
 	public static Matrix4f createTM(int x, int y, int s_x, int s_y) {
 		TM.setIdentity();
 		scale.x = s_x/1000f;
-		scale.y = s_y/1000f;
+		scale.y = s_y/1000f*getScreenRatio();
 		translation.x = scale.x - 1 + (x/500f);
-		translation.y = -scale.y + 1 - (y/500f)*((float) Display.getWidth()/Display.getHeight());
+		translation.y = -scale.y + 1 - (y/500f);
 		Matrix4f.translate(translation, TM, TM);
 		Matrix4f.scale(scale, TM, TM);
 		return TM;
+	}
+	
+	public static float getScreenRatio() {
+		return ((float) Display.getWidth()/Display.getHeight());
 	}
 	
 }

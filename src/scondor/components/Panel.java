@@ -7,6 +7,10 @@ public class Panel extends Component {
 	
 	private Image background;
 	
+	public Panel(int x, int y, int width, int height) {
+		super(x, y, width, height);
+	}
+	
 	public void setBackground(Texture tex, int priority) {
 		if (background!=null) {
 			background.remove();
