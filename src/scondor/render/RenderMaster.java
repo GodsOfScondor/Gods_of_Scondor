@@ -76,8 +76,20 @@ public class RenderMaster {
 	 */
 	@SuppressWarnings("unchecked")
 	public static void addText(Text text, int priority) {
-		TextMaster.addText(text, priority);
+		TextMaster.addText(text);
 		((List<Text>)text_priorities[priority].getList()).add(text);
+	}
+	
+	/**
+	 * 
+	 * removes a new text
+	 * should only be used via Text class
+	 * 
+	 */
+	@SuppressWarnings("unchecked")
+	public static void removeText(Text text, int priority) {
+		TextMaster.removeText(text);
+		((List<Text>)text_priorities[priority].getList()).remove(text);
 	}
 	
 	/**
@@ -89,6 +101,17 @@ public class RenderMaster {
 	@SuppressWarnings("unchecked")
 	public static void addImage(Image image, int priority) {
 		((List<Image>)image_priorities[priority].getList()).add(image);
+	}
+	
+	/**
+	 * 
+	 * removes a new image
+	 * should only be used via Image class
+	 * 
+	 */
+	@SuppressWarnings("unchecked")
+	public static void removeImage(Image image, int priority) {
+		((List<Image>)image_priorities[priority].getList()).remove(image);
 	}
 	
 }

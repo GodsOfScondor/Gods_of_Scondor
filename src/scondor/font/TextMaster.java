@@ -17,13 +17,13 @@ public class TextMaster {
 		font = new FontType(new Texture("font/field").getID(), new File("res/font/field.fnt"));
 	}
 	
-	public static void addText(Text text, int priority) {
+	public static void addText(Text text) {
 		data = font.loadText(text);
 		int[] xdata = Loader.loadToVAO(data.getVertexPositions(), data.getTextureCoords());
 		text.setMeshInfo(xdata[0], xdata[1]);
 	}
 	
-	public static void removeText(Text text, int priority) {
+	public static void removeText(Text text) {
 		destroy(text);
 		text.destroy();
 	}

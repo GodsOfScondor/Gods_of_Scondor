@@ -7,6 +7,7 @@ public class Image {
 	private int x,y,width,height;
 	private Texture tex;
 	private float transparency;
+	private int priority;
 	
 	public Image(Texture tex, int x, int y, int width, int height, int priority) {
 		this.tex = tex;
@@ -15,6 +16,7 @@ public class Image {
 		this.width = width;
 		this.height = height;
 		this.transparency = 1;
+		this.priority = priority;
 		RenderMaster.addImage(this, priority);
 	}
 
@@ -64,6 +66,10 @@ public class Image {
 
 	public void setTransparency(float transparency) {
 		this.transparency = transparency;
+	}
+	
+	public void remove() {
+		RenderMaster.removeImage(this, priority);
 	}
 	
 }

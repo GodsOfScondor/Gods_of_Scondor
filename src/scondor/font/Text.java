@@ -176,8 +176,8 @@ public class Text {
 	public void recreate() {
 		if (old.equalsIgnoreCase(text)) return;
 		old = text;
-		TextMaster.removeText(this,1);
-		TextMaster.addText(this,1);
+		TextMaster.removeText(this);
+		TextMaster.addText(this);
 	}
 
 	public float getTransparency() {

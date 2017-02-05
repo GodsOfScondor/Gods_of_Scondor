@@ -28,10 +28,12 @@ public abstract class Component {
 		for (Component comp : comps) {
 			comp.setVisible(visible);
 		}
-		discard();
+		if (visible) showup();
+		else discard();
 	}
 	
 	protected abstract void discard();
+	protected abstract void showup();
 	
 	public void destroy() {
 		for (Component comp : comps) {
@@ -53,5 +55,7 @@ public abstract class Component {
 	public void remove(Component comp) {
 		comps.remove(comp);
 	}
+
+	protected abstract void update();
 	
 }

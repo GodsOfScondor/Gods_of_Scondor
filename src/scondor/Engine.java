@@ -23,8 +23,8 @@ public class Engine {
 		KeyBoard.init();
 		Mouse.init();
 		
-//		new Image(new Texture("bg"), 0, 0, 1000, 900, 4);
-		new Text("Hallo du da!", 0, 0, 1, 4).setTransparency(0.5f);
+		new Image(new Texture("bg"), 0, 0, 1000, 1000, 4);
+		new Text("Hallo du da!", 0, 0, 1, 4).setColor(1, 1, 1);
 		
 	}
 	
