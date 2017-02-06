@@ -10,15 +10,17 @@ import scondor.image.Texture;
 
 public class TextMaster {
 	
-	private static FontType font;
 	private static TextMeshData data;
+	private static FontType[] fonts;
 	
 	public static void init() {
-		font = new FontType(new Texture("font/font2").getID(), new File("res/font/font2.fnt"));
+		fonts = new FontType[10];
+		fonts[0] = new FontType(new Texture("font/font1").getID(), new File("res/font/font1.fnt"));
+		fonts[1] = new FontType(new Texture("font/font2").getID(), new File("res/font/font2.fnt"));
 	}
 	
 	public static void addText(Text text) {
-		data = font.loadText(text);
+		data = fonts[text.getFontID()].loadText(text);
 		int[] xdata = Loader.loadToVAO(data.getVertexPositions(), data.getTextureCoords());
 		text.setMeshInfo(xdata[0], xdata[1]);
 	}
@@ -40,8 +42,8 @@ public class TextMaster {
         GL30.glDeleteVertexArrays(text.getMesh());
 	}
 	
-	public static FontType getFont() {
-		return font;
+	public static FontType getFont(int id) {
+		return fonts[id];
 	}
 
 }

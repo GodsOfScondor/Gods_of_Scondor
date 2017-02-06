@@ -46,13 +46,25 @@ public abstract class Component {
 	
 	public void add(Component comp) {
 		comps.add(comp);
+		setVisible(visible);
 	}
 	
 	public void remove(Component comp) {
 		comps.remove(comp);
+		comp.setVisible(false);
+		comp.destroy();
+		setVisible(visible);
 	}
 
 	protected abstract void update();
+	protected abstract void setPriority(int priority);
+	
+	public void validate(int priority) {
+		setPriority(priority);
+		for (Component comp : comps) {
+			comp.validate(priority);
+		}
+	}
 	
 	public boolean isVisible() {
 		return visible;

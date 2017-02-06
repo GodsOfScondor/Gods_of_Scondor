@@ -21,17 +21,20 @@ public class Text {
 	private float transparency;
 	private int vbo1;
 	private int vbo2;
+	private int font_id;
 	
 	private FontEffect effect;
+	private int priority = -1;
 	
-	public Text(String text, int x, int y, float size, int priority) {
+	public Text(String text, int x, int y, float size, int font_id, int priority) {
 		this.text = text;
 		this.size = size;
 		this.x = x;
 		this.y = y;
 		this.line_size = 1;
 		this.transparency = 1;
-		RenderMaster.addText(this,priority);
+		this.font_id = font_id;
+		setPriority(priority);
 	}
 	
 	public Text(String text, int x, int y, float size, FontEffect effect, int priority) {
@@ -42,7 +45,14 @@ public class Text {
 		this.line_size = 1;
 		this.transparency = 1;
 		this.effect = effect;
-		RenderMaster.addText(this,priority);
+		setPriority(priority);
+	}
+	
+	public void setPriority(int priority) {
+		if (this.priority == -1) if (priority != -1) {
+			this.priority = priority;
+			RenderMaster.addText(this, priority);
+		}
 	}
 
 	public void setColor(float r, float g, float b) {
@@ -191,7 +201,7 @@ public class Text {
 	
 	public int getWidth() {
 		int width = 0;
-		for (Line line : TextMaster.getFont().getBuilder().createStructure(this)) {
+		for (Line line : TextMaster.getFont(font_id).getBuilder().createStructure(this)) {
 			for (Word word : line.getWords()) {
 				for (Character c : word.getCharacters()) {
 					width+=c.getxAdvance()*Display.getWidth()*size*(1/Maths.getScreenRatio());
@@ -199,6 +209,10 @@ public class Text {
 			}
 		}
 		return (int) (width);
+	}
+
+	public int getFontID() {
+		return font_id;
 	}
 
 }

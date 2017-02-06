@@ -4,57 +4,51 @@ import org.lwjgl.opengl.Display;
 
 import scondor.font.FontEffect;
 import scondor.font.Text;
-import scondor.image.Image;
-import scondor.image.Texture;
 import scondor.inputs.Mouse;
 import scondor.util.Action;
-import scondor.util.Maths;
 
 public class Button extends Component {
 
 	private boolean enabled;
 	private Action action;
-	private Image background;
 	private Text text;
-	private float r, g, b, size;
+	private float r, g, b;
+	private float damper;
 
-	public Button(String text, int x, int y, float size, int priority, Action action) {
+	public Button(String text, int x, int y, float size, int font_id, Action action) {
 		super(x, y, 0, 0);
 		enabled = true;
 		this.action = action;
 		this.enabled = true;
-		this.text = new Text(text, x, y, size, priority);
-		super.width = (int) (this.text.getWidth());
+		this.text = new Text(text, x, y, size, font_id, -1);
+		super.width = 1;
 		super.height = (int) (size*(Display.getHeight() / 32)-10);
 		this.r = 0;
 		this.g = 0;
 		this.b = 0;
-		this.size = size;
+		this.damper = 0.5f;
 	}
 
-	public void setColor(float r, float g, float b) {
+	public Button setColor(float r, float g, float b) {
 		this.r = r;
 		this.g = g;
 		this.b = b;
 		text.setColor(r, g, b);
-	}
-
-	public void setBackground(Texture tex, int priority) {
-		if (background != null) {
-			background.destroy();
-		}
-		this.background = new Image(tex, (int)(x-10*size-5), (int)(y-10*size), (int)(width+20*size), (int)((height+20*size)/Maths.getScreenRatio()), priority);
-//		this.background = new Image(tex, x, y, width, (int) (height*0.5f), priority);
+		return this;
 	}
 	
-	public void setEffect(FontEffect effect) {
+	public Button setDamper(float damper) {
+		this.damper = damper;
+		return this;
+	}
+	
+	public Button setEffect(FontEffect effect) {
 		this.text.setEffect(effect);
+		return this;
 	}
 
 	@Override
 	protected void discard() {
-		if (background != null)
-			background.setTransparency(0f);
 		if (text != null)
 			text.setTransparency(0f);
 		enabled = false;
@@ -62,8 +56,6 @@ public class Button extends Component {
 
 	@Override
 	protected void showup() {
-		if (background != null)
-			background.setTransparency(1f);
 		if (text != null)
 			text.setTransparency(1f);
 		enabled = true;
@@ -71,8 +63,6 @@ public class Button extends Component {
 
 	@Override
 	protected void destroyComp() {
-		if (background != null)
-			background.destroy();
 		if (text != null)
 			text.destroy();
 	}
@@ -80,7 +70,7 @@ public class Button extends Component {
 	@Override
 	protected void update() {
 		if (enabled && Mouse.X >= x && Mouse.X <= x + width && Mouse.Y >= y && Mouse.Y <= y + height) {
-			text.setColor(r+0.5f, g+0.5f, b+0.5f);
+			text.setColor(r+damper, g+damper, b+damper);
 			if (Mouse.isButtonTyped(0)) {
 				if (action != null)
 					action.perform();
@@ -88,6 +78,12 @@ public class Button extends Component {
 		} else {
 			text.setColor(r, g, b);
 		}
+	}
+
+	@Override
+	protected void setPriority(int priority) {
+		text.setPriority(priority);
+		super.width = (int) (this.text.getWidth());
 	}
 
 }

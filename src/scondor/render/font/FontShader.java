@@ -61,7 +61,7 @@ public class FontShader extends ShaderProgram {
 		outline_color.y = g;
 		outline_color.z = b;
 		super.loadVector3f(loc_outline_color, outline_color);
-		loadEffectData(0.5f, 0.1f, 0.15f-glow*0.4f, 0.5f+glow*0.52f, 0, 0);
+		loadEffectData(0.5f, 0.1f, 0.45f, 0.5f+0.02f*glow, 0, 0);
 	}
 	
 	public void loadShadowEffect(float r, float g, float b, float o) {
@@ -70,6 +70,15 @@ public class FontShader extends ShaderProgram {
 		outline_color.z = b;
 		super.loadVector3f(loc_outline_color, outline_color);
 		loadEffectData(0.5f, 0.1f, 0.5f, 0.1f, 0.001f*o, -0.001f*o);
+	}
+	
+
+	public void loadOutlineEffect(float r, float g, float b, float outline) {
+		outline_color.x = r;
+		outline_color.y = g;
+		outline_color.z = b;
+		super.loadVector3f(loc_outline_color, outline_color);
+		loadEffectData(0.5f, 0.1f, 0.5f + 0.1f*outline, 0.1f, 0, 0);
 	}
 	
 	public void loadEffectData(float width, float edge, float border_width, float border_edge, float o_x, float o_y) {
@@ -86,14 +95,6 @@ public class FontShader extends ShaderProgram {
 		translation.x = (2*x)/1000f;
 		translation.y = (-2*y)/(1000f*Display.getHeight()/Display.getWidth());
 		super.loadVector2f(loc_translation, translation);
-	}
-
-	public void loadOutlineEffect(float r, float g, float b, float outline) {
-		outline_color.x = r;
-		outline_color.y = g;
-		outline_color.z = b;
-		super.loadVector3f(loc_outline_color, outline_color);
-		loadEffectData(0.5f, 0.1f, 0.5f + 0.1f*outline, 0.1f, 0, 0);
 	}
 	
 }

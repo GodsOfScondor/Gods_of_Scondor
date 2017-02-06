@@ -1,19 +1,18 @@
 package scondor.font;
 
 import scondor.render.font.FontShader;
-import scondor.util.Color;
 
 public class ShadowEffect extends FontEffect {
 
 	private float offset;
 
-	public ShadowEffect(Color color, float offset) {
-		super(color);
+	public ShadowEffect(float r, float g, float b, float offset) {
+		super(r,g,b);
 		this.offset = offset;
 	}
 	
 	public ShadowEffect(float offset) {
-		super(new Color(0, 0, 0));
+		super(0,0,0);
 		this.offset = offset;
 	}
 	

@@ -1,37 +1,41 @@
 package scondor.components;
 
+import scondor.font.FontEffect;
 import scondor.font.Text;
 
 public class Label extends Component {
 	
 	private Text text;
 	
-	public Label(String text, int x, int y, float size, int priority) {
+	public Label(String text, int x, int y, float size, int font_id) {
 		super(x, y, 1, 1);
-		this.text = new Text(text, x, y, size, priority);
+		this.text = new Text(text, x, y, size, font_id, -1);
 	}
 	
-	public void setColor(float r, float g, float b) {
+	public Label setColor(float r, float g, float b) {
 		text.setColor(r, g, b);
+		return this;
 	}
 	
-	public void setText(String text) {
+	public Label setText(String text) {
 		this.text.setText(text);
 		this.text.recreate();
+		return this;
 	}
 	
-	public String getText() {
-		return text.getText();
+	public Label setEffect(FontEffect effect) {
+		if (text!=null) text.setEffect(effect);
+		return this;
 	}
 	
 	@Override
 	protected void discard() {
-		text.setTransparency(0f);
+		if (text!=null) text.setTransparency(0f);
 	}
 
 	@Override
 	protected void showup() {
-		text.setTransparency(1f);
+		if (text!=null) text.setTransparency(1f);
 	}
 
 	@Override
@@ -41,5 +45,10 @@ public class Label extends Component {
 
 	@Override
 	protected void update() {}
+
+	@Override
+	protected void setPriority(int priority) {
+		text.setPriority(priority);
+	}
 	
 }

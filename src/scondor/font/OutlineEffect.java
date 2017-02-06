@@ -1,15 +1,13 @@
 package scondor.font;
 
 import scondor.render.font.FontShader;
-import scondor.util.Color;
 
 public class OutlineEffect extends FontEffect {
 
-	private float r,g,b;
 	private float outline;
 
-	public OutlineEffect(Color color, float outline) {
-		super(color);
+	public OutlineEffect(float r, float g, float b, float outline) {
+		super(r,g,b);
 		this.outline = outline;
 	}
 

@@ -1,14 +1,13 @@
 package scondor.font;
 
 import scondor.render.font.FontShader;
-import scondor.util.Color;
 
 public class GlowEffect extends FontEffect {
 	
 	private float glow;
 	
-	public GlowEffect(Color color, float glow) {
-		super(color);
+	public GlowEffect(float r, float g, float b, float glow) {
+		super(r,g,b);
 		this.glow = glow;
 	}
 	

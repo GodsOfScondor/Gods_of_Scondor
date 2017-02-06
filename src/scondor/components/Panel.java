@@ -6,17 +6,24 @@ import scondor.image.Texture;
 public class Panel extends Component {
 	
 	private Image background;
-	private boolean visible;
+	private int priority;
 	
-	public Panel(int x, int y, int width, int height) {
+	public Panel(int x, int y, int width, int height, int priority) {
 		super(x, y, width, height);
+		this.priority = priority;
 	}
 	
-	public void setBackground(Texture tex, int priority) {
+	public Panel setBackground(Texture tex) {
 		if (background!=null) {
 			background.destroy();
 		}
-		this.background = new Image(tex, x, y, width, height, priority);
+		this.background = new Image(tex, x, y, width, height, -1);
+		return this;
+	}
+	
+	public void show() {
+		validate(priority);
+		setVisible(true);
 	}
 	
 	@Override
@@ -36,5 +43,10 @@ public class Panel extends Component {
 
 	@Override
 	protected void update() {}
+
+	@Override
+	protected void setPriority(int priority) {
+		background.setPriority(priority);
+	}
 	
 }
