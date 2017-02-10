@@ -1,4 +1,4 @@
-package scondor.font;
+package scondor.font.mesh;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.lwjgl.opengl.Display;
+
+import scondor.font.Character;
 
 /**
  * Provides functionality for getting the values from a font file.
@@ -47,7 +49,7 @@ public class MetaFile {
 	 * @param file
 	 *            - the font file.
 	 */
-	protected MetaFile(File file) {
+	public MetaFile(File file) {
 		this.aspectRatio = (double) Display.getWidth() / (double) Display.getHeight();
 		openFile(file);
 		loadPaddingData();
@@ -57,11 +59,11 @@ public class MetaFile {
 		close();
 	}
 
-	protected double getSpaceWidth() {
+	public double getSpaceWidth() {
 		return spaceWidth;
 	}
 
-	protected Character getCharacter(int ascii) {
+	public Character getCharacter(int ascii) {
 		return metaData.get(ascii);
 	}
 

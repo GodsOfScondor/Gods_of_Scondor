@@ -2,8 +2,8 @@ package scondor.components;
 
 import org.lwjgl.opengl.Display;
 
-import scondor.font.FontEffect;
 import scondor.font.Text;
+import scondor.font.effect.FontEffect;
 import scondor.inputs.Mouse;
 import scondor.util.Action;
 
@@ -84,6 +84,21 @@ public class Button extends Component {
 	protected void setPriority(int priority) {
 		text.setPriority(priority);
 		super.width = (int) (this.text.getWidth());
+	}
+	
+	public Button fade(float start, float end, int time) {
+		text.fade(start, end, time);
+		return this;
+	}
+	
+	public Button slideX(int start, int end, int time) {
+		text.slideX(start, end, time);
+		return this;
+	}
+	
+	public Button slideY(int start, int end, int time) {
+		text.slideY(start, end, time);
+		return this;
 	}
 
 }

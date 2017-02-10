@@ -35,6 +35,9 @@ public class FontRender implements Render{
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		
 		for (Text text : list) {
+			
+			text.update();
+			
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, TextMaster.getFont(text.getFontID()).getTextureAtlas());
 			GL30.glBindVertexArray(text.getMesh());
 			GL20.glEnableVertexAttribArray(0);

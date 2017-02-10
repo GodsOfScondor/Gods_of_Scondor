@@ -1,4 +1,4 @@
-package scondor.font;
+package scondor.font.effect;
 
 import scondor.render.font.FontShader;
 

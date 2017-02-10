@@ -1,7 +1,7 @@
 package scondor.components;
 
-import scondor.font.FontEffect;
 import scondor.font.Text;
+import scondor.font.effect.FontEffect;
 
 public class Label extends Component {
 	
@@ -49,6 +49,21 @@ public class Label extends Component {
 	@Override
 	protected void setPriority(int priority) {
 		text.setPriority(priority);
+	}
+	
+	public Label fade(float start, float end, int time) {
+		text.fade(start, end, time);
+		return this;
+	}
+	
+	public Label slideX(int start, int end, int time) {
+		text.slideX(start, end, time);
+		return this;
+	}
+	
+	public Label slideY(int start, int end, int time) {
+		text.slideY(start, end, time);
+		return this;
 	}
 	
 }

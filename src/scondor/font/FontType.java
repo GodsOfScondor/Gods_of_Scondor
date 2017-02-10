@@ -2,6 +2,9 @@ package scondor.font;
 
 import java.io.File;
 
+import scondor.font.mesh.TextMeshCreator;
+import scondor.font.mesh.TextMeshData;
+
 /**
  * Represents a font. It holds the font's texture atlas as well as having the
  * ability to create the quad vertices for any text using this font.

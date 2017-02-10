@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL30;
 
 import scondor.Loader;
+import scondor.font.mesh.TextMeshData;
 import scondor.image.Texture;
 
 public class TextMaster {
@@ -17,6 +18,7 @@ public class TextMaster {
 		fonts = new FontType[10];
 		fonts[0] = new FontType(new Texture("font/font1").getID(), new File("res/font/font1.fnt"));
 		fonts[1] = new FontType(new Texture("font/font2").getID(), new File("res/font/font2.fnt"));
+		fonts[2] = new FontType(new Texture("font/font3").getID(), new File("res/font/font3.fnt"));
 	}
 	
 	public static void addText(Text text) {

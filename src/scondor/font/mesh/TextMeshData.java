@@ -1,4 +1,4 @@
-package scondor.font;
+package scondor.font.mesh;
 
 /**
  * Stores the vertex data for all the quads on which a text will be rendered.

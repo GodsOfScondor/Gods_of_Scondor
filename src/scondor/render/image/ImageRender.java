@@ -35,6 +35,7 @@ public class ImageRender implements Render {
 		shader.start();
 		for (Image img : list) {
 			
+			img.update();
 			GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
 			GL13.glActiveTexture(GL13.GL_TEXTURE0);
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, img.getTex().getID());

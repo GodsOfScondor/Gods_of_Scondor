@@ -24,4 +24,9 @@ public class Maths {
 		return ((float) Display.getWidth()/Display.getHeight());
 	}
 	
+	public static int diff(int x1, int x2)  {
+		if (x1>x2) return x1-x2; 
+		else return x2-x1;
+	}
+	
 }

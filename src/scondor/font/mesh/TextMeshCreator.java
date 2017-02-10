@@ -1,4 +1,4 @@
-package scondor.font;
+package scondor.font.mesh;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -6,24 +6,29 @@ import java.util.List;
 
 import org.lwjgl.opengl.Display;
 
+import scondor.font.Character;
+import scondor.font.Line;
+import scondor.font.Text;
+import scondor.font.Word;
+
 public class TextMeshCreator {
 
 	public static final double LINE_HEIGHT = 32f/Display.getHeight();
-	protected static final int SPACE_ASCII = 32;
+	public static final int SPACE_ASCII = 32;
 
 	private MetaFile metaData;
 
-	protected TextMeshCreator(File metaFile) {
+	public TextMeshCreator(File metaFile) {
 		metaData = new MetaFile(metaFile);
 	}
 
-	protected TextMeshData createTextMesh(Text text) {
+	public TextMeshData createTextMesh(Text text) {
 		List<Line> lines = createStructure(text);
 		TextMeshData data = createQuadVertices(text, lines);
 		return data;
 	}
 
-	protected List<Line> createStructure(Text text) {
+	public List<Line> createStructure(Text text) {
 		char[] chars = text.getText().toCharArray();
 		List<Line> lines = new ArrayList<Line>();
 		Line currentLine = new Line(metaData.getSpaceWidth(), text.getSize(), text.getMaxLineSize());

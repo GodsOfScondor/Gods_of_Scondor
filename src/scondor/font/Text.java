@@ -2,9 +2,11 @@ package scondor.font;
 
 import org.lwjgl.opengl.Display;
 
+import scondor.font.effect.FontEffect;
 import scondor.render.RenderMaster;
 import scondor.render.font.FontShader;
 import scondor.util.Maths;
+import scondor.util.Slide;
 
 public class Text {
 
@@ -25,6 +27,11 @@ public class Text {
 	
 	private FontEffect effect;
 	private int priority = -1;
+	
+	private Slide slide_x;
+	private Slide slide_y;
+	private Slide slide_transparency;
+	private int s_x,s_y,s_tranyparency;
 	
 	public Text(String text, int x, int y, float size, int font_id, int priority) {
 		this.text = text;
@@ -123,11 +130,11 @@ public class Text {
 		return this.vertices;
 	}
 
-	protected float getSize() {
+	public float getSize() {
 		return size;
 	}
 
-	protected void setLines(int number) {
+	public void setLines(int number) {
 		this.lines = number;
 	}
 	
@@ -213,6 +220,97 @@ public class Text {
 
 	public int getFontID() {
 		return font_id;
+	}
+
+	/**
+	 * 
+	 * @param start - start transparency
+	 * @param end - end transparency
+	 * @param time - frames to fade
+	 * 
+	 */
+	public void fade(float start, float end, int time) {
+		slide_transparency = new Slide((int)(1000*start), (int)(1000*end), time);
+		transparency = start;
+		slide_transparency.run();
+		s_tranyparency=0;
+	}
+	
+	/**
+	 * 
+	 * @param start - start x
+	 * @param end - end x
+	 * @param time - frames to slide
+	 * 
+	 */
+	public void slideX(int start, int end, int time) {
+		slide_x = new Slide(start, end, time);
+		x = start;
+		slide_x.run();
+		s_x=0;
+	}
+	
+	/**
+	 * 
+	 * @param start - start y
+	 * @param end - end y
+	 * @param time - frames to slide
+	 * 
+	 */
+	public void slideY(int start, int end, int time) {
+		slide_y = new Slide(start, end, time);
+		y = start;
+		slide_y.run();
+		s_y=0;
+	}
+	
+	/**
+	 * 
+	 * updates slide effects
+	 * 
+	 */
+	public void update() {
+		/*
+		 * fade transparency
+		 */
+		if (slide_transparency!=null) {
+			transparency = (slide_transparency.getValue()/1000f);
+			s_tranyparency++;
+			if (s_tranyparency>=slide_transparency.getTime()) {
+				transparency = (slide_transparency.getEndValue()/1000f);
+				slide_transparency.destroy();
+				slide_transparency=null;
+				s_tranyparency=0;
+			}
+		}
+		
+		/*
+		 * slide x
+		 */
+		if (slide_x!=null) {
+			x = slide_x.getValue();
+			s_x++;
+			if (s_x>=slide_x.getTime()) {
+				x = slide_x.getEndValue();
+				slide_x.destroy();
+				slide_x=null;
+				s_x=0;
+			}
+		}
+		
+		/*
+		 * slide y
+		 */
+		if (slide_y!=null) {
+			y = slide_y.getValue();
+			s_y++;
+			if (s_y>=slide_y.getTime()) {
+				y = slide_y.getEndValue();
+				slide_y.destroy();
+				slide_y=null;
+				s_y=0;
+			}
+		}
 	}
 
 }
