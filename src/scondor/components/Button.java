@@ -14,6 +14,7 @@ public class Button extends Component {
 	private Text text;
 	private float r, g, b;
 	private float damper;
+	private boolean target;
 
 	public Button(String text, int x, int y, float size, int font_id, Action action) {
 		super(x, y, 0, 0);
@@ -46,6 +47,10 @@ public class Button extends Component {
 		this.text.setEffect(effect);
 		return this;
 	}
+	
+	public boolean isTargeted() {
+		return target;
+	}
 
 	@Override
 	protected void discard() {
@@ -68,15 +73,17 @@ public class Button extends Component {
 	}
 
 	@Override
-	protected void update() {
+	protected void refresh() {
 		if (enabled && Mouse.X >= x && Mouse.X <= x + width && Mouse.Y >= y && Mouse.Y <= y + height) {
 			text.setColor(r+damper, g+damper, b+damper);
+			target = true;
 			if (Mouse.isButtonTyped(0)) {
 				if (action != null)
 					action.perform();
 			}
 		} else {
 			text.setColor(r, g, b);
+			target = false;
 		}
 	}
 

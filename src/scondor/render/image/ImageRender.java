@@ -25,7 +25,8 @@ public class ImageRender implements Render {
 		shader = new ImageShader();
 	}
 
-	public void render(List<Image> list) {
+	public void render(List<Image> list, int priority) {
+		
 		GL30.glBindVertexArray(vao_id);
 		GL20.glEnableVertexAttribArray(0);
 		GL11.glEnable(GL11.GL_BLEND);
@@ -33,16 +34,19 @@ public class ImageRender implements Render {
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		
 		shader.start();
+		
+		shader.loadPriority(priority);
+		
 		for (Image img : list) {
-			
+			System.out.println(img.getWidth());
 			img.update();
 			GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
 			GL13.glActiveTexture(GL13.GL_TEXTURE0);
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, img.getTex().getID());
 			
-			shader.loadTM(Maths.createTM(img.getX(), img.getY(), img.getWidth(), img.getHeight()));
-			shader.loadData(img.getTex());
-			shader.loadTransparency(img.getTransparency());
+			shader.loadTextureData(img.getTex());
+			shader.loadImageData(Maths.createTM(img.getX(), img.getY(), img.getWidth(), img.getHeight()), img.getTransparency(), img.getLayer());
+			
 			GL11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 0, vc);
 		}
 		shader.stop();

@@ -8,7 +8,7 @@ import scondor.render.font.FontShader;
 import scondor.util.Maths;
 import scondor.util.Slide;
 
-public class Text {
+public class Text implements Comparable<Text> {
 
 	private String text;
 	private String old = "";
@@ -21,6 +21,7 @@ public class Text {
 	private int lines;
 	private int x,y;
 	private float transparency;
+	private float layer;
 	private int vbo1;
 	private int vbo2;
 	private int font_id;
@@ -41,6 +42,7 @@ public class Text {
 		this.line_size = 1;
 		this.transparency = 1;
 		this.font_id = font_id;
+		this.layer = 0.5f;
 		setPriority(priority);
 	}
 	
@@ -221,7 +223,15 @@ public class Text {
 	public int getFontID() {
 		return font_id;
 	}
-
+	
+	public float getLayer() {
+		return layer;
+	}
+	
+	public void setLayer(float layer) {
+		this.layer = layer;
+	}
+	
 	/**
 	 * 
 	 * @param start - start transparency
@@ -311,6 +321,14 @@ public class Text {
 				s_y=0;
 			}
 		}
+	}
+	
+	/*
+	 * compares images for layer system
+	 */
+	@Override
+	public int compareTo(Text text) {
+		return Float.compare(this.layer, text.getLayer());
 	}
 
 }

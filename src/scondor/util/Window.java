@@ -9,10 +9,13 @@ public class Window {
 	
 	public static void init() {
 		try {
-			System.out.println(getBestMode().getWidth());
-			Display.setDisplayMode(getBestMode());
-			Display.setFullscreen(true);
-			Display.setTitle("Untitled Engine");
+			DisplayMode mode = getBestMode();
+			
+			if (mode.getFrequency()<30) mode = new DisplayMode(1920, 1080);
+			else Display.setFullscreen(true);
+			
+			Display.setDisplayMode(mode);
+			Display.setTitle("Gods of Scondor");
 			Display.setResizable(false);
 			Display.create(new PixelFormat());
 		} catch (LWJGLException e) {

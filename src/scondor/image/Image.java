@@ -3,11 +3,12 @@ package scondor.image;
 import scondor.render.RenderMaster;
 import scondor.util.Slide;
 
-public class Image {
+public class Image implements Comparable<Image>{
 
 	private int x, y, width, height;
 	private Texture tex;
 	private float transparency;
+	private float layer;
 	private int priority = -1;
 	
 	private Slide slide_x;
@@ -22,6 +23,7 @@ public class Image {
 		this.width = width;
 		this.height = height;
 		this.transparency = 1;
+		layer = 0.5f;
 		setPriority(priority);
 	}
 
@@ -173,6 +175,22 @@ public class Image {
 				s_y=0;
 			}
 		}
+	}
+	
+	public float getLayer() {
+		return layer;
+	}
+	
+	public void setLayer(float layer) {
+		this.layer = layer;
+	}
+	
+	/*
+	 * compares images for layer system
+	 */
+	@Override
+	public int compareTo(Image img) {
+		return Float.compare(img.getLayer(), this.layer);
 	}
 
 }

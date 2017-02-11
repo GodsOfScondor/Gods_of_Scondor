@@ -1,6 +1,7 @@
 package scondor.render;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
@@ -18,9 +19,10 @@ public class RenderMaster {
 	 *  - render priority system
 	 *  
 	 */
+	private static final int PRIORITIES = 5;
 	private static List<Render> renders = new ArrayList<>();
-	private static Priority[] image_priorities = new Priority[5];
-	private static Priority[] text_priorities = new Priority[5];
+	private static Priority[] image_priorities = new Priority[PRIORITIES];
+	private static Priority[] text_priorities = new Priority[PRIORITIES];
 	
 	/**
 	 * 
@@ -31,8 +33,8 @@ public class RenderMaster {
 		
 		TextMaster.init();
 		
-		for (int n = 0;n<5;n++) image_priorities[n] = new Priority(new ArrayList<Image>());
-		for (int n = 0;n<5;n++) text_priorities[n] = new Priority(new ArrayList<Text>());
+		for (int n = 0;n<PRIORITIES;n++) image_priorities[n] = new Priority(new ArrayList<Image>());
+		for (int n = 0;n<PRIORITIES;n++) text_priorities[n] = new Priority(new ArrayList<Text>());
 		
 		renders.add(new ImageRender());
 		renders.add(new FontRender());
@@ -52,9 +54,10 @@ public class RenderMaster {
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 		GL11.glClearColor(0, 1, 0, 1);
 		
-		for (int n = 0;n<5;n++) for (Render render : renders) {
-			if (render instanceof ImageRender) ((ImageRender)render).render((List<Image>) image_priorities[n].getList());
-			if (render instanceof FontRender) ((FontRender)render).render((List<Text>) text_priorities[n].getList());
+		for (int n = 0;n<PRIORITIES;n++) for (Render render : renders) {
+			if (render instanceof ImageRender) ((ImageRender)render).render((List<Image>) image_priorities[n].getList(), n);
+			if (render instanceof FontRender) ((FontRender)render).render((List<Text>) text_priorities[n].getList(), n);
+			System.out.println(n+".|"+(render instanceof ImageRender?"Image ":"Text  ")+": "+image_priorities[n].getList().size() + "|" + text_priorities[n].getList().size());
 		}
 		
 	}
@@ -78,6 +81,7 @@ public class RenderMaster {
 	public static void addText(Text text, int priority) {
 		TextMaster.addText(text);
 		((List<Text>)text_priorities[priority].getList()).add(text);
+		Collections.sort(((List<Text>)text_priorities[priority].getList()));
 	}
 	
 	/**
@@ -101,6 +105,7 @@ public class RenderMaster {
 	@SuppressWarnings("unchecked")
 	public static void addImage(Image image, int priority) {
 		((List<Image>)image_priorities[priority].getList()).add(image);
+		Collections.sort(((List<Image>)image_priorities[priority].getList()));
 	}
 	
 	/**

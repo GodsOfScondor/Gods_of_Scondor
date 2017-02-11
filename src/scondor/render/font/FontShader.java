@@ -24,6 +24,9 @@ public class FontShader extends ShaderProgram {
 	private int loc_outline_color;
 	private int loc_offset;
 	
+	private int loc_layer;
+	private int loc_priority;
+	
 	public FontShader() {
 		super("font/Font.vsh", "font/Font.fsh");
 	}
@@ -40,6 +43,9 @@ public class FontShader extends ShaderProgram {
 		loc_border_edge = super.getUniformLocation("border_edge");
 		loc_outline_color = super.getUniformLocation("outline_color");
 		loc_offset = super.getUniformLocation("offset");
+		
+		loc_layer = super.getUniformLocation("layer");
+		loc_priority = super.getUniformLocation("priority");
 	}
 
 	@Override
@@ -48,11 +54,12 @@ public class FontShader extends ShaderProgram {
 		super.bindAttribute(1, "tex_coords");
 	}
 	
-	public void loadColor(float r, float g, float b, float transparency) {
+	public void loadData(float r, float g, float b, float transparency, float layer) {
 		color.x = r;
 		color.y = g;
 		color.z = b;
 		super.loadFloat(loc_transparency, transparency);
+		super.loadFloat(loc_layer, layer);
 		super.loadVector3f(loc_color, color);
 	}
 	
@@ -95,6 +102,10 @@ public class FontShader extends ShaderProgram {
 		translation.x = (2*x)/1000f;
 		translation.y = (-2*y)/(1000f*Display.getHeight()/Display.getWidth());
 		super.loadVector2f(loc_translation, translation);
+	}
+	
+	public void loadPriority(int priority) {
+		super.loadInt(loc_priority, priority);
 	}
 	
 }

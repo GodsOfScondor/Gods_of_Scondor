@@ -13,6 +13,10 @@ public class ImageShader extends ShaderProgram {
 	private int loc_columns;
 	private int loc_offset;
 	private int loc_transparency;
+	
+	private int loc_layer;
+	private int loc_priority;
+	
 	private Vector2f offset;
 
 	public ImageShader() {
@@ -27,6 +31,9 @@ public class ImageShader extends ShaderProgram {
 		loc_columns = super.getUniformLocation("columns");
 		loc_offset = super.getUniformLocation("offset");
 		loc_transparency = super.getUniformLocation("transparency");
+		
+		loc_layer = super.getUniformLocation("layer");
+		loc_priority = super.getUniformLocation("priority");
 	}
 
 	@Override
@@ -34,11 +41,7 @@ public class ImageShader extends ShaderProgram {
 		super.bindAttribute(0, "position");
 	}
 	
-	public void loadTM(Matrix4f TM) {
-		super.loadMatrix(loc_TM, TM);
-	}
-	
-	public void loadData(Texture texture) {
+	public void loadTextureData(Texture texture) {
 		offset.setX(texture.getTexX()/texture.getColumns());
 		offset.setY(texture.getTexY()/texture.getRows());
 		super.loadVector2f(loc_offset, offset);
@@ -46,8 +49,14 @@ public class ImageShader extends ShaderProgram {
 		super.loadFloat(loc_rows, texture.getRows());
 	}
 	
-	public void loadTransparency(float transparency) {
+	public void loadImageData(Matrix4f TM, float transparency, float layer) {
 		super.loadFloat(loc_transparency, transparency);
+		super.loadFloat(loc_layer, layer);
+		super.loadMatrix(loc_TM, TM);
+	}
+	
+	public void loadPriority(int priority) {
+		super.loadInt(loc_priority, priority);
 	}
 	
 }

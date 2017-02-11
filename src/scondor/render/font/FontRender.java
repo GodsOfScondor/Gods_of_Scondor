@@ -20,19 +20,12 @@ public class FontRender implements Render{
 	public void setup() {
 		shader = new FontShader();
 	}
-
-	private void prepare() {
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glDisable(GL11.GL_DEPTH_TEST);
-		GL11.glEnable(GL11.GL_ALPHA);
-		GL11.glAlphaFunc(GL11.GL_GREATER, 0.0f);
-		shader.start();
-	}
 	
-	public void render(List<Text> list) {
+	public void render(List<Text> list, int priority) {
 		prepare();
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
+		
+		shader.loadPriority(priority);
 		
 		for (Text text : list) {
 			
@@ -42,7 +35,7 @@ public class FontRender implements Render{
 			GL30.glBindVertexArray(text.getMesh());
 			GL20.glEnableVertexAttribArray(0);
 			GL20.glEnableVertexAttribArray(1);
-			shader.loadColor(text.getRedColor(), text.getGreenColor(), text.getBlueColor(), text.getTransparency());
+			shader.loadData(text.getRedColor(), text.getGreenColor(), text.getBlueColor(), text.getTransparency(), text.getLayer());
 			text.effectFont(shader);
 			shader.loadTranslation(text.getX(), (int) (text.getY()/Maths.getScreenRatio()));
 			GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, text.getVertices());
@@ -51,6 +44,15 @@ public class FontRender implements Render{
 			GL30.glBindVertexArray(0);
 		}
 		finish();
+	}
+	
+	private void prepare() {
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		GL11.glEnable(GL11.GL_ALPHA);
+		GL11.glAlphaFunc(GL11.GL_GREATER, 0.0f);
+		shader.start();
 	}
 	
 	private static void finish() {

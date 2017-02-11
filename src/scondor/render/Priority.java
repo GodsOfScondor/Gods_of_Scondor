@@ -13,6 +13,6 @@ public class Priority {
 	
 	public List<?> getList() {
 		return list;
-	}
+	}	
 	
 }

@@ -3,14 +3,20 @@ package scondor;
 import scondor.components.Button;
 import scondor.components.Label;
 import scondor.components.Panel;
+import scondor.components.Picture;
 import scondor.font.effect.GlowEffect;
-import scondor.font.effect.OutlineEffect;
 import scondor.font.effect.ShadowEffect;
 import scondor.image.Texture;
 import scondor.util.Action;
 import scondor.util.Maths;
 
 public class Main extends Panel {
+
+	private Button button_battle;
+	private Button button_options;
+	private Button button_exit;
+	
+	private Picture arrow;
 
 	public Main() {
 		/*
@@ -20,23 +26,37 @@ public class Main extends Panel {
 		setBackground(new Texture("bg"));
 		
 		/*
+		 * create picture
+		 */
+		arrow = new Picture(new Texture("arrow"), 580, 400, 20, 35);
+		
+		/*
 		 * create buttons
 		 */
-		Button button_exit = new Button("BEENDEN", 600, 800, 2, 1, new Action() {
+		button_battle = new Button("BATTLE", 600, 500, 3, 1, new Action() {
 			@Override
 			public void perform() {
-				System.exit(0);
 			}
 		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f).fade(0, 1, 100);
 		
-		Button button_start = new Button("START", 600, 600, 2, 1, new Action() {
+		button_battle.addAction(new Action() {
 			@Override
 			public void perform() {
-				System.exit(0);
+				if (button_battle.isTargeted()) arrow.setY(510);
+				else if (button_options.isTargeted()) arrow.setY(610);
+				else if (button_exit.isTargeted()) arrow.setY(710);
+				else arrow.setY(1000);
+			}
+		});
+		
+		button_options = new Button("OPTIONS", 600, 600, 3, 1, new Action() {
+			@Override
+			public void perform() {
+				setVisible(false);
 			}
 		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f).fade(0, 1, 100);
 		
-		Button button_continue = new Button("FORTSETZEN", 600, 700, 2, 1, new Action() {
+		button_exit = new Button("EXIT", 600, 700, 3, 1, new Action() {
 			@Override
 			public void perform() {
 				System.exit(0);
@@ -53,8 +73,9 @@ public class Main extends Panel {
 		 */
 		add(label);
 		add(button_exit);
-		add(button_start);
-		add(button_continue);
+		add(button_battle);
+		add(button_options);
+		add(arrow);
 		
 		/*
 		 * show panel

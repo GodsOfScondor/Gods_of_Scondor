@@ -44,7 +44,7 @@ public class Label extends Component {
 	}
 
 	@Override
-	protected void update() {}
+	protected void refresh() {}
 
 	@Override
 	protected void setPriority(int priority) {

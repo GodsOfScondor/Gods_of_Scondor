@@ -3,14 +3,18 @@ package scondor.components;
 import java.util.ArrayList;
 import java.util.List;
 
+import scondor.util.Action;
+
 public abstract class Component {
 	
 	protected List<Component> comps;
+	protected List<Action> actions;
 	protected int x,y,width,height;
 	private boolean visible;
 	
 	public Component(int x,int y,int width,int height) {
 		comps = new ArrayList<>();
+		actions = new ArrayList<>();
 		this.x=x;
 		this.y=y;
 		this.width=width;
@@ -56,7 +60,7 @@ public abstract class Component {
 		setVisible(visible);
 	}
 
-	protected abstract void update();
+	protected abstract void refresh();
 	protected abstract void setPriority(int priority);
 	
 	public void validate(int priority) {
@@ -68,6 +72,15 @@ public abstract class Component {
 	
 	public boolean isVisible() {
 		return visible;
+	}
+	
+	public void addAction(Action action) {
+		actions.add(action);
+	}
+	
+	public void update() {
+		for (Action action : actions)action.perform();
+		refresh();
 	}
 	
 }
