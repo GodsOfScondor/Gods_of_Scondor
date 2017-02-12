@@ -36,10 +36,11 @@ public class Main extends Panel {
 		button_battle = new Button("BATTLE", 600, 500, 3, 1, new Action() {
 			@Override
 			public void perform() {
+				
 			}
 		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f).fade(0, 1, 100);
 		
-		button_battle.addAction(new Action() {
+		addAction(new Action() {
 			@Override
 			public void perform() {
 				if (button_battle.isTargeted()) arrow.setY(510);
