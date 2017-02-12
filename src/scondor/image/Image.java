@@ -14,7 +14,9 @@ public class Image implements Comparable<Image>{
 	private Slide slide_x;
 	private Slide slide_y;
 	private Slide slide_transparency;
-	private int s_x,s_y,s_tranyparency;
+	private int s_x,s_y,s_transparency;
+	private int b_x,b_y;
+	private float b_tranyparency;
 
 	public Image(Texture tex, int x, int y, int width, int height, int priority) {
 		this.tex = tex;
@@ -81,6 +83,10 @@ public class Image implements Comparable<Image>{
 	public void setTransparency(float transparency) {
 		this.transparency = transparency;
 	}
+	
+	public void setTexture(Texture tex) {
+		this.tex = tex;
+	}
 
 	public void destroy() {
 		RenderMaster.removeImage(this, priority);
@@ -94,10 +100,11 @@ public class Image implements Comparable<Image>{
 	 * 
 	 */
 	public void fade(float start, float end, int time) {
+		b_tranyparency = transparency;
 		slide_transparency = new Slide((int)(1000*start), (int)(1000*end), time);
 		transparency = start;
 		slide_transparency.run();
-		s_tranyparency=0;
+		s_transparency=0;
 	}
 	
 	/**
@@ -108,6 +115,7 @@ public class Image implements Comparable<Image>{
 	 * 
 	 */
 	public void slideX(int start, int end, int time) {
+		b_x = x;
 		slide_x = new Slide(start, end, time);
 		x = start;
 		slide_x.run();
@@ -122,10 +130,36 @@ public class Image implements Comparable<Image>{
 	 * 
 	 */
 	public void slideY(int start, int end, int time) {
+		b_y = y;
 		slide_y = new Slide(start, end, time);
 		y = start;
 		slide_y.run();
 		s_y=0;
+	}
+	
+	/**
+	 * 
+	 * stops effects
+	 * 
+	 */
+	public void stopEffects() {
+		slide_transparency = null;
+		s_transparency = 0;
+		slide_x = null;
+		s_x = 0;
+		slide_y = null;
+		s_y = 0;
+	}
+	
+	/**
+	 * 
+	 * resets position and transparency
+	 * 
+	 */
+	public void resetEffects() {
+		transparency = b_tranyparency;
+		x = b_x;
+		y = b_y;
 	}
 	
 	/**
@@ -139,12 +173,12 @@ public class Image implements Comparable<Image>{
 		 */
 		if (slide_transparency!=null) {
 			transparency = (slide_transparency.getValue()/1000f);
-			s_tranyparency++;
-			if (s_tranyparency>=slide_transparency.getTime()) {
+			s_transparency++;
+			if (s_transparency>=slide_transparency.getTime()) {
 				transparency = (slide_transparency.getEndValue()/1000f);
 				slide_transparency.destroy();
 				slide_transparency=null;
-				s_tranyparency=0;
+				s_transparency=0;
 			}
 		}
 		

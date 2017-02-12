@@ -3,7 +3,6 @@ package scondor;
 import scondor.components.ComponentMaster;
 import scondor.inputs.KeyBoard;
 import scondor.inputs.Mouse;
-import scondor.packets.Message;
 import scondor.render.RenderMaster;
 import scondor.server.Client;
 import scondor.util.Utils;
@@ -15,12 +14,12 @@ public class Engine {
 	
 	public static void init() {
 		
-		client = new Client();
-		
-		try { Thread.sleep(5000); }
-		catch (InterruptedException e) { e.printStackTrace(); }
-		
-		Client.send(new Message("Hallo!"));
+//		client = new Client();
+//		
+//		try { Thread.sleep(5000); }
+//		catch (InterruptedException e) { e.printStackTrace(); }
+//		
+//		Client.send(new Message("Hallo!"));
 		
 		Window.init();
 		RenderMaster.init();
@@ -30,11 +29,12 @@ public class Engine {
 		KeyBoard.init();
 		Mouse.init();
 		
-		new Main();
+		new Main().setVisible(true);
 		
 	}
 	
 	public static void update() {
+		if (KeyBoard.getCurrent()!='\0') System.out.println(KeyBoard.getCurrent());
 		KeyBoard.update();
 		Mouse.update();
 		

@@ -30,7 +30,10 @@ public class Label extends Component {
 	
 	@Override
 	protected void discard() {
-		if (text!=null) text.setTransparency(0f);
+		if (text!=null) {
+			text.stopEffects();
+			text.setTransparency(0f);
+		}
 	}
 
 	@Override

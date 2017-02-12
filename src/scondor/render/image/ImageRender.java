@@ -38,7 +38,6 @@ public class ImageRender implements Render {
 		shader.loadPriority(priority);
 		
 		for (Image img : list) {
-			System.out.println(img.getWidth());
 			img.update();
 			GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
 			GL13.glActiveTexture(GL13.GL_TEXTURE0);

@@ -54,15 +54,16 @@ public class Button extends Component {
 
 	@Override
 	protected void discard() {
-		if (text != null)
+		if (text != null) {
+			text.stopEffects();
 			text.setTransparency(0f);
+		}
 		enabled = false;
 	}
 
 	@Override
 	protected void showup() {
-		if (text != null)
-			text.setTransparency(1f);
+		if (text != null) text.setTransparency(1f);
 		enabled = true;
 	}
 

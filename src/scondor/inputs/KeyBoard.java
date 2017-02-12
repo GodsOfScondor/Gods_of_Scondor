@@ -66,6 +66,7 @@ public class KeyBoard {
 	private static boolean[] released = new boolean[100];
 	private static boolean[] typed = new boolean[100];
 	private static int n = 0;
+	private static char current;
 
 	public static void init() {
 		for (n=0;n<100;n++) released[n] = true;
@@ -137,6 +138,9 @@ public class KeyBoard {
 			} else if (!pressed[n]) released[n] = true;
 		}
 		
+		current = '\0';
+		for (int n=0;n<50;n++) if (isKeyTyped(n)) current = getCharByKeycode(n);
+		
 	}
 	
 	public static boolean isKeyPressed(int keycode) {
@@ -147,7 +151,12 @@ public class KeyBoard {
 		return typed[keycode];
 	}
 	
-	public char getCharByKeycode(int keycode) {
+	public static char getCurrent() {
+		return current;
+		
+	}
+	
+	public static char getCharByKeycode(int keycode) {
 		boolean shift = isKeyPressed(KEY_RSHIFT) || isKeyPressed(KEY_LSHIFT);
 		switch (keycode) {
 		case KEY_A: return (shift ? 'A' : 'a');

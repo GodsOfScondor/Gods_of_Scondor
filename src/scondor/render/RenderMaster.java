@@ -57,7 +57,7 @@ public class RenderMaster {
 		for (int n = 0;n<PRIORITIES;n++) for (Render render : renders) {
 			if (render instanceof ImageRender) ((ImageRender)render).render((List<Image>) image_priorities[n].getList(), n);
 			if (render instanceof FontRender) ((FontRender)render).render((List<Text>) text_priorities[n].getList(), n);
-			System.out.println(n+".|"+(render instanceof ImageRender?"Image ":"Text  ")+": "+image_priorities[n].getList().size() + "|" + text_priorities[n].getList().size());
+//			System.out.println(n+".|"+(render instanceof ImageRender?"Image ":"Text  ")+": "+image_priorities[n].getList().size() + "|" + text_priorities[n].getList().size());
 		}
 		
 	}
