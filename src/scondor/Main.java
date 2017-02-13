@@ -5,6 +5,7 @@ import scondor.components.CheckBox;
 import scondor.components.Label;
 import scondor.components.Panel;
 import scondor.components.Picture;
+import scondor.components.TextField;
 import scondor.font.effect.GlowEffect;
 import scondor.image.Texture;
 import scondor.util.Action;
@@ -77,9 +78,19 @@ public class Main extends Panel {
 			}
 		});
 		
+		
+		
+		
+		TextField field = new TextField("Hi", 200, 400, 400, 200);
+		
+		
+		
+		
+		
 		/*
 		 * add comps to panel
 		 */
+		add(field);
 		add(label);
 		add(button_exit);
 		add(button_battle);
