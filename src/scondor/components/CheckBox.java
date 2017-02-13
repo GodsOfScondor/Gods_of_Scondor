@@ -55,7 +55,7 @@ public class CheckBox extends Component {
 		return target;
 	}
 	
-	public boolean isSSelected() {
+	public boolean isSelected() {
 		return select;
 	}
 

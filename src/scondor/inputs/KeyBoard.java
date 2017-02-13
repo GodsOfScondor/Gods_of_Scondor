@@ -62,18 +62,20 @@ public class KeyBoard {
 	public static final int KEY_ENTER = 54;
 	public static final int KEY_F5 = 55;
 	
-	private static boolean[] pressed = new boolean[100];
-	private static boolean[] released = new boolean[100];
-	private static boolean[] typed = new boolean[100];
+	private static final int KEYS = 100;
+	
+	private static boolean[] pressed = new boolean[KEYS];
+	private static boolean[] released = new boolean[KEYS];
+	private static boolean[] typed = new boolean[KEYS];
 	private static int n = 0;
 	private static char current;
 
 	public static void init() {
-		for (n=0;n<100;n++) released[n] = true;
+		for (n=0;n<KEYS;n++) released[n] = true;
 	}
 	
 	public static void update() {
-		for (n=0;n<100;n++) typed[n] = false;
+		for (n=0;n<KEYS;n++) typed[n] = false;
 		pressed[KEY_A] = Keyboard.isKeyDown(Keyboard.KEY_A);
 		pressed[KEY_B] = Keyboard.isKeyDown(Keyboard.KEY_B);
 		pressed[KEY_C] = Keyboard.isKeyDown(Keyboard.KEY_C);
@@ -131,7 +133,7 @@ public class KeyBoard {
 		pressed[KEY_ENTER] = Keyboard.isKeyDown(Keyboard.KEY_RETURN);
 		pressed[KEY_F5] = Keyboard.isKeyDown(Keyboard.KEY_F5);
 		
-		for (n=0;n<100;n++) {
+		for (n=0;n<KEYS;n++) {
 			if (pressed[n] && released[n]) {
 				released[n] = false;
 				typed[n] = true;
@@ -139,7 +141,7 @@ public class KeyBoard {
 		}
 		
 		current = '\0';
-		for (int n=0;n<50;n++) if (isKeyTyped(n)) current = getCharByKeycode(n);
+		for (int n=0;n<KEYS;n++) if (isKeyTyped(n)) current = getCharByKeycode(n);
 		
 	}
 	
@@ -153,7 +155,10 @@ public class KeyBoard {
 	
 	public static char getCurrent() {
 		return current;
-		
+	}
+	
+	public static boolean hasCurrent() {
+		return current != '\0';
 	}
 	
 	public static char getCharByKeycode(int keycode) {
@@ -195,8 +200,9 @@ public class KeyBoard {
 		case KEY_7: return (shift ? '/' : '7');
 		case KEY_8: return (shift ? '(' : '8');
 		case KEY_9: return (shift ? ')' : '9');
+		case KEY_SPACE: return (shift ? ' ' : ' ');
 		}
-		return '-';
+		return '~';
 	}
 	
 }

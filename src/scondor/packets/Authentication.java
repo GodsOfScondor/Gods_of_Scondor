@@ -1,6 +1,6 @@
 package scondor.packets;
 
-import org.gnet.packet.Packet;
+import scondor.gnet.packet.Packet;
 
 public class Authentication extends Packet {
 

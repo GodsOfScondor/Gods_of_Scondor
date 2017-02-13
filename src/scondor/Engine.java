@@ -5,6 +5,7 @@ import scondor.inputs.KeyBoard;
 import scondor.inputs.Mouse;
 import scondor.render.RenderMaster;
 import scondor.server.Client;
+import scondor.startup.Login;
 import scondor.util.Utils;
 import scondor.util.Window;
 
@@ -29,8 +30,7 @@ public class Engine {
 		KeyBoard.init();
 		Mouse.init();
 		
-		new Main().setVisible(true);
-		
+		new Login().show();
 	}
 	
 	public static void update() {

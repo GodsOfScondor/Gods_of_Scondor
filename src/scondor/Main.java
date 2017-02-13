@@ -18,6 +18,8 @@ public class Main extends Panel {
 	private Button button_exit;
 	
 	private Picture arrow;
+	private CheckBox box;
+	private TextField field;
 
 	public Main() {
 		/*
@@ -63,7 +65,7 @@ public class Main extends Panel {
 		/*
 		 * create checkbox
 		 */
-		CheckBox box = new CheckBox(100, 300, 1);
+		box = new CheckBox(100, 300, 1);
 		
 		/*
 		 * add actions to panel 
@@ -81,8 +83,13 @@ public class Main extends Panel {
 		
 		
 		
-		TextField field = new TextField("Hi", 200, 400, 400, 200);
-		
+		field = new TextField(200, 400, 300, 20);
+		addAction(new Action() {
+			@Override
+			public void perform() {
+				field.setVisible(box.isSelected());
+			}
+		});
 		
 		
 		

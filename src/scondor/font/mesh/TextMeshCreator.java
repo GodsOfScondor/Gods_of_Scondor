@@ -4,16 +4,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.opengl.Display;
-
 import scondor.font.Character;
 import scondor.font.Line;
 import scondor.font.Text;
 import scondor.font.Word;
+import scondor.util.Maths;
 
 public class TextMeshCreator {
 
-	public static final double LINE_HEIGHT = 32f/Display.getHeight();
+	public static final double LINE_HEIGHT = 10/1000f*Maths.getScreenRatio();
 	public static final int SPACE_ASCII = 32;
 
 	private MetaFile metaData;

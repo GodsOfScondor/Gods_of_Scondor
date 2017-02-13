@@ -1,8 +1,8 @@
 package scondor.server;
 
-import org.gnet.client.ClientEventListener;
-import org.gnet.client.ServerModel;
-import org.gnet.packet.Packet;
+import scondor.gnet.client.ClientEventListener;
+import scondor.gnet.client.ServerModel;
+import scondor.gnet.packet.Packet;
 
 public class Listener extends ClientEventListener {
 
