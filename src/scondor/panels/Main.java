@@ -1,4 +1,4 @@
-package scondor;
+package scondor.panels;
 
 import scondor.components.Button;
 import scondor.components.CheckBox;
@@ -60,7 +60,7 @@ public class Main extends Panel {
 		/*
 		 * create labels
 		 */
-		Label label = new Label("THOMAPHEN v2.0", 150, 100, 5, 0).setEffect(new GlowEffect(0,0,0,5)).setColor(0.5f, 0.5f, 0.05f).fade(0, 1, 100).slideY(250, 100, 80);
+		Label label = new Label("THOMAPHEN v2.0", 150, 100, 5, 0).setEffect(new GlowEffect(0,0,0,5)).setColor(0.5f, 0.5f, 0.05f).fade(0, 1, 200).slideY(250, 100, 80);
 		
 		/*
 		 * create checkbox
@@ -79,9 +79,6 @@ public class Main extends Panel {
 				else arrow.setY(1000);
 			}
 		});
-		
-		
-		
 		
 		field = new TextField(200, 400, 300, 20);
 		addAction(new Action() {
@@ -104,11 +101,6 @@ public class Main extends Panel {
 		add(button_options);
 		add(arrow);
 		add(box);
-		
-		/*
-		 * show panel
-		 */
-		show();
 	}
 	
 }

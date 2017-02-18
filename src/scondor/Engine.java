@@ -3,9 +3,9 @@ package scondor;
 import scondor.components.ComponentMaster;
 import scondor.inputs.KeyBoard;
 import scondor.inputs.Mouse;
+import scondor.panels.Panels;
 import scondor.render.RenderMaster;
 import scondor.server.Client;
-import scondor.startup.Login;
 import scondor.util.Utils;
 import scondor.util.Window;
 
@@ -26,15 +26,17 @@ public class Engine {
 		RenderMaster.init();
 		ComponentMaster.init();
 		Utils.init();
+		Panels.init();
 		
 		KeyBoard.init();
 		Mouse.init();
 		
-		new Login().show();
+		Panels.show(Panels.LOGIN);
+		Panels.show(Panels.MAIN);
+		
 	}
 	
 	public static void update() {
-		if (KeyBoard.getCurrent()!='\0') System.out.println(KeyBoard.getCurrent());
 		KeyBoard.update();
 		Mouse.update();
 		

@@ -17,7 +17,9 @@ uniform float border_edge;
 uniform vec2 offset;
 uniform vec3 outline_color;
 
-void main(void){
+void main(void) {
+
+	if (transparency < 0.01) discard;
 	
 	float distance = 1.0 - texture(font, coords).a;
 	float alpha = 1.0 - smoothstep(width, width + edge, distance);
