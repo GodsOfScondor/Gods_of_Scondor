@@ -2,8 +2,9 @@ package scondor.components;
 
 import scondor.image.Image;
 import scondor.image.Texture;
+import scondor.panels.Fadeable;
 
-public class Panel extends Component {
+public abstract class Panel extends Component implements Fadeable {
 	
 	private Image background;
 	private int priority;

@@ -20,6 +20,7 @@ public class Main extends Panel {
 	private Picture arrow;
 	private CheckBox box;
 	private TextField field;
+	private Label label;
 
 	public Main() {
 		/*
@@ -41,26 +42,26 @@ public class Main extends Panel {
 			public void perform() {
 				
 			}
-		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f).fade(0, 1, 100);
+		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f);
 		
 		button_options = new Button("OPTIONS", 600, 600, 3, 1, new Action() {
 			@Override
 			public void perform() {
-				setVisible(false);
+				Panels.show(Panels.LOGIN);
 			}
-		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f).fade(0, 1, 100);
+		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f);
 		
 		button_exit = new Button("EXIT", 600, 700, 3, 1, new Action() {
 			@Override
 			public void perform() {
 				System.exit(0);
 			}
-		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f).fade(0, 1, 100);
+		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f);
 		
 		/*
 		 * create labels
 		 */
-		Label label = new Label("THOMAPHEN v2.0", 150, 100, 5, 0).setEffect(new GlowEffect(0,0,0,5)).setColor(0.5f, 0.5f, 0.05f).fade(0, 1, 200).slideY(250, 100, 80);
+		label = new Label("THOMAPHEN v2.0", 150, 100, 5, 0).setEffect(new GlowEffect(0,0,0,5)).setColor(0.5f, 0.5f, 0.05f);
 		
 		/*
 		 * create checkbox
@@ -101,6 +102,22 @@ public class Main extends Panel {
 		add(button_options);
 		add(arrow);
 		add(box);
+	}
+
+	@Override
+	public void fadeIn() {
+		label.fade(0, 1, 200).slideX(1500, 100, 150);
+		button_battle.fade(0, 1, 100).slideX(1500, 600, 150);
+		button_options.fade(0, 1, 100).slideX(1500, 600, 150);
+		button_exit.fade(0, 1, 100).slideX(1500, 600, 150);
+	}
+
+	@Override
+	public void fadeOut() {
+		label.fade(0, 1, 200).slideY(250, 100, 80);
+		button_battle.fade(0, 1, 100);
+		button_options.fade(0, 1, 100);
+		button_exit.fade(0, 1, 100);
 	}
 	
 }

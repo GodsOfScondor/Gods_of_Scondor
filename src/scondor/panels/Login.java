@@ -55,4 +55,17 @@ public class Login extends Panel {
 		
 	}
 
+	@Override
+	public void fadeIn() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void fadeOut() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

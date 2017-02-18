@@ -23,10 +23,12 @@ public class Panels {
 	public static void show(int panel) {
 		if (current != null) {
 			current.setVisible(false);
+			current.fadeOut();
 		}
 		
 		current = panels.get(panel);
 		current.show();
+		current.fadeIn();
 		
 	}
 	
