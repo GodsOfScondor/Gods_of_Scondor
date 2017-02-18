@@ -2,8 +2,9 @@ package scondor.components;
 
 import scondor.image.Image;
 import scondor.image.Texture;
+import scondor.panels.EffectAble;
 
-public class Picture extends Component {
+public class Picture extends Component implements EffectAble<Picture> {
 	
 	private Image img;
 	
@@ -54,18 +55,28 @@ public class Picture extends Component {
 		this.img.setHeight(height);
 	}
 	
+	@Override
 	public Picture fade(float start, float end, int time) {
 		img.fade(start, end, time);
 		return this;
 	}
 	
+	@Override
 	public Picture slideX(int start, int end, int time) {
 		img.slideX(start, end, time);
 		return this;
 	}
 	
+	@Override
 	public Picture slideY(int start, int end, int time) {
 		img.slideY(start, end, time);
+		return this;
+	}
+	
+	@Override
+	public Picture stop() {
+		img.stopEffects();
+		img.resetEffects();
 		return this;
 	}
 	

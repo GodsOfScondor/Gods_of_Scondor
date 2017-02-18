@@ -31,7 +31,6 @@ public class Engine {
 		KeyBoard.init();
 		Mouse.init();
 		
-		Panels.show(Panels.LOGIN);
 		Panels.show(Panels.MAIN);
 		
 	}

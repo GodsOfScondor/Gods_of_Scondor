@@ -2,8 +2,9 @@ package scondor.components;
 
 import scondor.font.Text;
 import scondor.font.effect.FontEffect;
+import scondor.panels.EffectAble;
 
-public class Label extends Component {
+public class Label extends Component implements EffectAble<Label> {
 	
 	private Text text;
 	
@@ -54,18 +55,28 @@ public class Label extends Component {
 		text.setPriority(priority);
 	}
 	
+	@Override
 	public Label fade(float start, float end, int time) {
 		text.fade(start, end, time);
 		return this;
 	}
 	
+	@Override
 	public Label slideX(int start, int end, int time) {
 		text.slideX(start, end, time);
 		return this;
 	}
 	
+	@Override
 	public Label slideY(int start, int end, int time) {
 		text.slideY(start, end, time);
+		return this;
+	}
+
+	@Override
+	public Label stop() {
+		text.stopEffects();
+		text.resetEffects();
 		return this;
 	}
 	

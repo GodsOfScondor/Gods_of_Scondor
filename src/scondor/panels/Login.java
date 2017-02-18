@@ -2,6 +2,7 @@ package scondor.panels;
 
 import scondor.components.Button;
 import scondor.components.CheckBox;
+import scondor.components.Component;
 import scondor.components.Label;
 import scondor.components.Panel;
 import scondor.components.TextField;
@@ -33,7 +34,11 @@ public class Login extends Panel {
 		save_box = new CheckBox(700, 500, 1.2f);
 		save = new Label("Remember me", 730, 500, 3, 1).setEffect(effect).setColor(1, 1, 1);
 		
-		login = new Button("LOGIN", 500, 700, 5, 1, null).setEffect(effect).setDamper(0.2f);
+		login = new Button("LOGIN", 500, 700, 5, 1, new Action() {
+			public void perform() {
+				Panels.show(Panels.MAIN);
+			}
+		}).setEffect(effect).setDamper(0.2f);
 		exit = new Button("EXIT", 700, 700, 5, 1, new Action() {
 			public void perform() {
 				System.exit(0);
@@ -53,6 +58,18 @@ public class Login extends Panel {
 		add(exit);
 		
 		
+	}
+
+	@Override
+	public void swipeIn() {
+		for (Component comp : comps) if (comp instanceof EffectAble<?>) ((EffectAble<?>) comp).fade(0, 1, 100);
+	}
+
+
+	@Override
+	public void swipeOut() {
+		for (Component comp : comps) if (comp instanceof EffectAble<?>) ((EffectAble<?>) comp).fade(1, 0, 100);
+
 	}
 
 }

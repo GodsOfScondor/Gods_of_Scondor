@@ -83,5 +83,21 @@ public abstract class Component {
 		for (Action action : actions)action.perform();
 		refresh();
 	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
 	
 }

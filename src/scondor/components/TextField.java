@@ -5,9 +5,10 @@ import scondor.image.Image;
 import scondor.image.Texture;
 import scondor.inputs.KeyBoard;
 import scondor.inputs.Mouse;
+import scondor.panels.EffectAble;
 import scondor.util.Maths;
 
-public class TextField extends Component {
+public class TextField extends Component implements EffectAble<TextField> {
 	
 	private Text text;
 	private Image bg,fg, cursor;
@@ -106,6 +107,46 @@ public class TextField extends Component {
 	
 	public String getText() {
 		return line;
+	}
+
+	@Override
+	public TextField fade(float start, float end, int time) {
+		bg.fade(start, end, time);
+		fg.fade(start, end, time);
+		cursor.fade(start, end, time);
+		text.fade(start, end, time);
+		return this;
+	}
+	
+	@Override
+	public TextField slideX(int start, int end, int time) {
+		bg.slideX(start, end, time);
+		fg.slideX(start, end, time);
+		cursor.slideX(start, end, time);
+		text.slideX(start, end, time);
+		return this;
+	}
+	
+	@Override
+	public TextField slideY(int start, int end, int time) {
+		bg.slideY(start, end, time);
+		fg.slideY(start, end, time);
+		cursor.slideY(start, end, time);
+		text.slideY(start, end, time);
+		return this;
+	}
+	
+	@Override
+	public TextField stop() {
+		bg.stopEffects();
+		bg.resetEffects();
+		fg.stopEffects();
+		fg.resetEffects();
+		cursor.stopEffects();
+		cursor.resetEffects();
+		text.stopEffects();
+		text.resetEffects();
+		return this;
 	}
 
 }

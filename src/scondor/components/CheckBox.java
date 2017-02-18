@@ -3,13 +3,13 @@ package scondor.components;
 import scondor.image.Image;
 import scondor.image.Texture;
 import scondor.inputs.Mouse;
+import scondor.panels.EffectAble;
 import scondor.util.Maths;
 
-public class CheckBox extends Component {
+public class CheckBox extends Component implements EffectAble<CheckBox> {
 	
 	private Image box;
 	private boolean select,target;
-	private float damper;
 	private static final int SIZE = 20;
 	
 	private static final Texture TEX_BOX = new Texture("box");
@@ -70,5 +70,30 @@ public class CheckBox extends Component {
 	protected void setPriority(int priority) {
 		if (box!=null) box.setPriority(priority);
 	}
-
+	
+	@Override
+	public CheckBox fade(float start, float end, int time) {
+		box.fade(start, end, time);
+		return this;
+	}
+	
+	@Override
+	public CheckBox slideX(int start, int end, int time) {
+		box.slideX(start, end, time);
+		return this;
+	}
+	
+	@Override
+	public CheckBox slideY(int start, int end, int time) {
+		box.slideY(start, end, time);
+		return this;
+	}
+	
+	@Override
+	public CheckBox stop() {
+		box.stopEffects();
+		box.resetEffects();
+		return this;
+	}
+	
 }

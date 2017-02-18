@@ -5,9 +5,10 @@ import org.lwjgl.opengl.Display;
 import scondor.font.Text;
 import scondor.font.effect.FontEffect;
 import scondor.inputs.Mouse;
+import scondor.panels.EffectAble;
 import scondor.util.Action;
 
-public class Button extends Component {
+public class Button extends Component implements EffectAble<Button> {
 
 	private boolean enabled;
 	private Action action;
@@ -75,7 +76,7 @@ public class Button extends Component {
 
 	@Override
 	protected void refresh() {
-		if (enabled && Mouse.X >= x && Mouse.X <= x + width && Mouse.Y >= y && Mouse.Y <= y + height) {
+		if (enabled && text.getTransparency() > 0.99f && Mouse.X >= x && Mouse.X <= x + width && Mouse.Y >= y && Mouse.Y <= y + height) {
 			text.setColor(r+damper, g+damper, b+damper);
 			target = true;
 			if (Mouse.isButtonTyped(0)) {
@@ -94,18 +95,28 @@ public class Button extends Component {
 		super.width = (int) (this.text.getWidth());
 	}
 	
+	@Override
 	public Button fade(float start, float end, int time) {
 		text.fade(start, end, time);
 		return this;
 	}
 	
+	@Override
 	public Button slideX(int start, int end, int time) {
 		text.slideX(start, end, time);
 		return this;
 	}
 	
+	@Override
 	public Button slideY(int start, int end, int time) {
 		text.slideY(start, end, time);
+		return this;
+	}
+	
+	@Override
+	public Button stop() {
+		text.stopEffects();
+		text.resetEffects();
 		return this;
 	}
 

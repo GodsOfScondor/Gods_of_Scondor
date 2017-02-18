@@ -1,11 +1,10 @@
 package scondor.panels;
 
 import scondor.components.Button;
-import scondor.components.CheckBox;
+import scondor.components.Component;
 import scondor.components.Label;
 import scondor.components.Panel;
 import scondor.components.Picture;
-import scondor.components.TextField;
 import scondor.font.effect.GlowEffect;
 import scondor.image.Texture;
 import scondor.util.Action;
@@ -18,8 +17,7 @@ public class Main extends Panel {
 	private Button button_exit;
 	
 	private Picture arrow;
-	private CheckBox box;
-	private TextField field;
+	private Label label;
 
 	public Main() {
 		/*
@@ -31,7 +29,7 @@ public class Main extends Panel {
 		/*
 		 * create picture
 		 */
-		arrow = new Picture(new Texture("arrow"), 580, 400, 20, 35);
+		arrow = new Picture(new Texture("arrow"), 580, 400, 20, 20);
 		
 		/*
 		 * create buttons
@@ -41,32 +39,30 @@ public class Main extends Panel {
 			public void perform() {
 				
 			}
-		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f).fade(0, 1, 100);
+		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f);
 		
 		button_options = new Button("OPTIONS", 600, 600, 3, 1, new Action() {
 			@Override
 			public void perform() {
-				setVisible(false);
+				Panels.show(Panels.LOGIN);
 			}
-		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f).fade(0, 1, 100);
+		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f);
 		
 		button_exit = new Button("EXIT", 600, 700, 3, 1, new Action() {
 			@Override
 			public void perform() {
 				System.exit(0);
 			}
-		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f).fade(0, 1, 100);
+		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f);
 		
 		/*
 		 * create labels
 		 */
-		Label label = new Label("THOMAPHEN v2.0", 150, 100, 5, 0).setEffect(new GlowEffect(0,0,0,5)).setColor(0.5f, 0.5f, 0.05f).fade(0, 1, 200).slideY(250, 100, 80);
+		label = new Label("THOMAPHEN v2.0", 150, 100, 5, 0).setEffect(new GlowEffect(0,0,0,5)).setColor(0.5f, 0.5f, 0.05f);
 		
 		/*
 		 * create checkbox
 		 */
-		box = new CheckBox(100, 300, 1);
-		
 		/*
 		 * add actions to panel 
 		 */
@@ -80,27 +76,24 @@ public class Main extends Panel {
 			}
 		});
 		
-		field = new TextField(200, 400, 300, 20);
-		addAction(new Action() {
-			@Override
-			public void perform() {
-				field.setVisible(box.isSelected());
-			}
-		});
-		
-		
-		
-		
 		/*
 		 * add comps to panel
 		 */
-		add(field);
 		add(label);
 		add(button_exit);
 		add(button_battle);
 		add(button_options);
 		add(arrow);
-		add(box);
+	}
+
+	@Override
+	public void swipeIn() {
+		for (Component comp : comps) if (comp instanceof EffectAble<?>) ((EffectAble<?>) comp).fade(0, 1, 100);
+	}
+
+	@Override
+	public void swipeOut() {
+		for (Component comp : comps) if (comp instanceof EffectAble<?>) ((EffectAble<?>) comp).fade(1, 0, 100);
 	}
 	
 }
