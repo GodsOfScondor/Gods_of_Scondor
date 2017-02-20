@@ -4,6 +4,7 @@ import scondor.image.Image;
 import scondor.image.Texture;
 import scondor.panels.EffectAble;
 import scondor.panels.SwipeAble;
+import scondor.util.Maths;
 
 public abstract class Panel extends Component implements SwipeAble, EffectAble<Panel> {
 	
@@ -12,6 +13,11 @@ public abstract class Panel extends Component implements SwipeAble, EffectAble<P
 	
 	public Panel(int x, int y, int width, int height, int priority) {
 		super(x, y, width, height);
+		this.priority = priority;
+	}
+	
+	public Panel(int priority) {
+		super(0, 0, 1000, 1 + (int) (1000/Maths.getScreenRatio()));
 		this.priority = priority;
 	}
 	
@@ -31,6 +37,7 @@ public abstract class Panel extends Component implements SwipeAble, EffectAble<P
 	@Override
 	protected void discard() {
 		if (background!=null) background.setTransparency(0f);
+		System.out.println("here!");
 	}
 
 	@Override
@@ -53,19 +60,19 @@ public abstract class Panel extends Component implements SwipeAble, EffectAble<P
 	
 	@Override
 	public Panel fade(float start, float end, int time) {
-		for (Component comp : comps) if (comp instanceof EffectAble<?>) ((EffectAble<?>) comp).fade(start, end, time);
+		background.fade(start, end, time);
 		return this;
 	}
 	
 	@Override
 	public Panel slideX(int start, int end, int time) {
-		for (Component comp : comps) if (comp instanceof EffectAble<?>) ((EffectAble<?>) comp).slideX(start, end, time);
+		background.slideX(start, end, time);
 		return this;
 	}
 	
 	@Override
 	public Panel slideY(int start, int end, int time) {
-		for (Component comp : comps) if (comp instanceof EffectAble<?>) ((EffectAble<?>) comp).slideY(start, end, time);
+		background.slideY(start, end, time);
 		return this;
 	}
 	

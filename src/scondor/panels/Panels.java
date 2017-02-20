@@ -10,26 +10,38 @@ public class Panels {
 	public static final int LOGIN = 0;
 	public static final int REGISTER = 1;
 	public static final int MAIN = 2;
+	public static final int POPUP = 3;
+	
+	public static final int FADEIN = 100;
+	public static final int FADEOUT = 30;
 	
 	private static Map<Integer, Panel> panels = new HashMap<>();
 	private static Panel current;
+	private static int key;
 	
 	public static void init() {
 		current = null;
 		panels.put(LOGIN, new Login());
 		panels.put(MAIN, new Main());
+		panels.put(POPUP, new PopUp());
 	}
 	
-	public static void show(int panel) {
+	public static void show(int key) {
 		if (current != null) {
 			current.setVisible(false);
 			current.swipeOut();
 		}
 		
-		current = panels.get(panel);
+		current = panels.get(key);
 		current.show();
 		current.swipeIn();
+		Panels.key = key;
 		
+	}
+	
+	public static void popup(String msg) {
+		((PopUp)panels.get(POPUP)).setMSG(msg, key);
+		show(POPUP);
 	}
 	
 }

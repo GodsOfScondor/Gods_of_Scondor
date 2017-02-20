@@ -9,7 +9,6 @@ import scondor.components.TextField;
 import scondor.font.effect.OutlineEffect;
 import scondor.image.Texture;
 import scondor.util.Action;
-import scondor.util.Maths;
 
 public class Login extends Panel {
 	
@@ -21,7 +20,7 @@ public class Login extends Panel {
 	
 	
 	public Login() {
-		super(0, 0, 1000, 1 + (int) (1000 / Maths.getScreenRatio()), 1);
+		super(1);
 		setBackground(new Texture("bg"));
 		
 		effect = new OutlineEffect(0.5f, 0.5f, 0.5f, 0.8f);
@@ -57,18 +56,19 @@ public class Login extends Panel {
 		add(login);
 		add(exit);
 		
-		
 	}
 
 	@Override
 	public void swipeIn() {
-		for (Component comp : comps) if (comp instanceof EffectAble<?>) ((EffectAble<?>) comp).fade(0, 1, 100);
+		fade(0, 1, Panels.FADEIN);
+		for (Component comp : comps) if (comp instanceof EffectAble<?>) ((EffectAble<?>) comp).fade(0, 1, Panels.FADEIN);
 	}
 
 
 	@Override
 	public void swipeOut() {
-		for (Component comp : comps) if (comp instanceof EffectAble<?>) ((EffectAble<?>) comp).fade(1, 0, 100);
+		fade(1, 0, Panels.FADEOUT);
+		for (Component comp : comps) if (comp instanceof EffectAble<?>) ((EffectAble<?>) comp).fade(1, 0, Panels.FADEOUT);
 
 	}
 

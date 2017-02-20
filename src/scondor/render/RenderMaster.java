@@ -52,7 +52,7 @@ public class RenderMaster {
 	public static void update() {
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-		GL11.glClearColor(0, 1, 0, 1);
+		GL11.glClearColor(1, 1, 1, 1);
 		
 		for (int n = 0;n<PRIORITIES;n++) for (Render render : renders) {
 			if (render instanceof ImageRender) ((ImageRender)render).render((List<Image>) image_priorities[n].getList(), n);

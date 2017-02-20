@@ -79,5 +79,14 @@ public class Label extends Component implements EffectAble<Label> {
 		text.resetEffects();
 		return this;
 	}
+
+	public void setXY(int x, int y) {
+		text.setXY(x, y);
+	}
+	
+	@Override
+	public int getWidth() {
+		return text.getWidth();
+	}
 	
 }

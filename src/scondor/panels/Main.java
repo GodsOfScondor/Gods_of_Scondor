@@ -8,7 +8,6 @@ import scondor.components.Picture;
 import scondor.font.effect.GlowEffect;
 import scondor.image.Texture;
 import scondor.util.Action;
-import scondor.util.Maths;
 
 public class Main extends Panel {
 
@@ -23,7 +22,7 @@ public class Main extends Panel {
 		/*
 		 * create panel
 		 */
-		super(0, 0, 1000, 1 + (int) (1000/Maths.getScreenRatio()),1);
+		super(1);
 		setBackground(new Texture("bg"));
 		
 		/*
@@ -44,7 +43,7 @@ public class Main extends Panel {
 		button_options = new Button("OPTIONS", 600, 600, 3, 1, new Action() {
 			@Override
 			public void perform() {
-				Panels.show(Panels.LOGIN);
+				Panels.popup("Time: " + System.currentTimeMillis());
 			}
 		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f);
 		
@@ -88,12 +87,14 @@ public class Main extends Panel {
 
 	@Override
 	public void swipeIn() {
-		for (Component comp : comps) if (comp instanceof EffectAble<?>) ((EffectAble<?>) comp).fade(0, 1, 100);
+		fade(0, 1, Panels.FADEIN);
+		for (Component comp : comps) if (comp instanceof EffectAble<?>) ((EffectAble<?>) comp).fade(0, 1, Panels.FADEIN);
 	}
 
 	@Override
 	public void swipeOut() {
-		for (Component comp : comps) if (comp instanceof EffectAble<?>) ((EffectAble<?>) comp).fade(1, 0, 100);
+		fade(1, 0, Panels.FADEOUT);
+		for (Component comp : comps) if (comp instanceof EffectAble<?>) ((EffectAble<?>) comp).fade(1, 0, Panels.FADEOUT);
 	}
 	
 }
