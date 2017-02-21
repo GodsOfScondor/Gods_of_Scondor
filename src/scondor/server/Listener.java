@@ -5,6 +5,7 @@ import scondor.gnet.client.ServerModel;
 import scondor.gnet.packet.Packet;
 import scondor.packets.Message;
 import scondor.panels.Panels;
+import scondor.panels.start.Connector;
 import scondor.util.Action;
 
 public class Listener extends ClientEventListener {
@@ -41,11 +42,17 @@ public class Listener extends ClientEventListener {
 		if (packet instanceof Message) {
 			Client.add(new Action() {
 				public void perform() {
-					String[] buffer = ((String) packet.getEntry("MESSAGE")).split(":");
-					if (buffer.length==3) {
-						Panels.popup(buffer[2], Float.parseFloat(buffer[1].split(",")[0]), Float.parseFloat(buffer[1].split(",")[1]), Float.parseFloat(buffer[1].split(",")[2]));
+					int code = Integer.parseInt((String) packet.getEntry("MESSAGE"));
+					
+					String msg = "1,0,0:Invalid code!";
+					if (code < 5) msg = Connector.msgFromServer(code);
+					
+					String[] buffer = msg.split(":");
+					
+					if (buffer.length==2) {
+						Panels.popup(buffer[1], Float.parseFloat(buffer[0].split(",")[0]), Float.parseFloat(buffer[0].split(",")[1]), Float.parseFloat(buffer[0].split(",")[2]));
 					} else {
-						Panels.popup(buffer[3], Float.parseFloat(buffer[1].split(",")[0]), Float.parseFloat(buffer[1].split(",")[1]), Float.parseFloat(buffer[1].split(",")[2]), Integer.parseInt(buffer[2]));
+						Panels.popup(buffer[2], Float.parseFloat(buffer[0].split(",")[0]), Float.parseFloat(buffer[0].split(",")[1]), Float.parseFloat(buffer[0].split(",")[2]), Integer.parseInt(buffer[1]));
 					}
 				}
 			});

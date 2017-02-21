@@ -18,7 +18,7 @@ public class CheckBox extends Component implements EffectAble<CheckBox> {
 	public CheckBox(int x, int y, float size) {
 		super(x, y, (int)(30*size), (int)(SIZE*size));
 		this.box = new Image(TEX_BOX, x, y, (int)(SIZE*size), (int)(SIZE*size), -1);
-		this.box.setTransparency(0.3f);
+		this.box.setTransparency(0.7f);
 		this.box.setLayer(0.4f);
 	}
 
@@ -41,21 +41,23 @@ public class CheckBox extends Component implements EffectAble<CheckBox> {
 
 	@Override
 	protected void refresh() {
-		if (Mouse.X >= x && Mouse.X <= x + width && Mouse.Y >= y && Mouse.Y <= y + height*Maths.getScreenRatio()) {
-			
-			if (Mouse.isButtonTyped(0)) select = !select;
-			
-			target = true;
-			this.box.setTransparency(1);
-			
-		} else {
-			
-			this.box.setTransparency(0.3f);
-			target = false;
-			
+		if (isVisible()) {
+			if (Mouse.X >= x && Mouse.X <= x + width && Mouse.Y >= y && Mouse.Y <= y + height*Maths.getScreenRatio()) {
+				
+				if (Mouse.isButtonTyped(0)) select = !select;
+				
+				target = true;
+				this.box.setTransparency(1);
+				
+			} else {
+				
+				this.box.setTransparency(0.7f);
+				target = false;
+				
+			}
+			if (select) box.setTex(TEX_BOX_SELECTED);
+			else box.setTex(TEX_BOX);
 		}
-		if (select) box.setTex(TEX_BOX_SELECTED);
-		else box.setTex(TEX_BOX);
 	}
 	
 	public boolean isTargeted() {

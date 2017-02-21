@@ -8,8 +8,7 @@ import scondor.components.Panel;
 import scondor.components.TextField;
 import scondor.font.effect.OutlineEffect;
 import scondor.image.Texture;
-import scondor.packets.Authentication;
-import scondor.server.Client;
+import scondor.panels.start.Connector;
 import scondor.util.Action;
 
 public class Login extends Panel {
@@ -37,7 +36,7 @@ public class Login extends Panel {
 		
 		login = new Button("LOGIN", 500, 700, 5, 1, new Action() {
 			public void perform() {
-				Client.send(new Authentication(username_field.getText(), password_field.getText()));
+				Connector.login(username_field.getText(), password_field.getText());
 			}
 		}).setEffect(effect).setDamper(0.2f);
 		exit = new Button("EXIT", 700, 700, 5, 1, new Action() {
@@ -45,6 +44,12 @@ public class Login extends Panel {
 				System.exit(0);
 			}
 		}).setEffect(effect).setDamper(0.2f);
+		
+		addAction(new Action() {
+			public void perform() {
+				if (Panels.isOpen(Panels.LOGIN)) Connector.save_data = save_box.isSelected();
+			}
+		});
 		
 		add(username);
 		add(password);

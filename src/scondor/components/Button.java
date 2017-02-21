@@ -4,6 +4,7 @@ import org.lwjgl.opengl.Display;
 
 import scondor.font.Text;
 import scondor.font.effect.FontEffect;
+import scondor.font.mesh.TextMeshCreator;
 import scondor.inputs.Mouse;
 import scondor.panels.EffectAble;
 import scondor.util.Action;
@@ -24,7 +25,7 @@ public class Button extends Component implements EffectAble<Button> {
 		this.enabled = true;
 		this.text = new Text(text, x, y, size, font_id, -1);
 		super.width = 1;
-		super.height = (int) (size*(Display.getHeight() / 32)-10);
+		super.height = (int) (Display.getHeight()*size*TextMeshCreator.LINE_HEIGHT);
 		this.r = 0;
 		this.g = 0;
 		this.b = 0;

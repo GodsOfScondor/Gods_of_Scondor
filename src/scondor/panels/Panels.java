@@ -49,5 +49,9 @@ public class Panels {
 		((PopUp)panels.get(POPUP)).setMSG("NEXT", msg, r, g, b, panel);
 		show(POPUP);
 	}
+
+	public static boolean isOpen(int panel) {
+		return key == panel;
+	}
 	
 }

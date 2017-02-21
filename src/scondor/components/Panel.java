@@ -37,7 +37,6 @@ public abstract class Panel extends Component implements SwipeAble, EffectAble<P
 	@Override
 	protected void discard() {
 		if (background!=null) background.setTransparency(0f);
-		System.out.println("here!");
 	}
 
 	@Override

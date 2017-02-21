@@ -1,9 +1,7 @@
 package scondor;
 
-import scondor.components.ComponentMaster;
 import scondor.inputs.KeyBoard;
 import scondor.inputs.Mouse;
-import scondor.panels.Panels;
 import scondor.render.RenderMaster;
 import scondor.server.Client;
 import scondor.util.Utils;
@@ -19,14 +17,10 @@ public class Engine {
 		
 		Window.init();
 		RenderMaster.init();
-		ComponentMaster.init();
 		Utils.init();
-		Panels.init();
 		
 		KeyBoard.init();
 		Mouse.init();
-		
-		Panels.show(Panels.LOGIN);
 		
 	}
 	
@@ -36,7 +30,6 @@ public class Engine {
 		
 		Client.update();
 		Utils.update();
-		ComponentMaster.update();
 		
 		RenderMaster.update();
 		Window.update();
