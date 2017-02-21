@@ -5,6 +5,7 @@ import scondor.gnet.client.ServerModel;
 import scondor.gnet.packet.Packet;
 import scondor.packets.Message;
 import scondor.panels.Panels;
+import scondor.util.Action;
 
 public class Listener extends ClientEventListener {
 
@@ -32,13 +33,17 @@ public class Listener extends ClientEventListener {
 	 * 
 	 */
 	@Override
-	protected void packetReceived(ServerModel server, Packet packet) {
+	protected void packetReceived(ServerModel server, final Packet packet) {
 		
 		/*
 		 * msg from server
 		 */
 		if (packet instanceof Message) {
-			Panels.popup("" + packet.getEntry("MESSAGE"));
+			Client.add(new Action() {
+				public void perform() {
+					Panels.popup("" + packet.getEntry("MESSAGE"));
+				}
+			});
 		}
 		
 	}

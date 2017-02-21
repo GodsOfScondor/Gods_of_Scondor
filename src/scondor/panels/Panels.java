@@ -22,6 +22,7 @@ public class Panels {
 	public static void init() {
 		current = null;
 		panels.put(LOGIN, new Login());
+		panels.put(REGISTER, new Register());
 		panels.put(MAIN, new Main());
 		panels.put(POPUP, new PopUp());
 	}

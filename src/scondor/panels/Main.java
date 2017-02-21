@@ -43,7 +43,7 @@ public class Main extends Panel {
 		button_options = new Button("OPTIONS", 600, 600, 3, 1, new Action() {
 			@Override
 			public void perform() {
-				Panels.popup("Time: " + System.currentTimeMillis());
+				Panels.show(Panels.REGISTER);
 			}
 		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f);
 		

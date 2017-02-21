@@ -15,12 +15,7 @@ public class Engine {
 	
 	public static void init() {
 		
-//		client = new Client();
-//		
-//		try { Thread.sleep(5000); }
-//		catch (InterruptedException e) { e.printStackTrace(); }
-//		
-//		Client.send(new Message("Hallo!"));
+		client = new Client();
 		
 		Window.init();
 		RenderMaster.init();
@@ -39,6 +34,7 @@ public class Engine {
 		KeyBoard.update();
 		Mouse.update();
 		
+		Client.update();
 		Utils.update();
 		ComponentMaster.update();
 		
