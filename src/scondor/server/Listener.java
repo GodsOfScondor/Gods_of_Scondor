@@ -41,7 +41,12 @@ public class Listener extends ClientEventListener {
 		if (packet instanceof Message) {
 			Client.add(new Action() {
 				public void perform() {
-					Panels.popup("" + packet.getEntry("MESSAGE"));
+					String[] buffer = ((String) packet.getEntry("MESSAGE")).split(":");
+					if (buffer.length==3) {
+						Panels.popup(buffer[2], Float.parseFloat(buffer[1].split(",")[0]), Float.parseFloat(buffer[1].split(",")[1]), Float.parseFloat(buffer[1].split(",")[2]));
+					} else {
+						Panels.popup(buffer[3], Float.parseFloat(buffer[1].split(",")[0]), Float.parseFloat(buffer[1].split(",")[1]), Float.parseFloat(buffer[1].split(",")[2]), Integer.parseInt(buffer[2]));
+					}
 				}
 			});
 		}

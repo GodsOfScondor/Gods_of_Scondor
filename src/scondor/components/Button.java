@@ -120,4 +120,10 @@ public class Button extends Component implements EffectAble<Button> {
 		return this;
 	}
 
+	public Button setText(String button) {
+		text.setText(button);
+		text.recreate();
+		return this;
+	}
+
 }

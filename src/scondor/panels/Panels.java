@@ -40,8 +40,13 @@ public class Panels {
 		
 	}
 	
-	public static void popup(String msg) {
-		((PopUp)panels.get(POPUP)).setMSG(msg, key);
+	public static void popup(String msg, float r, float g, float b) {
+		((PopUp)panels.get(POPUP)).setMSG("BACK", msg, r, g, b, key);
+		show(POPUP);
+	}
+	
+	public static void popup(String msg, float r, float g, float b, int panel) {
+		((PopUp)panels.get(POPUP)).setMSG("NEXT", msg, r, g, b, panel);
 		show(POPUP);
 	}
 	
