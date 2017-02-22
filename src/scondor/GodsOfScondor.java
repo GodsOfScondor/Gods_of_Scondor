@@ -24,6 +24,9 @@ public class GodsOfScondor {
 			
 		}
 		
+		Engine.close();
+		Game.close();
+		
 	}
 	
 }

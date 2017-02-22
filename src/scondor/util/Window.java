@@ -29,7 +29,7 @@ public class Window {
 		Display.update();
 	}
 	
-	public static void cleanUp() {
+	public static void close() {
 		Display.destroy();
 	}
 	

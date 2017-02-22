@@ -36,7 +36,7 @@ public class Engine {
 	}
 	
 	public static void close() {
-		Window.cleanUp();
+		Window.close();
 		RenderMaster.close();
 		Loader.close();
 	}
