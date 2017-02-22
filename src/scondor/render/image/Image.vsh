@@ -16,7 +16,7 @@ uniform int priority;
 void main(void) {
 
 	float z = ((1.0/PRIORITIES)*priority)+(layer/PRIORITIES);
-
+  
 	gl_Position = TM * vec4(position.xy, z , 1.0);
 	
 	tex_coords = (vec2(((position.x+1.0)/2.0)/columns, (1 - (position.y+1.0)/2.0)/rows)) + offset;

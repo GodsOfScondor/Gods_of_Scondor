@@ -12,12 +12,15 @@ public class GodsOfScondor {
 	 * @author Bernhard Scharrer
 	 * 
 	 */
+	
+	private static boolean close;
+	
 	public static void main(String[] args) {
 		
 		Engine.init();
 		Game.init();
 		
-		while (!Display.isCloseRequested()&&!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
+		while (!close && !Display.isCloseRequested()&&!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
 			
 			Engine.update();
 			Game.update();
@@ -27,6 +30,12 @@ public class GodsOfScondor {
 		Engine.close();
 		Game.close();
 		
+		System.exit(0);
+		
+	}
+	
+	public static void close() {
+		close = true;
 	}
 	
 }

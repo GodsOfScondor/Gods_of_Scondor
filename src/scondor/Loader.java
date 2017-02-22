@@ -122,12 +122,12 @@ public class Loader {
 	}
 
 	public static void close() {
-		for (int vao : vaos)
-			GL30.glDeleteVertexArrays(vao);
-		for (int vbo : vbos)
-			GL15.glDeleteBuffers(vbo);
-		for (int texture : textures)
-			GL11.glDeleteTextures(texture);
+//		for (int vao : vaos)
+//			GL30.glDeleteVertexArrays(vao);
+//		for (int vbo : vbos)
+//			GL15.glDeleteBuffers(vbo);
+//		for (int texture : textures)
+//			GL11.glDeleteTextures(texture);
 	}
 
 }

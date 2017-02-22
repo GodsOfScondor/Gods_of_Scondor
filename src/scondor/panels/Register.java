@@ -1,5 +1,6 @@
 package scondor.panels;
 
+import scondor.GodsOfScondor;
 import scondor.components.Button;
 import scondor.components.CheckBox;
 import scondor.components.Component;
@@ -42,7 +43,7 @@ public class Register extends Panel {
 		}).setEffect(effect).setDamper(0.2f);
 		exit = new Button("EXIT", 700, 700, 5, 1, new Action() {
 			public void perform() {
-				System.exit(0);
+				GodsOfScondor.close();
 			}
 		}).setEffect(effect).setDamper(0.2f);
 		already = new Button("Already have an account?", 500, 850, 3, 1, new Action() {

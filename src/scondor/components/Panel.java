@@ -54,24 +54,24 @@ public abstract class Panel extends Component implements SwipeAble, EffectAble<P
 
 	@Override
 	protected void setPriority(int priority) {
-		background.setPriority(priority);
+		if (background!=null) background.setPriority(priority);
 	}
 	
 	@Override
 	public Panel fade(float start, float end, int time) {
-		background.fade(start, end, time);
+		if (background!=null) background.fade(start, end, time);
 		return this;
 	}
 	
 	@Override
 	public Panel slideX(int start, int end, int time) {
-		background.slideX(start, end, time);
+		if (background!=null) background.slideX(start, end, time);
 		return this;
 	}
 	
 	@Override
 	public Panel slideY(int start, int end, int time) {
-		background.slideY(start, end, time);
+		if (background!=null) background.slideY(start, end, time);
 		return this;
 	}
 	

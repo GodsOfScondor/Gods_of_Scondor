@@ -1,5 +1,6 @@
 package scondor.panels;
 
+import scondor.GodsOfScondor;
 import scondor.components.Button;
 import scondor.components.Component;
 import scondor.components.Label;
@@ -33,31 +34,31 @@ public class Main extends Panel {
 		/*
 		 * create buttons
 		 */
-		button_battle = new Button("BATLINGER", 600, 500, 3, 1, new Action() {
+		button_battle = new Button("PLAY", 600, 500, 3, 1, new Action() {
 			@Override
 			public void perform() {
-				
+				Panels.show(Panels.LOBBY);
 			}
 		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f);
 		
 		button_options = new Button("OPTIONS", 600, 600, 3, 1, new Action() {
 			@Override
 			public void perform() {
-				Panels.show(Panels.REGISTER);
+				
 			}
 		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f);
 		
 		button_exit = new Button("EXIT", 600, 700, 3, 1, new Action() {
 			@Override
 			public void perform() {
-				System.exit(0);
+				GodsOfScondor.close();
 			}
 		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f);
 		
 		/*
 		 * create labels
 		 */
-		label = new Label("THOMAPHEN v2.0", 150, 100, 5, 0).setEffect(new GlowEffect(0,0,0,5)).setColor(0.5f, 0.5f, 0.05f);
+		label = new Label("Gods of Scondor", 150, 100, 5, 0).setEffect(new GlowEffect(0,0,0,5)).setColor(0.5f, 0.5f, 0.05f);
 		
 		/*
 		 * create checkbox

@@ -18,6 +18,11 @@ public class Label extends Component implements EffectAble<Label> {
 		return this;
 	}
 	
+	public Label setLineSize(int size) {
+		text.setLineSize(size);
+		return this;
+	}
+	
 	public Label setText(String text) {
 		this.text.setText(text);
 		this.text.recreate();

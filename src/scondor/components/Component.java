@@ -21,7 +21,6 @@ public abstract class Component {
 		this.height=height;
 		ComponentMaster.comps.add(this);
 		setVisible(false);
-		System.out.println("\n");
 	}
 	
 	public void setVisible(boolean visible) {

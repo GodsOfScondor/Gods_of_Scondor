@@ -11,8 +11,9 @@ public class Panels {
 	public static final int REGISTER = 1;
 	public static final int MAIN = 2;
 	public static final int POPUP = 3;
+	public static final int LOBBY = 4;
 	
-	public static final int FADEIN = 100;
+	public static final int FADEIN = 70;
 	public static final int FADEOUT = 30;
 	
 	private static Map<Integer, Panel> panels = new HashMap<>();
@@ -25,6 +26,7 @@ public class Panels {
 		panels.put(REGISTER, new Register());
 		panels.put(MAIN, new Main());
 		panels.put(POPUP, new PopUp());
+		panels.put(LOBBY, new Lobby());
 	}
 	
 	public static void show(int key) {
