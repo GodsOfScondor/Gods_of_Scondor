@@ -13,7 +13,7 @@ public class Engine {
 	
 	public static void init() {
 		
-		client = new Client();
+//		client = new Client();
 		
 		Window.init();
 		RenderMaster.init();

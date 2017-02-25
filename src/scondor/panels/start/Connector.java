@@ -33,6 +33,8 @@ public class Connector {
 	private static final int LOGIN_SUCCESFULL = 2;
 	private static final int WRONG_LICENSE = 3;
 	private static final int USERNAME_ALREADY_EXISTS = 4;
+	private static final int SEARCHING_FOR_PLAYER = 5;
+	private static final int FOUND_PLAYER = 6;
 
 	public static void init() {
 		try {
@@ -57,7 +59,7 @@ public class Connector {
 				
 			} else {
 
-				Panels.show(Panels.REGISTER);
+				Panels.show(Panels.MAIN);
 
 			}
 
