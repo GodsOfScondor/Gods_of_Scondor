@@ -59,7 +59,7 @@ public class Connector {
 				
 			} else {
 
-				Panels.show(Panels.MAIN);
+				Panels.show(Panels.REGISTER);
 
 			}
 
