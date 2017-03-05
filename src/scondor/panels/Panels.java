@@ -12,6 +12,7 @@ public class Panels {
 	public static final int MAIN = 2;
 	public static final int POPUP = 3;
 	public static final int LOBBY = 4;
+	public static final int SHOP = 5;
 	
 	public static final int FADEIN = 70;
 	public static final int FADEOUT = 30;
@@ -27,6 +28,7 @@ public class Panels {
 		panels.put(MAIN, new Main());
 		panels.put(POPUP, new PopUp());
 		panels.put(LOBBY, new Lobby());
+		panels.put(SHOP, new Shop());
 	}
 	
 	public static void show(int key) {
