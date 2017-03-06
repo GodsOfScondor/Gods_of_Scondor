@@ -23,7 +23,7 @@ public class Client extends GNetClient {
 	}
 	
 	public static void send(Packet packet) {
-		//server.sendPacket(packet);
+		server.sendPacket(packet);
 	}
 	
 	protected static void setServerModel(ServerModel server) {

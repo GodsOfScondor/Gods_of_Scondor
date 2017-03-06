@@ -7,6 +7,7 @@ import scondor.deck.Deck;
 import scondor.deck.card.Card;
 
 public class Player {
+	
 	private Deck player_deck;
 	private List<Card> card_list=new ArrayList<>();
 	

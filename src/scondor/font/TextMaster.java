@@ -19,6 +19,7 @@ public class TextMaster {
 		fonts[0] = new FontType(new Texture("font/font1").getID(), new File("res/font/font1.fnt"));
 		fonts[1] = new FontType(new Texture("font/font2").getID(), new File("res/font/font2.fnt"));
 		fonts[2] = new FontType(new Texture("font/font3").getID(), new File("res/font/font3.fnt"));
+		fonts[3] = new FontType(new Texture("font/font4").getID(), new File("res/font/font4.fnt"));
 	}
 	
 	public static void addText(Text text) {
