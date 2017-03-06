@@ -1,13 +1,16 @@
 package scondor.panels;
 
+import java.util.ArrayList;
+
 import scondor.GodsOfScondor;
 import scondor.components.Button;
-import scondor.components.Card;
 import scondor.components.Component;
 import scondor.components.Label;
 import scondor.components.Panel;
+import scondor.components.Picture;
 import scondor.font.effect.OutlineEffect;
 import scondor.image.Texture;
+import scondor.inputs.Mouse;
 import scondor.util.Action;
 
 public class Shop extends Panel {
@@ -15,6 +18,7 @@ public class Shop extends Panel {
 	private Label title;
 	private Button shop, exit;
 	private OutlineEffect effect;
+	private ArrayList<Picture> decks = new ArrayList<>();
 
 	public Shop() {
 		super(1);
@@ -39,26 +43,44 @@ public class Shop extends Panel {
 			}
 		});
 
-		Card card1 = new Card(300, 370, 0.5f);
-		Card card2 = new Card(325, 371, 0.5f);
-		Card card3 = new Card(350, 372, 0.5f);
-		Card card4 = new Card(375, 372, 0.5f);
-		Card card5 = new Card(400, 371, 0.5f);
-		Card card6 = new Card(425, 371, 0.5f);
-		Card card7 = new Card(450, 370, 0.5f);
+		addAction(new Action() {
+			public void perform() {
+				for (Picture deck : decks) {
+					if (Mouse.X >= deck.getX() && Mouse.X <= deck.getX() + deck.getWidth() && Mouse.Y >= deck.getY()
+							&& Mouse.Y <= deck.getY() + deck.getHeight()) {
+						deck.setWidth(30);
+						deck.setHeight(48);
+					} else {
+						deck.setWidth(25);
+						deck.setHeight(40);
+					}
+				}
 
-		add(card1);
-		add(card2);
-		add(card3);
-		add(card4);
-		add(card5);
-		add(card6);
-		add(card7);
+			}
+		});
+
+		Picture deck1 = new Picture(new Texture("card_gn_common"), 300, 370, 25, 40);
+		decks.add(deck1);
+		Picture deck2 = new Picture(new Texture("card_gn_common"), 325, 372, 25, 40);
+		decks.add(deck2);
+		Picture deck3 = new Picture(new Texture("card_gn_common"), 350, 372, 25, 40);
+		decks.add(deck3);
+		Picture deck4 = new Picture(new Texture("card_gn_common"), 375, 372, 25, 40);
+		decks.add(deck4);
+		Picture deck5 = new Picture(new Texture("card_gn_common"), 400, 372, 25, 40);
+		decks.add(deck5);
+		Picture deck6 = new Picture(new Texture("card_gn_common"), 425, 372, 25, 40);
+		decks.add(deck6);
+		Picture deck7 = new Picture(new Texture("card_gn_common"), 450, 372, 25, 40);
+		decks.add(deck7);
+
+		for (Picture deck : decks) {
+			add(deck);
+		}
 
 		add(title);
 		add(shop);
 		add(exit);
-
 	}
 
 	@Override
