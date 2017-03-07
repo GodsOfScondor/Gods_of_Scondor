@@ -88,7 +88,7 @@ public class Main extends Panel {
 			}
 		});
 		
-		/*
+		/*b
 		 * add comps to panel
 		 */
 		add(label);

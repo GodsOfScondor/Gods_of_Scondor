@@ -3,8 +3,9 @@ package scondor.components;
 import scondor.font.Text;
 import scondor.image.Image;
 import scondor.image.Texture;
+import scondor.panels.EffectAble;
 
-public class Card extends Component {
+public class Card extends Component implements EffectAble<Card> {
 	
 	private Image card;
 	private Image sprite;
@@ -22,8 +23,8 @@ public class Card extends Component {
 		card.setLayer(0.48f);
 		sprite = new Image(new Texture(SPRITE_SHEET,5,5), x, y, 0, 0, -1);
 		sprite.setLayer(0.481f);
-		name = new Text("Twisted_Fate", 0, 0, size*0.3f, 1, -1);
-		description = new Text("I am a description text for example isuses. A A A A A A A A A A A A A A A A A A A ", 0, 0, size*0.3f, 3, -1);
+		name = new Text("Pikachu", 0, 0, size*0.3f, 1, -1);
+		description = new Text("BZZZ BZZZZZ BZZZZ", 0, 0, size*0.3f, 3, -1);
 		setSize(size);
 	}
 
@@ -68,7 +69,7 @@ public class Card extends Component {
 		return size;
 	}
 	
-	public void setSize(float size) {
+	public Card setSize(float size) {
 		this.size = size;
 		this.card.setWidth((int)(50*size));
 		this.card.setHeight((int)(80*size));
@@ -83,6 +84,39 @@ public class Card extends Component {
 		this.description.setLineSize((int) (size*36));
 		this.description.setSize(size*0.3f);
 		this.description.recreate();
+		return this;
+	}
+
+	@Override
+	public Card fade(float start, float end, int time) {
+		if (card != null) card.fade(start, end, time);
+		if (sprite != null) sprite.fade(start, end, time);
+		if (name != null) name.fade(start, end, time);
+		if (description != null) description.fade(start, end, time);
+		return this;
+	}
+
+	@Override
+	public Card slideX(int start, int end, int time) {
+		if (card != null) card.slideX(start, end, time);
+		if (sprite != null) sprite.slideX(start, end, time);
+		if (name != null) name.slideX(start, end, time);
+		if (description != null) description.slideX(start, end, time);
+		return this;
+	}
+
+	@Override
+	public Card slideY(int start, int end, int time) {
+		if (card != null) card.slideY(start, end, time);
+		if (sprite != null) sprite.slideY(start, end, time);
+		if (name != null) name.slideY(start, end, time);
+		if (description != null) description.slideY(start, end, time);
+		return this;
+	}
+
+	@Override
+	public Card stop() {
+		return this;
 	}
 	
 }

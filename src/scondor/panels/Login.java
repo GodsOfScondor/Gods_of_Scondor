@@ -25,7 +25,7 @@ public class Login extends Panel {
 	
 	public Login() {
 		super(1);
-		setBackground(new Texture("bg"));
+		setBackground(new Texture("lobby"));
 		
 		effect = new OutlineEffect(0.5f, 0.5f, 0.5f, 0.8f);
 		username = new Label("Username:", 500, 300, 5, 1).setEffect(effect);
