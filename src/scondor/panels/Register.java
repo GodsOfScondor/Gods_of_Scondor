@@ -22,7 +22,7 @@ public class Register extends Panel {
 	
 	public Register() {
 		super(1);
-		setBackground(new Texture("lobby"));
+		setBackground(new Texture("bg"));
 		
 		effect = new OutlineEffect(0.5f, 0.5f, 0.5f, 0.8f);
 		license = new Label("License:", 400, 200, 5, 1).setEffect(effect);
@@ -48,7 +48,7 @@ public class Register extends Panel {
 		}).setEffect(effect).setDamper(0.2f);
 		already = new Button("Already have an account?", 500, 850, 3, 1, new Action() {
 			public void perform() {
-				Panels.show(Panels.DECK_CHOOSER);
+				Panels.show(Panels.LOBBY);
 			}
 		}).setEffect(effect).setDamper(0.2f);
 		
