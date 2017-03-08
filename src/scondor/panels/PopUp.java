@@ -14,6 +14,7 @@ public class PopUp extends Panel {
 	private Label label;
 	private Button button;
 	private int last;
+	
 
 	public PopUp() {
 		super(1);
