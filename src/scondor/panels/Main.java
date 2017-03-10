@@ -44,7 +44,7 @@ public class Main extends Panel {
 		
 		button_shop = new Button("SHOP", 600, 400, 3, 1, new Action() {
 			public void perform() {
-				
+				Panels.show(Panels.SHOP);
 			}
 		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f);
 		

@@ -5,6 +5,7 @@ import scondor.gnet.client.ServerModel;
 import scondor.gnet.packet.Packet;
 import scondor.packets.Message;
 import scondor.panels.Panels;
+import scondor.panels.ShopHandler;
 import scondor.panels.start.Connector;
 import scondor.util.Action;
 
@@ -45,7 +46,11 @@ public class Listener extends ClientEventListener {
 					int code = Integer.parseInt((String) packet.getEntry("MESSAGE"));
 					
 					String msg = "1,0,0:Invalid code!";
+					
 					if (code < 5) msg = Connector.msgFromServer(code);
+					else if (code < 7) msg = ShopHandler.msgFromServer(code);
+					
+					if (msg.equalsIgnoreCase("nopopup")) return;
 					
 					String[] buffer = msg.split(":");
 					

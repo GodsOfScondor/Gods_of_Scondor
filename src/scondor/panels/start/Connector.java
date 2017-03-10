@@ -13,6 +13,7 @@ import scondor.packets.Authentication;
 import scondor.packets.Verification;
 import scondor.panels.Panels;
 import scondor.server.Client;
+import scondor.util.Messanger;
 
 public class Connector {
 
@@ -33,8 +34,6 @@ public class Connector {
 	private static final int LOGIN_SUCCESFULL = 2;
 	private static final int WRONG_LICENSE = 3;
 	private static final int USERNAME_ALREADY_EXISTS = 4;
-	private static final int SEARCHING_FOR_PLAYER = 5;
-	private static final int FOUND_PLAYER = 6;
 
 	public static void init() {
 		try {
@@ -71,16 +70,16 @@ public class Connector {
 	public static String msgFromServer(int code) {
 
 		switch (code) {
-		case USER_ALREADY_ONLINE: return "1,0,0:User is already online!";
-		case WRONG_PASSWORD: return "1,0,0:0:Wrong Password!";
+		case USER_ALREADY_ONLINE: return Messanger.build("User is already online!", 1, 0, 0);
+		case WRONG_PASSWORD: return Messanger.build("Wrong Password!", Panels.LOGIN, 1, 0, 0);
 		case LOGIN_SUCCESFULL:
 			saveData();
-			return "0,1,0:2:Login succesfully!";
-		case WRONG_LICENSE: return "1,0,0:License is wrong!";
-		case USERNAME_ALREADY_EXISTS: return "1,0,0:Username already exists!";
+			return Messanger.build("Login succesfully!", Panels.MAIN, 0, 1, 0);
+		case WRONG_LICENSE: return Messanger.build("License is wrong!", 1, 0, 0);
+		case USERNAME_ALREADY_EXISTS: return Messanger.build("Username already exists!", 1, 0, 0);
 		}
 
-		return "1,0,0:Invalid code!";
+		return "nopopup";
 	}
 
 	public static void register(String username, String password, String license) {

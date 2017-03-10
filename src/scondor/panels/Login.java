@@ -2,7 +2,6 @@ package scondor.panels;
 
 import scondor.GodsOfScondor;
 import scondor.components.Button;
-import scondor.components.Card;
 import scondor.components.CheckBox;
 import scondor.components.Component;
 import scondor.components.Label;
@@ -10,7 +9,6 @@ import scondor.components.Panel;
 import scondor.components.TextField;
 import scondor.font.effect.OutlineEffect;
 import scondor.image.Texture;
-import scondor.inputs.KeyBoard;
 import scondor.panels.start.Connector;
 import scondor.util.Action;
 
@@ -54,14 +52,6 @@ public class Login extends Panel {
 			}
 		});
 		
-		final Card card = new Card(100, 300, 1);
-		addAction(new Action() {
-			public void perform() {
-				if (KeyBoard.isKeyPressed(KeyBoard.KEY_DOWN)) card.setSize(card.getSize()-0.1f);
-				if (KeyBoard.isKeyPressed(KeyBoard.KEY_UP)) card.setSize(card.getSize()+0.1f);
-			}
-		});
-		add(card);
 		add(username);
 		add(password);
 		

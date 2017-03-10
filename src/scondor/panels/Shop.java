@@ -29,6 +29,7 @@ public class Shop extends Panel {
 
 		shop = new Button("DECKS", 180, 500, 5, 1, new Action() {
 			public void perform() {
+				ShopHandler.buy(200);
 			}
 		}).setEffect(effect).setDamper(0.2f);
 		exit = new Button("EXIT", 815, 600, 5, 1, new Action() {
@@ -97,7 +98,6 @@ public class Shop extends Panel {
 		for (Component comp : comps)
 			if (comp instanceof EffectAble<?>)
 				((EffectAble<?>) comp).fade(1, 0, Panels.FADEOUT);
-
 	}
 
 }

@@ -48,7 +48,7 @@ public class Register extends Panel {
 		}).setEffect(effect).setDamper(0.2f);
 		already = new Button("Already have an account?", 500, 850, 3, 1, new Action() {
 			public void perform() {
-				Panels.show(Panels.LOBBY);
+				Panels.show(Panels.LOGIN);
 			}
 		}).setEffect(effect).setDamper(0.2f);
 		
