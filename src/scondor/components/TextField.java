@@ -24,7 +24,7 @@ public class TextField extends Component implements EffectAble<TextField> {
 		this.bg = new Image(WHITE, x-1, y-1, width+2, height+2, -1);
 		this.fg = new Image(BLACK, x, y, width, height, -1);
 		this.cursor = new Image(WHITE, x, y+2, 1, height-4, -1);
-		this.text = new Text("", x+2, y+2, height/10f, 1, -1);
+		this.text = new Text("", x+2, y+2, height/10f, 3, -1);
 		this.text.setColor(1, 1, 1);
 		this.bg.setLayer(0.452f);
 		this.fg.setLayer(0.451f);

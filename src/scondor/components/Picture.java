@@ -2,7 +2,9 @@ package scondor.components;
 
 import scondor.image.Image;
 import scondor.image.Texture;
+import scondor.inputs.Mouse;
 import scondor.panels.EffectAble;
+import scondor.util.Maths;
 
 public class Picture extends Component implements EffectAble<Picture> {
 	
@@ -53,6 +55,10 @@ public class Picture extends Component implements EffectAble<Picture> {
 	
 	public void setHeight(int height) {
 		this.img.setHeight(height);
+	}
+	
+	public boolean isMouseOver() {
+		return (Mouse.X >= img.getX() && Mouse.X <= img.getX()+img.getWidth() && Mouse.Y >= img.getY() && Mouse.Y <= img.getY() + img.getHeight() * Maths.getScreenRatio());
 	}
 	
 	@Override

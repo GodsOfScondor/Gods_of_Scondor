@@ -19,7 +19,8 @@ public class Shop extends Panel {
 	private Button shop, exit;
 	private OutlineEffect effect;
 	private ArrayList<Picture> decks = new ArrayList<>();
-
+	private Picture picBuffer = null;
+	
 	public Shop() {
 		super(1);
 		setBackground(new Texture("shop"));
@@ -47,34 +48,45 @@ public class Shop extends Panel {
 		addAction(new Action() {
 			public void perform() {
 				for (Picture deck : decks) {
-					if (Mouse.X >= deck.getX() && Mouse.X <= deck.getX() + deck.getWidth() && Mouse.Y >= deck.getY()
-							&& Mouse.Y <= deck.getY() + deck.getHeight()) {
+					if (deck.isMouseOver()) {
 						deck.setWidth(30);
 						deck.setHeight(48);
+						if(Mouse.isButtonTyped(0)){
+							picBuffer = deck;
+						}
 					} else {
 						deck.setWidth(25);
 						deck.setHeight(40);
 					}
 				}
-
+				if(picBuffer != null) {
+					//deckPreview = picBuffer;
+					picBuffer.setVisible(true);
+					
+				} else {
+					picBuffer.setVisible(false);
+				}
 			}
 		});
-
-		Picture deck1 = new Picture(new Texture("card_gn_common"), 300, 370, 25, 40);
+		
+		Texture card_border = new Texture("card_gn_common");
+		
+		Picture deck1 = new Picture(card_border, 300, 370, 25, 40);
 		decks.add(deck1);
-		Picture deck2 = new Picture(new Texture("card_gn_common"), 325, 372, 25, 40);
+		Picture deck2 = new Picture(card_border, 325, 372, 25, 40);
 		decks.add(deck2);
-		Picture deck3 = new Picture(new Texture("card_gn_common"), 350, 372, 25, 40);
+		Picture deck3 = new Picture(card_border, 350, 372, 25, 40);
 		decks.add(deck3);
-		Picture deck4 = new Picture(new Texture("card_gn_common"), 375, 372, 25, 40);
+		Picture deck4 = new Picture(card_border, 375, 372, 25, 40);
 		decks.add(deck4);
-		Picture deck5 = new Picture(new Texture("card_gn_common"), 400, 372, 25, 40);
+		Picture deck5 = new Picture(card_border, 400, 372, 25, 40);
 		decks.add(deck5);
-		Picture deck6 = new Picture(new Texture("card_gn_common"), 425, 372, 25, 40);
+		Picture deck6 = new Picture(card_border, 425, 372, 25, 40);
 		decks.add(deck6);
-		Picture deck7 = new Picture(new Texture("card_gn_common"), 450, 372, 25, 40);
+		Picture deck7 = new Picture(card_border, 450, 372, 25, 40);
 		decks.add(deck7);
-
+		Picture deckPreview = new Picture(card_border, 40, 800, 50, 80);
+		decks.add(deckPreview);
 		for (Picture deck : decks) {
 			add(deck);
 		}
@@ -98,6 +110,7 @@ public class Shop extends Panel {
 		for (Component comp : comps)
 			if (comp instanceof EffectAble<?>)
 				((EffectAble<?>) comp).fade(1, 0, Panels.FADEOUT);
+
 	}
 
 }

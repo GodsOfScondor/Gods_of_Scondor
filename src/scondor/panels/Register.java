@@ -22,14 +22,14 @@ public class Register extends Panel {
 	
 	public Register() {
 		super(1);
-		setBackground(new Texture("bg"));
+		setBackground(new Texture("lobby"));
 		
 		effect = new OutlineEffect(0.5f, 0.5f, 0.5f, 0.8f);
-		license = new Label("License:", 400, 200, 5, 1).setEffect(effect);
-		username = new Label("Username:", 400, 300, 5, 1).setEffect(effect);
-		password = new Label("Password:", 400, 400, 5, 1).setEffect(effect);
+		license = new Label("License:", 200, 200, 5, 1).setEffect(effect);
+		username = new Label("Username:", 200, 300, 5, 1).setEffect(effect);
+		password = new Label("Password:", 200, 400, 5, 1).setEffect(effect);
 		
-		license_field = new TextField(550, 220, 350, 30);
+		license_field = new TextField(350, 220, 550, 30);
 		username_field = new TextField(700, 320, 200, 30);
 		password_field = new TextField(700, 420, 200, 30);
 		

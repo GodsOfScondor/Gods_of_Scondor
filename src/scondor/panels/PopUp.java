@@ -18,7 +18,7 @@ public class PopUp extends Panel {
 
 	public PopUp() {
 		super(1);
-		setBackground(new Texture("bg"));
+		setBackground(new Texture("lobby"));
 		
 		label = new Label("null", 500,400,6,1).setEffect(new ShadowEffect(3)).setColor(1, 0, 0);
 		button = new Button("BACK", 450, 650, 5, 1, new Action() {

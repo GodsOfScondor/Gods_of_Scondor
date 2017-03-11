@@ -56,7 +56,7 @@ public class Main extends Panel {
 		
 		button_options = new Button("OPTIONS", 600, 600, 3, 1, new Action() {
 			public void perform() {
-				
+				Panels.show(Panels.DECK_STARTER);
 			}
 		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f);
 		

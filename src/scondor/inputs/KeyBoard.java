@@ -133,7 +133,7 @@ public class KeyBoard {
 		pressed[KEY_DOWN] = Keyboard.isKeyDown(Keyboard.KEY_DOWN);
 		pressed[KEY_ENTER] = Keyboard.isKeyDown(Keyboard.KEY_RETURN);
 		pressed[KEY_F5] = Keyboard.isKeyDown(Keyboard.KEY_F5);
-		pressed[KEY_MINUS] = Keyboard.isKeyDown(Keyboard.KEY_SUBTRACT);
+		pressed[KEY_MINUS] = Keyboard.isKeyDown(Keyboard.KEY_SUBTRACT) || Keyboard.isKeyDown(Keyboard.KEY_MINUS);
 		
 		for (n=0;n<KEYS;n++) {
 			if (pressed[n] && released[n]) {

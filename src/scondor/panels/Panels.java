@@ -15,6 +15,7 @@ public class Panels {
 	public static final int SHOP = 5;
 	public static final int DECK_CHOOSER = 6;
 	public static final int DECK_BUILDER = 7;
+	public static final int DECK_STARTER = 8;
 	
 	public static final int FADEIN = 70;
 	public static final int FADEOUT = 30;
@@ -33,6 +34,7 @@ public class Panels {
 		panels.put(SHOP, new Shop());
 		panels.put(DECK_CHOOSER, new DeckChooser());
 		panels.put(DECK_BUILDER, new DeckBuilder());
+		panels.put(DECK_STARTER, new DeckStarter());
 	}
 	
 	public static void show(int key) {

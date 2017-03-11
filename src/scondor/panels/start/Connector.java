@@ -102,9 +102,12 @@ public class Connector {
 		try {
 			
 			file = new File(PATH);
-			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
 			
 			if (!save) {
+			
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
+			
+			
 				
 				writer.write("save="+(save_data||save)); writer.newLine();
 				
@@ -114,12 +117,14 @@ public class Connector {
 				}
 				
 				writer.write("license=" + license);
-				
-			} else {
-				// TODO switch user
-			}
 
 			writer.close();
+			
+			} else {
+				
+				// TODO switch user
+				
+			}
 
 		} catch (IOException e) {
 			e.printStackTrace();

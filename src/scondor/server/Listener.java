@@ -4,6 +4,7 @@ import scondor.gnet.client.ClientEventListener;
 import scondor.gnet.client.ServerModel;
 import scondor.gnet.packet.Packet;
 import scondor.packets.Message;
+import scondor.panels.DeckStarter;
 import scondor.panels.Panels;
 import scondor.panels.ShopHandler;
 import scondor.panels.start.Connector;
@@ -49,6 +50,7 @@ public class Listener extends ClientEventListener {
 					
 					if (code < 5) msg = Connector.msgFromServer(code);
 					else if (code < 7) msg = ShopHandler.msgFromServer(code);
+					else if (code < 8) msg = DeckStarter.msgFromServer(code);
 					
 					if (msg.equalsIgnoreCase("nopopup")) return;
 					
