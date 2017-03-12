@@ -135,7 +135,7 @@ public class Card extends Component implements EffectAble<Card> {
 			this.sprite.getTex().setX(data.getID()%32);
 			this.sprite.getTex().setY(data.getID()/32);
 		} else {
-			this.name.setText("");
+			this.name.setText("swag");
 			this.description.setText("");
 			this.sprite.getTex().setX(0);
 			this.sprite.getTex().setY(0);

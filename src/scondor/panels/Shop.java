@@ -3,7 +3,6 @@ package scondor.panels;
 import java.util.ArrayList;
 import java.util.Random;
 
-import scondor.GodsOfScondor;
 import scondor.components.Button;
 import scondor.components.Card;
 import scondor.components.Component;
@@ -32,14 +31,15 @@ public class Shop extends Panel {
 		effect = new OutlineEffect(0.5f, 0.5f, 0.5f, 0.8f);
 		title = new Label("ONLY TODAY: FREE CARDS FOR EVERYONE!!! ...just 9,99$/Card", 50, 50, 5, 1).setEffect(effect);
 
-		shop = new Button("DECKS", 180, 500, 5, 1, new Action() {
+		shop = new Button("BUY", 210, 500, 5, 1, new Action() {
 			public void perform() {
 				ShopHandler.buy(200);
+				//@berni: Card component "cost" hinzufügen damit ShopHandler.buy(preview.getCost()); ???
 			}
 		}).setEffect(effect).setDamper(0.2f);
-		exit = new Button("EXIT", 815, 600, 5, 1, new Action() {
+		exit = new Button("BACK", 810, 600, 5, 1, new Action() {
 			public void perform() {
-				GodsOfScondor.close();
+					Panels.show(Panels.MAIN);
 				;
 			}
 		}).setEffect(effect).setDamper(0.2f);
@@ -91,13 +91,11 @@ public class Shop extends Panel {
 		decks.add(deck6);
 		Picture deck7 = new Picture(card_border, 450, 372, 25, 40);
 		decks.add(deck7);
-		Picture deckPreview = new Picture(card_border, 40, 800, 50, 80);
-		decks.add(deckPreview);
 		for (Picture deck : decks) {
 			add(deck);
 		}
 
-		preview = new Card(null, 0, 0, 3);
+		preview = new Card(null, 50, 550, 3);
 		
 		add(preview);
 		add(title);
