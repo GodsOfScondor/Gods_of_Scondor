@@ -52,4 +52,12 @@ public class Texture {
 		return t_y;
 	}
 
+	public void setX(int t_x) {
+		this.t_x = t_x;
+	}
+	
+	public void setY(int t_y) {
+		this.t_y = t_y;
+	}
+
 }

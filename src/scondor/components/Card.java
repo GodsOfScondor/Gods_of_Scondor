@@ -1,5 +1,6 @@
 package scondor.components;
 
+import scondor.deck.card.CardData;
 import scondor.font.Text;
 import scondor.image.Image;
 import scondor.image.Texture;
@@ -13,19 +14,26 @@ public class Card extends Component implements EffectAble<Card> {
 	private Text description;
 	
 	private float size;
+	private CardData data;
 	
 	private static final Texture SPRITE_SHEET = new Texture("icons", 32, 32);
 	
-	public Card(int x, int y, float size) {
+	public Card(CardData data, int x, int y, float size) {
 		super(x, y, (int)(50*size), (int)(80*size));
+		
+		this.data = data;
 		this.size = size;
+		
 		card = new Image(new Texture("card_gn_common"), x, y, super.width, super.height, -1);
 		card.setLayer(0.48f);
-		sprite = new Image(new Texture(SPRITE_SHEET,5,5), x, y, 0, 0, -1);
+		
+		sprite = new Image(new Texture(SPRITE_SHEET,0,0), x, y, 0, 0, -1);
 		sprite.setLayer(0.481f);
-		name = new Text("Pikachu", 0, 0, size*0.3f, 1, -1);
-		description = new Text("BZZZ BZZZZZ BZZZZ", 0, 0, size*0.3f, 3, -1);
-		setSize(size);
+		
+		name = new Text("", 0, 0, size*0.3f, 1, -1);
+		description = new Text("", 0, 0, size*0.3f, 3, -1);
+		
+		setData(data);
 	}
 
 	@Override
@@ -117,6 +125,26 @@ public class Card extends Component implements EffectAble<Card> {
 	@Override
 	public Card stop() {
 		return this;
+	}
+	
+	public void setData(CardData data) {
+		this.data = data;
+		if (hasData()) {
+			this.name.setText(data.getName());
+			this.description.setText(data.getDescription());
+			this.sprite.getTex().setX(data.getID()%32);
+			this.sprite.getTex().setY(data.getID()/32);
+		} else {
+			this.name.setText("");
+			this.description.setText("");
+			this.sprite.getTex().setX(0);
+			this.sprite.getTex().setY(0);
+		}
+		setSize(size);
+	}
+
+	public boolean hasData() {
+		return data!=null;
 	}
 	
 }

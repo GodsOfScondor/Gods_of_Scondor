@@ -1,16 +1,20 @@
 package scondor.panels;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import scondor.GodsOfScondor;
 import scondor.components.Button;
+import scondor.components.Card;
 import scondor.components.Component;
 import scondor.components.Label;
 import scondor.components.Panel;
 import scondor.components.Picture;
+import scondor.deck.card.troops.TroopCardData;
 import scondor.font.effect.OutlineEffect;
 import scondor.image.Texture;
 import scondor.inputs.Mouse;
+import scondor.mana.ManaType;
 import scondor.util.Action;
 
 public class Shop extends Panel {
@@ -19,7 +23,7 @@ public class Shop extends Panel {
 	private Button shop, exit;
 	private OutlineEffect effect;
 	private ArrayList<Picture> decks = new ArrayList<>();
-	private Picture picBuffer = null;
+	private Card preview;
 	
 	public Shop() {
 		super(1);
@@ -52,19 +56,21 @@ public class Shop extends Panel {
 						deck.setWidth(30);
 						deck.setHeight(48);
 						if(Mouse.isButtonTyped(0)){
-							picBuffer = deck;
+							
+							TroopCardData data = new TroopCardData(new Random().nextInt(10), "", "", 0, ManaType.WILD, 0, 0, 0);
+							preview.setData(data);
 						}
 					} else {
 						deck.setWidth(25);
 						deck.setHeight(40);
 					}
 				}
-				if(picBuffer != null) {
+				if(preview.hasData()) {
 					//deckPreview = picBuffer;
-					picBuffer.setVisible(true);
+					preview.setVisible(true);
 					
 				} else {
-					picBuffer.setVisible(false);
+					preview.setVisible(false);
 				}
 			}
 		});
@@ -91,6 +97,9 @@ public class Shop extends Panel {
 			add(deck);
 		}
 
+		preview = new Card(null, 0, 0, 3);
+		
+		add(preview);
 		add(title);
 		add(shop);
 		add(exit);

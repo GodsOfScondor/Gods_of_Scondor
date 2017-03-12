@@ -22,11 +22,11 @@ public class ShopHandler {
 		
 		if (code==SHOP_SUCCES) {
 			
-			return Messanger.build("Succesfully bought!", 0, 1, 0);
+			return Messanger.build("Succesfully bought!", Panels.SHOP, 0, 1, 0);
 			
 		} else if (code==SHOP_FAIL) {
 			
-			return Messanger.build("Not enough money!", 1, 0, 0);
+			return Messanger.build("Not enough money!", Panels.SHOP, 1, 0, 0);
 			
 		}
 		
