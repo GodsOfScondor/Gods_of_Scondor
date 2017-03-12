@@ -12,6 +12,7 @@ public class ShopHandler {
 	
 	public static void buy(int cost) {
 		if (!buying) {
+			buying=true;
 			Client.send(new Message("buy;"+cost+";"+"data"));
 		}
 	}
