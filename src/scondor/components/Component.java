@@ -83,19 +83,19 @@ public abstract class Component {
 		refresh();
 	}
 
-	public int getX() {
+	public int getCompX() {
 		return x;
 	}
 
-	public int getY() {
+	public int getCompY() {
 		return y;
 	}
 
-	public int getWidth() {
+	public int getCompWidth() {
 		return width;
 	}
 
-	public int getHeight() {
+	public int getCompHeight() {
 		return height;
 	}
 	

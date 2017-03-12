@@ -1,4 +1,4 @@
-package scondor.panels.start;
+package scondor.content;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -9,33 +9,37 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
+import scondor.gnet.packet.Packet;
 import scondor.packets.Authentication;
+import scondor.packets.CardList;
 import scondor.packets.Verification;
 import scondor.panels.Panels;
 import scondor.server.Client;
 import scondor.util.Messanger;
 
-public class Connector {
+public class Connection {
 
-	private static BufferedReader reader;
-	public static boolean save_data = false;
-	private static boolean save = false;
-	private static BufferedWriter writer;
-	private static File file;
-	private static final String PATH = "res/data/auth.data";
+	private BufferedReader reader;
+	public boolean save_data = false;
+	private boolean save = false;
+	private BufferedWriter writer;
+	private File file;
+	private final String PATH = "res/data/auth.data";
 
-	private static String username;
-	private static String password;
-	private static String license;
-	private static String line;
+	private String username;
+	private String password;
+	private String license;
+	private String line;
 	
-	private static final int USER_ALREADY_ONLINE = 0;
-	private static final int WRONG_PASSWORD = 1;
-	private static final int LOGIN_SUCCESFULL = 2;
-	private static final int WRONG_LICENSE = 3;
-	private static final int USERNAME_ALREADY_EXISTS = 4;
+	private Contents contents;
+	
+	private final int USER_ALREADY_ONLINE = 0;
+	private final int WRONG_PASSWORD = 1;
+	private final int LOGIN_SUCCESFULL = 2;
+	private final int WRONG_LICENSE = 3;
+	private final int USERNAME_ALREADY_EXISTS = 4;
 
-	public static void init() {
+	public void start() {
 		try {
 
 			file = new File(PATH);
@@ -67,14 +71,17 @@ public class Connector {
 		}
 	}
 
-	public static String msgFromServer(int code) {
+	public String msgFromServer(int code) {
 
 		switch (code) {
 		case USER_ALREADY_ONLINE: return Messanger.build("User is already online!", 1, 0, 0);
 		case WRONG_PASSWORD: return Messanger.build("Wrong Password!", Panels.LOGIN, 1, 0, 0);
 		case LOGIN_SUCCESFULL:
 			saveData();
-			return Messanger.build("Login succesfully!", Panels.MAIN, 0, 1, 0);
+			contents = new Contents();
+			contents.load();
+			int panel = contents.getAvaibleCards().size()==0?Panels.DECK_CHOOSER:Panels.MAIN;
+			return Messanger.build("Login succesfully!", panel, 0, 1, 0);
 		case WRONG_LICENSE: return Messanger.build("License is wrong!", 1, 0, 0);
 		case USERNAME_ALREADY_EXISTS: return Messanger.build("Username already exists!", 1, 0, 0);
 		}
@@ -82,22 +89,22 @@ public class Connector {
 		return "nopopup";
 	}
 
-	public static void register(String username, String password, String license) {
-		Connector.username = username;
-		Connector.password = password;
-		Connector.license = license;
+	public void register(String username, String password, String license) {
+		this.username = username;
+		this.password = password;
+		this.license = license;
 
 		Client.send(new Verification(username, password, license));
 	}
 	
-	public static void login(String username, String password) {
-		Connector.username = username;
-		Connector.password = password;
+	public void login(String username, String password) {
+		this.username = username;
+		this.password = password;
 		
 		Client.send(new Authentication(username, password));
 	}
 	
-	private static void saveData() {
+	private void saveData() {
 
 		try {
 			
@@ -130,6 +137,20 @@ public class Connector {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void incoming(Packet packet) {
+		if (packet instanceof CardList) {
+			contents.incoming((CardList)packet);
+		}
+	}
+
+	public void close() {
+		contents.close();
+	}
+	
+	public Contents getContents() {
+		return contents;
 	}
 
 }

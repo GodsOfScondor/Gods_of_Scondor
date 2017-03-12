@@ -34,7 +34,7 @@ public class PopUp extends Panel {
 	protected void setMSG(String msg, String popup, float r, float g, float b, int last) {
 		label.setText(popup);
 		label.setColor(r, g, b);
-		label.setXY((int) (520-((label.getWidth())/2f)), 400);
+		label.setXY((int) (520-((label.getCompWidth())/2f)), 400);
 		button.setText(msg);
 		this.last = last;
 	}

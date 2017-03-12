@@ -50,20 +50,20 @@ public class DeckStarter extends Panel {
 
 	private void setDescription(String desc) {
 		description.setText(desc);
-		description.setXY(500-(description.getWidth()/2), description.getY());
+		description.setXY(500-(description.getCompWidth()/2), description.getCompY());
 	}
 	
 	private void resize(Picture picture, boolean bold) {
 		if (bold) {
-			wild.setX(wild.getX()-5);
-			wild.setY(wild.getY()-5);
-			wild.setWidth(wild.getWidth()+10);
-			wild.setHeight(wild.getHeight()+10);
+			wild.setX(wild.getCompX()-5);
+			wild.setY(wild.getCompY()-5);
+			wild.setWidth(wild.getCompWidth()+10);
+			wild.setHeight(wild.getCompHeight()+10);
 		} else {
-			wild.setX(wild.getX());
-			wild.setY(wild.getY());
-			wild.setWidth(wild.getWidth());
-			wild.setHeight(wild.getHeight());
+			wild.setX(wild.getCompX());
+			wild.setY(wild.getCompY());
+			wild.setWidth(wild.getCompWidth());
+			wild.setHeight(wild.getCompHeight());
 		}
 	}
 	

@@ -1,5 +1,6 @@
 package scondor;
 
+import scondor.content.Connection;
 import scondor.inputs.KeyBoard;
 import scondor.inputs.Mouse;
 import scondor.render.RenderMaster;
@@ -10,6 +11,7 @@ import scondor.util.Window;
 public class Engine {
 	
 	private static Client client;
+	private static Connection connection;
 	
 	public static void init() {
 		
@@ -22,9 +24,13 @@ public class Engine {
 		KeyBoard.init();
 		Mouse.init();
 		
+		connection = new Connection();
+		connection.start();
+		
 	}
 	
 	public static void update() {
+		
 		KeyBoard.update();
 		Mouse.update();
 		
@@ -33,16 +39,25 @@ public class Engine {
 		
 		RenderMaster.update();
 		Window.update();
+		
 	}
 	
 	public static void close() {
+		
+		connection.close();
+		
 		Window.close();
 		RenderMaster.close();
 		Loader.close();
+		
 	}
 	
 	public static Client getClient() {
 		return client;
+	}
+	
+	public static Connection getConnection() {
+		return connection;
 	}
 	
 }

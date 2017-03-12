@@ -20,6 +20,9 @@ public class Client extends GNetClient {
 		bind();
 		start();
 		addEventListener(new Listener());
+		while (server==null)
+			try { Thread.sleep(100); } 
+			catch (InterruptedException e) { e.printStackTrace(); }
 	}
 	
 	public static void send(Packet packet) {

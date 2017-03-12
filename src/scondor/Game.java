@@ -1,8 +1,8 @@
 package scondor;
 
 import scondor.components.ComponentMaster;
+import scondor.content.Connection;
 import scondor.panels.Panels;
-import scondor.panels.start.Connector;
 
 public class Game {
 	
@@ -10,8 +10,6 @@ public class Game {
 		
 		ComponentMaster.init();
 		Panels.init();
-		
-		Connector.init();
 		
 	}
 	

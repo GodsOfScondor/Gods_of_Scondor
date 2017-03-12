@@ -1,5 +1,6 @@
 package scondor.panels;
 
+import scondor.Engine;
 import scondor.GodsOfScondor;
 import scondor.components.Button;
 import scondor.components.CheckBox;
@@ -9,7 +10,6 @@ import scondor.components.Panel;
 import scondor.components.TextField;
 import scondor.font.effect.OutlineEffect;
 import scondor.image.Texture;
-import scondor.panels.start.Connector;
 import scondor.util.Action;
 
 public class Login extends Panel {
@@ -37,7 +37,7 @@ public class Login extends Panel {
 		
 		login = new Button("LOGIN", 500, 700, 5, 1, new Action() {
 			public void perform() {
-				Connector.login(username_field.getText(), password_field.getText());
+				Engine.getConnection().login(username_field.getText(), password_field.getText());
 			}
 		}).setEffect(effect).setDamper(0.2f);
 		exit = new Button("EXIT", 700, 700, 5, 1, new Action() {
@@ -48,7 +48,7 @@ public class Login extends Panel {
 		
 		addAction(new Action() {
 			public void perform() {
-				if (Panels.isOpen(Panels.LOGIN)) Connector.save_data = save_box.isSelected();
+				if (Panels.isOpen(Panels.LOGIN)) Engine.getConnection().save_data = save_box.isSelected();
 			}
 		});
 		

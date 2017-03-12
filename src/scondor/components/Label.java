@@ -90,7 +90,7 @@ public class Label extends Component implements EffectAble<Label> {
 	}
 	
 	@Override
-	public int getWidth() {
+	public int getCompWidth() {
 		return text.getWidth();
 	}
 	
