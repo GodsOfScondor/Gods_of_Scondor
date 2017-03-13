@@ -28,15 +28,7 @@ public class DeckStarter extends Panel {
 		addAction(new Action() {
 			public void perform() {
 				
-				if (wild.isMouseOver()) {
-					resize(wild, true);
-					setDescription("This deck deals with the strengh beasties.");
-					if (Mouse.isButtonTyped(0)) {
-						Client.send(new Message("starter;0"));
-					}
-				} else {
-					resize(wild, false);
-				}
+				selectDeck(wild, 1, "This deck is inspired by the strength of beasts");
 				
 			}
 		});
@@ -48,23 +40,28 @@ public class DeckStarter extends Panel {
 		add(wild_name);
 	}
 
+	private boolean selectDeck(Picture pic, int id, String description) {
+		if (pic.isMouseOver()) {
+			pic.setX(pic.getCompX()-5);
+			pic.setY(pic.getCompY()-5);
+			pic.setWidth(pic.getCompWidth()+10);
+			pic.setHeight(pic.getCompHeight()+10);
+			setDescription(description);
+			if (Mouse.isButtonTyped(0)) {
+				Client.send(new Message("starter;"+id));
+			}
+		} else {
+			pic.setX(pic.getCompX());
+			pic.setY(pic.getCompY());
+			pic.setWidth(pic.getCompWidth());
+			pic.setHeight(pic.getCompHeight());
+		}
+		return pic.isMouseOver();
+	}
+	
 	private void setDescription(String desc) {
 		description.setText(desc);
 		description.setXY(500-(description.getCompWidth()/2), description.getCompY());
-	}
-	
-	private void resize(Picture picture, boolean bold) {
-		if (bold) {
-			wild.setX(wild.getCompX()-5);
-			wild.setY(wild.getCompY()-5);
-			wild.setWidth(wild.getCompWidth()+10);
-			wild.setHeight(wild.getCompHeight()+10);
-		} else {
-			wild.setX(wild.getCompX());
-			wild.setY(wild.getCompY());
-			wild.setWidth(wild.getCompWidth());
-			wild.setHeight(wild.getCompHeight());
-		}
 	}
 	
 	@Override

@@ -80,7 +80,7 @@ public class Connection {
 			saveData();
 			contents = new Contents();
 			contents.load();
-			int panel = contents.getAvaibleCards().size()==0?Panels.DECK_CHOOSER:Panels.MAIN;
+			int panel = contents.getAvaibleCards().size()==0?Panels.DECK_STARTER:Panels.MAIN;
 			return Messanger.build("Login succesfully!", panel, 0, 1, 0);
 		case WRONG_LICENSE: return Messanger.build("License is wrong!", 1, 0, 0);
 		case USERNAME_ALREADY_EXISTS: return Messanger.build("Username already exists!", 1, 0, 0);
