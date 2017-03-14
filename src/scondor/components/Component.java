@@ -54,6 +54,7 @@ public abstract class Component {
 	}
 	
 	public void remove(Component comp) {
+		ComponentMaster.comps.remove(comp);
 		comps.remove(comp);
 		comp.setVisible(false);
 		comp.destroy();

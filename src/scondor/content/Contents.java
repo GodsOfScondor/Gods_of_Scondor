@@ -2,9 +2,10 @@ package scondor.content;
 
 import java.util.List;
 
+import scondor.deck.DeckData;
 import scondor.deck.card.CardData;
-import scondor.deck.card.troops.TroopCardData;
 import scondor.packets.CardList;
+import scondor.packets.DeckList;
 import scondor.packets.Message;
 import scondor.server.Client;
 
@@ -13,35 +14,52 @@ public class Contents {
 //	private static final File cards = new File("res/data/cards.dat");
 	
 	private List<CardData> cards;
+	private List<DeckData> decks;
 	
 	public void load() {
+		
+		System.out.println("Starting content loading...");
+		
+		request("request;cardlist");
+		request("request;decklist");
+		
+		System.out.println("... finished content loading!");
+		
+	}
+	
+	public void request(String request) {
 		try {
-			System.out.println("Starting content loading...");
-			Client.send(new Message("request;cardlist"));
+			Client.send(new Message(request));
 			synchronized (this) { wait(); }
-			System.out.println("... finished content loading!");
-			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void incoming(CardList list) {
 		cards = (List<CardData>) list.getEntry("LIST");
-		System.out.println(cards.size());
+		System.out.println("Cards: "+cards.size());
+		synchronized (this) { notify(); }
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void incoming(DeckList list) {
+		decks = (List<DeckData>) list.getEntry("LIST");
+		System.out.println("Decks: "+decks.size());
 		synchronized (this) { notify(); }
 	}
 	
 	public void close() {
-		for (CardData data : cards) {
-			if (data instanceof TroopCardData) {
-				System.out.println("here" + data.getID());
-			}
-		}
+		
 	}
 	
 	public List<CardData> getAvaibleCards() {
 		return cards;
+	}
+	
+	public List<DeckData> getAvaibleDecks() {
+		return decks;
 	}
 	
 }

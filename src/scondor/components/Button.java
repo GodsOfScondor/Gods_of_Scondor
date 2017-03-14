@@ -127,4 +127,20 @@ public class Button extends Component implements EffectAble<Button> {
 		return this;
 	}
 
+	public void setXY(int x, int y) {
+		text.setXY(x, y);
+	}
+
+	public int getX() {
+		return text.getX();
+	}
+	
+	public int getY() {
+		return text.getY();
+	}
+
+	public void setTransparency(float transparency) {
+		text.setTransparency(transparency);
+	}
+
 }

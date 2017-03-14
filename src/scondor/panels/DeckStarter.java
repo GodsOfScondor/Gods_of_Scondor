@@ -10,6 +10,7 @@ import scondor.inputs.Mouse;
 import scondor.packets.Message;
 import scondor.server.Client;
 import scondor.util.Action;
+import scondor.util.Messanger;
 
 public class DeckStarter extends Panel {
 	
@@ -28,7 +29,9 @@ public class DeckStarter extends Panel {
 		addAction(new Action() {
 			public void perform() {
 				
-				selectDeck(wild, 1, "This deck is inspired by the strength of beasts");
+				if (isVisible()) {
+					selectDeck(wild, 1, "This deck is inspired by the strength of beasts");
+				}
 				
 			}
 		});
@@ -78,7 +81,7 @@ public class DeckStarter extends Panel {
 	}
 
 	public static String msgFromServer(int code) {
-		return null;
+		return Messanger.nopopup();
 	}
 	
 }

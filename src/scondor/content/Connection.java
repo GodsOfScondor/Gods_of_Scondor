@@ -12,6 +12,7 @@ import java.io.OutputStreamWriter;
 import scondor.gnet.packet.Packet;
 import scondor.packets.Authentication;
 import scondor.packets.CardList;
+import scondor.packets.DeckList;
 import scondor.packets.Verification;
 import scondor.panels.Panels;
 import scondor.server.Client;
@@ -142,6 +143,8 @@ public class Connection {
 	public void incoming(Packet packet) {
 		if (packet instanceof CardList) {
 			contents.incoming((CardList)packet);
+		} else if (packet instanceof DeckList) {
+			contents.incoming((DeckList)packet);
 		}
 	}
 

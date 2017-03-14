@@ -1,11 +1,11 @@
 package scondor.server;
 
 import scondor.Engine;
-import scondor.content.Connection;
 import scondor.gnet.client.ClientEventListener;
 import scondor.gnet.client.ServerModel;
 import scondor.gnet.packet.Packet;
 import scondor.packets.CardList;
+import scondor.packets.DeckList;
 import scondor.packets.Message;
 import scondor.panels.DeckStarter;
 import scondor.panels.Panels;
@@ -48,6 +48,8 @@ public class Listener extends ClientEventListener {
 				public void perform() {
 					int code = Integer.parseInt((String) packet.getEntry("MESSAGE"));
 					
+					System.out.println(code);
+					
 					String msg = "1,0,0:Invalid code!";
 					
 					if (code < 5) msg = Engine.getConnection().msgFromServer(code);
@@ -70,7 +72,7 @@ public class Listener extends ClientEventListener {
 		/*
 		 * incoming content from server
 		 */
-		else if (packet instanceof CardList) {
+		else if (packet instanceof CardList || packet instanceof DeckList) {
 			Engine.getConnection().incoming(packet);
 		}
 		

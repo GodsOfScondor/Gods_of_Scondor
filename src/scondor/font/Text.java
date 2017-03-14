@@ -197,7 +197,7 @@ public class Text implements Comparable<Text> {
 	 * 
 	 */
 	public void recreate() {
-//		if (old.equalsIgnoreCase(text)) return;
+		if (old.equalsIgnoreCase(text)) return;
 		old = text;
 		TextMaster.removeText(this);
 		TextMaster.addText(this);

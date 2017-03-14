@@ -38,7 +38,7 @@ public class Main extends Panel {
 		 */
 		button_battle = new Button("PLAY", 600, 300, 3, 1, new Action() {
 			public void perform() {
-				Panels.show(Panels.LOBBY);
+				Panels.show(Panels.DECK_CHOOSER);
 			}
 		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f);
 		
