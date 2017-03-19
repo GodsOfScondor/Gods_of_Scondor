@@ -8,8 +8,7 @@ public class Game {
 	
 	public static void init() {
 		
-		ComponentMaster.init();
-		Panels.init();
+
 		
 	}
 	

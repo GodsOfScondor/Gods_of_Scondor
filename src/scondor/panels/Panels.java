@@ -43,6 +43,7 @@ public class Panels {
 			current.swipeOut();
 		}
 		
+		System.out.println(key);
 		current = panels.get(key);
 		current.show();
 		current.swipeIn();

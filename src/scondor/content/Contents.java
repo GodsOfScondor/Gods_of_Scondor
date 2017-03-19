@@ -39,14 +39,14 @@ public class Contents {
 	@SuppressWarnings("unchecked")
 	public void incoming(CardList list) {
 		cards = (List<CardData>) list.getEntry("LIST");
-		System.out.println("Cards: "+cards.size());
+//		System.out.println("Cards: "+cards.size());
 		synchronized (this) { notify(); }
 	}
 	
 	@SuppressWarnings("unchecked")
 	public void incoming(DeckList list) {
 		decks = (List<DeckData>) list.getEntry("LIST");
-		System.out.println("Decks: "+decks.size());
+//		System.out.println("Decks: "+decks.size());
 		synchronized (this) { notify(); }
 	}
 	

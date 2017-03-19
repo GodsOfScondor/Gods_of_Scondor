@@ -8,6 +8,8 @@ import scondor.components.Picture;
 import scondor.font.effect.GlowEffect;
 import scondor.font.effect.OutlineEffect;
 import scondor.image.Texture;
+import scondor.packets.Message;
+import scondor.server.Client;
 import scondor.util.Action;
 
 public class Lobby extends Panel {
@@ -26,6 +28,7 @@ public class Lobby extends Panel {
 		back = new Button("BACK", 800, 900, 3.5f, 1, new Action() {
 			public void perform() {
 				Panels.show(Panels.MAIN);
+				Client.send(new Message("lobby;-1"));
 			}
 		}).setColor(0.8f, 0.8f, 0.8f).setDamper(-0.2f).setEffect(effect);
 		

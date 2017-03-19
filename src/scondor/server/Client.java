@@ -6,6 +6,7 @@ import java.util.List;
 import scondor.gnet.client.GNetClient;
 import scondor.gnet.client.ServerModel;
 import scondor.gnet.packet.Packet;
+import scondor.packets.Message;
 import scondor.util.Action;
 
 public class Client extends GNetClient {
@@ -27,6 +28,7 @@ public class Client extends GNetClient {
 	
 	public static void send(Packet packet) {
 		server.sendPacket(packet);
+//		if (packet instanceof Message) System.out.println((String) packet.getEntry("MESSAGE"));
 	}
 	
 	protected static void setServerModel(ServerModel server) {

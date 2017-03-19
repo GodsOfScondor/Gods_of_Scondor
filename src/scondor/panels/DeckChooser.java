@@ -14,6 +14,8 @@ import scondor.font.effect.OutlineEffect;
 import scondor.image.Texture;
 import scondor.inputs.KeyBoard;
 import scondor.inputs.Mouse;
+import scondor.packets.Message;
+import scondor.server.Client;
 import scondor.util.Action;
 
 public class DeckChooser extends Panel {
@@ -62,11 +64,21 @@ public class DeckChooser extends Panel {
 						names[n].setTransparency(1f-(0.3f*Math.abs(2-(n+current))));
 					}
 					
+					if (KeyBoard.isKeyTyped(KeyBoard.KEY_ENTER)) {
+						Client.send(new Message("lobby;"+getDeckID(names[current].getText())));
+						Panels.show(Panels.LOBBY);
+					}
+					
 				}
 				
 			}
 		});
 		
+	}
+	
+	private int getDeckID(String name) {
+		for (DeckData deck : decks) if (deck.getName().equalsIgnoreCase(name)) return deck.getID();
+		return -1;
 	}
 	
 	private void setContents() {
@@ -76,7 +88,12 @@ public class DeckChooser extends Panel {
 		current = decks.size()/2;
 		
 		n = 0;
-		for (DeckData data : decks) names[n++].setText(data.getName());
+		for (DeckData data : decks) {
+			
+			names[n].setText(data.getName());
+			System.out.println(n);
+			n++;
+		}
 		for (n=n+0;n<MAX;n++) names[n].setText("");
 		
 	}

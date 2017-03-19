@@ -143,4 +143,8 @@ public class Button extends Component implements EffectAble<Button> {
 		text.setTransparency(transparency);
 	}
 
+	public String getText() {
+		return text.getText();
+	}
+
 }
