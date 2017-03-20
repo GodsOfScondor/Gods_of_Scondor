@@ -1,6 +1,7 @@
-package scondor.panels;
+package scondor.panels.shop;
 
 import scondor.packets.Message;
+import scondor.panels.Panels;
 import scondor.server.Client;
 import scondor.util.Messanger;
 
@@ -10,10 +11,10 @@ public class ShopHandler {
 	private static final int SHOP_SUCCES = 5;
 	private static final int SHOP_FAIL = 6;
 	
-	public static void buy(int cost) {
+	public static void buy(String data) {
 		if (!buying) {
 			buying=true;
-			Client.send(new Message("buy;"+cost+";"+"data"));
+			Client.send(new Message("buy;"+data+";"));
 		}
 	}
 	

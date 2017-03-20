@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import scondor.components.Panel;
+import scondor.panels.shop.Shop;
 
 public class Panels {
 	

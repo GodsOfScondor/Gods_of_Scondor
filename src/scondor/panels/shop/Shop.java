@@ -1,4 +1,4 @@
-package scondor.panels;
+package scondor.panels.shop;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,6 +14,8 @@ import scondor.font.effect.OutlineEffect;
 import scondor.image.Texture;
 import scondor.inputs.Mouse;
 import scondor.mana.ManaType;
+import scondor.panels.EffectAble;
+import scondor.panels.Panels;
 import scondor.util.Action;
 
 public class Shop extends Panel {
@@ -21,7 +23,7 @@ public class Shop extends Panel {
 	private Label title;
 	private Button shop, exit;
 	private OutlineEffect effect;
-	private ArrayList<Picture> decks = new ArrayList<>();
+	private ArrayList<Picture> packs = new ArrayList<>();
 	private Card preview;
 	
 	public Shop() {
@@ -33,8 +35,8 @@ public class Shop extends Panel {
 
 		shop = new Button("BUY", 210, 500, 5, 1, new Action() {
 			public void perform() {
-				ShopHandler.buy(200);
-				//@berni: Card component "cost" hinzufügen damit ShopHandler.buy(preview.getCost()); ???
+				ShopHandler.buy("Wild-Pack_10");
+				
 			}
 		}).setEffect(effect).setDamper(0.2f);
 		exit = new Button("BACK", 810, 600, 5, 1, new Action() {
@@ -51,7 +53,7 @@ public class Shop extends Panel {
 
 		addAction(new Action() {
 			public void perform() {
-				for (Picture deck : decks) {
+				for (Picture deck : packs) {
 					if (deck.isMouseOver()) {
 						deck.setWidth(30);
 						deck.setHeight(48);
@@ -75,24 +77,24 @@ public class Shop extends Panel {
 			}
 		});
 		
-		Texture card_border = new Texture("card_gn_common");
-		
-		Picture deck1 = new Picture(card_border, 300, 370, 25, 40);
-		decks.add(deck1);
-		Picture deck2 = new Picture(card_border, 325, 372, 25, 40);
-		decks.add(deck2);
-		Picture deck3 = new Picture(card_border, 350, 372, 25, 40);
-		decks.add(deck3);
-		Picture deck4 = new Picture(card_border, 375, 372, 25, 40);
-		decks.add(deck4);
-		Picture deck5 = new Picture(card_border, 400, 372, 25, 40);
-		decks.add(deck5);
-		Picture deck6 = new Picture(card_border, 425, 372, 25, 40);
-		decks.add(deck6);
-		Picture deck7 = new Picture(card_border, 450, 372, 25, 40);
-		decks.add(deck7);
-		for (Picture deck : decks) {
-			add(deck);
+//		Picture card1 = new Picture(card_border, 300, 370, 25, 40);
+//		packs.add(card1);
+//		Picture card2 = new Picture(card_border, 325, 372, 25, 40);
+//		packs.add(card2);
+//		Picture card3 = new Picture(card_border, 350, 372, 25, 40);
+//		packs.add(card3);
+//		Picture card4 = new Picture(card_border, 375, 372, 25, 40);
+//		packs.add(card4);
+//		Picture card5 = new Picture(card_border, 400, 372, 25, 40);
+//		packs.add(card5);
+//		Picture card6 = new Picture(card_border, 425, 372, 25, 40);
+//		packs.add(card6);
+//		Picture card7 = new Picture(card_border, 450, 372, 25, 40);
+//		packs.add(card7);
+//		Picture deck1 = new Picture(deck_border, 450, 700, 25, 40);
+//		packs.add(deck1);
+		for (Picture pack : packs) {
+			add(pack);
 		}
 
 		preview = new Card(null, 50, 550, 3);

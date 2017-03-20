@@ -9,7 +9,7 @@ import scondor.packets.DeckList;
 import scondor.packets.Message;
 import scondor.panels.DeckStarter;
 import scondor.panels.Panels;
-import scondor.panels.ShopHandler;
+import scondor.panels.shop.ShopHandler;
 import scondor.util.Action;
 
 public class Listener extends ClientEventListener {
