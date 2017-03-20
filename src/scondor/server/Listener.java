@@ -48,8 +48,6 @@ public class Listener extends ClientEventListener {
 				public void perform() {
 					int code = Integer.parseInt((String) packet.getEntry("MESSAGE"));
 					
-					System.out.println(code);
-					
 					String msg = "1,0,0:Invalid code!";
 					
 					if (code < 5) msg = Engine.getConnection().msgFromServer(code);

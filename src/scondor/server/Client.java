@@ -6,7 +6,6 @@ import java.util.List;
 import scondor.gnet.client.GNetClient;
 import scondor.gnet.client.ServerModel;
 import scondor.gnet.packet.Packet;
-import scondor.packets.Message;
 import scondor.util.Action;
 
 public class Client extends GNetClient {

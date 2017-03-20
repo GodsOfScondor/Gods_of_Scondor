@@ -56,7 +56,7 @@ public class DeckChooser extends Panel {
 					if (Mouse.getDWheel()>0) current--;
 					if (Mouse.getDWheel()<0) current++;
 					
-					current = Math.min(decks.size()-3, current);
+					current = Math.min(decks.size()-1, current);
 					current = Math.max(2-(decks.size()-1), current);
 					
 					for (n=0;n<MAX;n++) {
