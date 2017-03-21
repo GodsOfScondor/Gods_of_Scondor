@@ -62,6 +62,9 @@ public class KeyBoard {
 	public static final int KEY_ENTER = 54;
 	public static final int KEY_F5 = 55;
 	public static final int KEY_MINUS = 56;
+	public static final int KEY_ADD = 57;
+	public static final int KEY_DIVIDE = 58;
+	public static final int KEY_MULTIPLY = 59;
 	
 	private static final int KEYS = 100;
 	
@@ -134,6 +137,9 @@ public class KeyBoard {
 		pressed[KEY_ENTER] = Keyboard.isKeyDown(Keyboard.KEY_RETURN);
 		pressed[KEY_F5] = Keyboard.isKeyDown(Keyboard.KEY_F5);
 		pressed[KEY_MINUS] = Keyboard.isKeyDown(Keyboard.KEY_SUBTRACT) || Keyboard.isKeyDown(Keyboard.KEY_MINUS);
+		pressed[KEY_ADD] = Keyboard.isKeyDown(Keyboard.KEY_ADD);
+		pressed[KEY_DIVIDE] = Keyboard.isKeyDown(Keyboard.KEY_DIVIDE);
+		pressed[KEY_MULTIPLY] = Keyboard.isKeyDown(Keyboard.KEY_MULTIPLY);
 		
 		for (n=0;n<KEYS;n++) {
 			if (pressed[n] && released[n]) {
@@ -204,6 +210,9 @@ public class KeyBoard {
 		case KEY_9: return (shift ? ')' : '9');
 		case KEY_SPACE: return (shift ? ' ' : ' ');
 		case KEY_MINUS: return (shift ? '_' : '-');
+		case KEY_ADD: return (shift ? '*' : '+');
+		case KEY_DIVIDE: return (shift ? '~' : '/');
+		case KEY_MULTIPLY: return (shift ? '~' : '*');
 		}
 		return '~';
 	}

@@ -1,4 +1,4 @@
-package scondor.panels;
+package scondor.panels.deck;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +15,8 @@ import scondor.image.Texture;
 import scondor.inputs.KeyBoard;
 import scondor.inputs.Mouse;
 import scondor.packets.Message;
+import scondor.panels.EffectAble;
+import scondor.panels.Panels;
 import scondor.server.Client;
 import scondor.util.Action;
 

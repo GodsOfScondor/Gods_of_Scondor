@@ -53,26 +53,28 @@ public class Shop extends Panel {
 
 		addAction(new Action() {
 			public void perform() {
-				for (Picture deck : packs) {
-					if (deck.isMouseOver()) {
-						deck.setWidth(30);
-						deck.setHeight(48);
-						if(Mouse.isButtonTyped(0)){
-							
-							TroopCardData data = new TroopCardData(new Random().nextInt(10), "", "", 0, ManaType.WILD, 0, 0, 0);
-							preview.setData(data);
+				if (isVisible()) {
+					for (Picture deck : packs) {
+						if (deck.isMouseOver()) {
+							deck.setWidth(30);
+							deck.setHeight(48);
+							if(Mouse.isButtonTyped(0)){
+								
+								TroopCardData data = new TroopCardData(new Random().nextInt(10), "", "", 0, ManaType.WILD, 0, 0, 0);
+								preview.setData(data);
+							}
+						} else {
+							deck.setWidth(25);
+							deck.setHeight(40);
 						}
-					} else {
-						deck.setWidth(25);
-						deck.setHeight(40);
 					}
-				}
-				if(preview.hasData()) {
-					//deckPreview = picBuffer;
-					preview.setVisible(true);
-					
-				} else {
-					preview.setVisible(false);
+					if(preview.hasData()) {
+						//deckPreview = picBuffer;
+						preview.setVisible(true);
+						
+					} else {
+						preview.setVisible(false);
+					}
 				}
 			}
 		});

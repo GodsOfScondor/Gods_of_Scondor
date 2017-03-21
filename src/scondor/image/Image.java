@@ -15,7 +15,6 @@ public class Image implements Comparable<Image>{
 	private Slide slide_y;
 	private Slide slide_transparency;
 	private int s_x,s_y,s_transparency;
-	private int b_x,b_y;
 	private float b_tranyparency;
 
 	public Image(Texture tex, int x, int y, int width, int height, int priority) {
@@ -81,6 +80,7 @@ public class Image implements Comparable<Image>{
 	}
 
 	public void setTransparency(float transparency) {
+		this.resetEffects();
 		this.transparency = transparency;
 	}
 	
@@ -100,6 +100,9 @@ public class Image implements Comparable<Image>{
 	 * 
 	 */
 	public void fade(float start, float end, int time) {
+		
+		if (transparency<0.001 && end < 0.001) return;
+		
 		b_tranyparency = transparency;
 		slide_transparency = new Slide((int)(1000*start), (int)(1000*end), time);
 		transparency = start;
@@ -115,7 +118,6 @@ public class Image implements Comparable<Image>{
 	 * 
 	 */
 	public void slideX(int start, int end, int time) {
-		b_x = x;
 		slide_x = new Slide(start, end, time);
 		x = start;
 		slide_x.run();
@@ -130,7 +132,6 @@ public class Image implements Comparable<Image>{
 	 * 
 	 */
 	public void slideY(int start, int end, int time) {
-		b_y = y;
 		slide_y = new Slide(start, end, time);
 		y = start;
 		slide_y.run();
@@ -158,8 +159,6 @@ public class Image implements Comparable<Image>{
 	 */
 	public void resetEffects() {
 		transparency = b_tranyparency;
-		x = b_x;
-		y = b_y;
 	}
 	
 	/**

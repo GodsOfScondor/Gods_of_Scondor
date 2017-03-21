@@ -15,7 +15,7 @@ public class TextField extends Component implements EffectAble<TextField> {
 	private String line = "";
 	private boolean focus;
 	private int time;
-	private boolean cursor_visible ;
+	private boolean cursor_visible, hide;
 	private static final Texture WHITE = new Texture("colors/white");
 	private static final Texture BLACK = new Texture("colors/black");
 	
@@ -80,7 +80,8 @@ public class TextField extends Component implements EffectAble<TextField> {
 				if (KeyBoard.getCurrent() !='~') {
 					if (text.getWidth()+20<width) {
 						line = line + KeyBoard.getCurrent();
-						text.setText(line);
+						if (!hide) text.setText(line);
+						else text.setText(generateHidedText(line.length()));
 						text.recreate();
 						this.cursor.setX(x+text.getWidth()+5);
 					}
@@ -89,7 +90,8 @@ public class TextField extends Component implements EffectAble<TextField> {
 			if (KeyBoard.isKeyTyped(KeyBoard.KEY_BACK)) {
 				if (line.length()>0) {
 					line = line.substring(0, line.length()-1);
-					text.setText(line);
+					if (!hide) text.setText(line);
+					else text.setText(generateHidedText(line.length()));
 					text.recreate();
 					this.cursor.setX(x+text.getWidth());
 				} else this.cursor.setX(x);
@@ -97,6 +99,12 @@ public class TextField extends Component implements EffectAble<TextField> {
 		} else {
 			this.cursor.setTransparency(0f);
 		}
+	}
+
+	private String generateHidedText(int length) {
+		String str = "";
+		for (int n=0;n<length;n++) str = str+"*";
+		return str;
 	}
 
 	@Override
@@ -155,6 +163,11 @@ public class TextField extends Component implements EffectAble<TextField> {
 
 	public boolean isFocused() {
 		return focus;
+	}
+	
+	public TextField setHided(boolean hide) {
+		this.hide = hide;
+		return this;
 	}
 
 }

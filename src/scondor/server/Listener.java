@@ -7,8 +7,8 @@ import scondor.gnet.packet.Packet;
 import scondor.packets.CardList;
 import scondor.packets.DeckList;
 import scondor.packets.Message;
-import scondor.panels.DeckStarter;
 import scondor.panels.Panels;
+import scondor.panels.deck.DeckStarter;
 import scondor.panels.shop.ShopHandler;
 import scondor.util.Action;
 

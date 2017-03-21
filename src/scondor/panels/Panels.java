@@ -4,6 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import scondor.components.Panel;
+import scondor.panels.authentification.Login;
+import scondor.panels.authentification.Register;
+import scondor.panels.deck.DeckBuilder;
+import scondor.panels.deck.DeckChooser;
+import scondor.panels.deck.DeckStarter;
 import scondor.panels.shop.Shop;
 
 public class Panels {

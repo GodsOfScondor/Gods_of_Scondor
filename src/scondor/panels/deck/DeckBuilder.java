@@ -1,4 +1,4 @@
-package scondor.panels;
+package scondor.panels.deck;
 
 import scondor.components.Panel;
 import scondor.image.Texture;

@@ -1,4 +1,4 @@
-package scondor.panels;
+package scondor.panels.deck;
 
 import scondor.components.Component;
 import scondor.components.Label;
@@ -8,6 +8,8 @@ import scondor.font.effect.OutlineEffect;
 import scondor.image.Texture;
 import scondor.inputs.Mouse;
 import scondor.packets.Message;
+import scondor.panels.EffectAble;
+import scondor.panels.Panels;
 import scondor.server.Client;
 import scondor.util.Action;
 import scondor.util.Messanger;

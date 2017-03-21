@@ -26,50 +26,50 @@ public class Main extends Panel {
 		 * create panel
 		 */
 		super(1);
-		setBackground(new Texture("lobby"));
+		setBackground(new Texture("bg"));
 		
 		/*
 		 * create picture
 		 */
-		arrow = new Picture(new Texture("arrow"), 580, 400, 20, 20);
+		arrow = new Picture(new Texture("arrow"), 780, 400, 20, 20);
 		
 		/*
 		 * create buttons
 		 */
-		button_battle = new Button("PLAY", 600, 300, 3, 1, new Action() {
+		button_battle = new Button("PLAY", 800, 300, 3, 1, new Action() {
 			public void perform() {
 				Panels.show(Panels.DECK_CHOOSER);
 			}
-		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f);
+		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.8f, 0.8f, 0.8f);
 		
-		button_shop = new Button("SHOP", 600, 400, 3, 1, new Action() {
+		button_shop = new Button("SHOP", 800, 400, 3, 1, new Action() {
 			public void perform() {
 				Panels.show(Panels.SHOP);
 			}
-		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f);
+		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.8f, 0.8f, 0.8f);
 		
-		button_deck = new Button("DECK", 600, 500, 3, 1, new Action() {
+		button_deck = new Button("DECK", 800, 500, 3, 1, new Action() {
 			public void perform() {
 				
 			}
-		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f);
+		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.8f, 0.8f, 0.8f);
 		
-		button_options = new Button("OPTIONS", 600, 600, 3, 1, new Action() {
+		button_options = new Button("OPTIONS", 800, 600, 3, 1, new Action() {
 			public void perform() {
 				Panels.show(Panels.DECK_STARTER);
 			}
-		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f);
+		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.8f, 0.8f, 0.8f);
 		
-		button_exit = new Button("EXIT", 600, 700, 3, 1, new Action() {
+		button_exit = new Button("EXIT", 800, 700, 3, 1, new Action() {
 			public void perform() {
 				GodsOfScondor.close();
 			}
-		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.5f, 0.5f, 0.5f);
+		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.8f, 0.8f, 0.8f);
 		
 		/*
 		 * create labels
 		 */
-		label = new Label("Gods of Scondor", 150, 100, 5, 0).setEffect(new GlowEffect(0,0,0,3)).setColor(0.5f, 0.5f, 0.05f);
+		label = new Label("Gods of Scondor", 150, 100, 8, 2).setEffect(new GlowEffect(0,0,0,2)).setColor(0.5f, 0.5f, 0.05f);
 		
 		/*
 		 * create checkbox
