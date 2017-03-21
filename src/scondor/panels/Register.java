@@ -30,8 +30,8 @@ public class Register extends Panel {
 		password = new Label("Password:", 200, 400, 5, 1).setEffect(effect);
 		
 		license_field = new TextField(350, 220, 550, 30);
-		username_field = new TextField(700, 320, 200, 30);
-		password_field = new TextField(700, 420, 200, 30);
+		username_field = new TextField(500, 320, 400, 30);
+		password_field = new TextField(500, 420, 400, 30);
 		
 		save_box = new CheckBox(700, 510, 1.2f);
 		save = new Label("Remember me", 730, 500, 3, 1).setEffect(effect).setColor(1, 1, 1);

@@ -61,6 +61,10 @@ public class TextField extends Component implements EffectAble<TextField> {
 		}
 	}
 
+	public void setFocus(boolean focus) {
+		this.focus = focus;
+	}
+	
 	@Override
 	protected void refresh() {
 		if (Mouse.isButtonTyped(0) && Mouse.X >= x && Mouse.X <= x + width && Mouse.Y >= y && Mouse.Y <= y + (int)(height*Maths.getScreenRatio())) {
@@ -147,6 +151,10 @@ public class TextField extends Component implements EffectAble<TextField> {
 		text.stopEffects();
 		text.resetEffects();
 		return this;
+	}
+
+	public boolean isFocused() {
+		return focus;
 	}
 
 }

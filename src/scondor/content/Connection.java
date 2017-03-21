@@ -149,7 +149,7 @@ public class Connection {
 	}
 
 	public void close() {
-		contents.close();
+		if (contents!=null) contents.close();
 	}
 	
 	public Contents getContents() {

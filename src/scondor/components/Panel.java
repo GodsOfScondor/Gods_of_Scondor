@@ -2,6 +2,7 @@ package scondor.components;
 
 import scondor.image.Image;
 import scondor.image.Texture;
+import scondor.inputs.KeyBoard;
 import scondor.panels.EffectAble;
 import scondor.panels.SwipeAble;
 import scondor.util.Maths;
@@ -50,7 +51,54 @@ public abstract class Panel extends Component implements SwipeAble, EffectAble<P
 	}
 
 	@Override
-	protected void refresh() {}
+	protected void refresh() {
+		if (isVisible()) if (KeyBoard.isKeyTyped(KeyBoard.KEY_TAB)) {
+			TextField current = null;
+			TextField next = null;
+			TextField first = null;
+			
+			for (Component comp : comps) if (comp instanceof TextField) {
+				if (((TextField)comp).isFocused()) {
+					current = (TextField) comp;
+					break;
+				}
+			}
+			
+			for (Component comp : comps) if (comp instanceof TextField) {
+				if (current==comp) {
+					((TextField)comp).setFocus(false);
+					continue;
+				}
+				if (current!=null) {
+					if (comp.getCompY()>=current.getCompY()) {
+						if (next!=null) {
+							if (comp.getCompY() < next.getCompY()) {
+								next = (TextField) comp;
+							}
+						} else {
+							next = (TextField) comp;
+						}
+					}
+				} else {
+					current = (TextField) comp;
+					next = (TextField) comp;
+				}
+			}
+			
+			if (next!=null) next.setFocus(true);
+			else {
+				for (Component comp : comps) if (comp instanceof TextField) {
+					if (first!=null) {
+						if (comp.getCompY() < first.getCompY()) first = (TextField) comp;
+					} else {
+						first = (TextField) comp;
+					}
+				}
+				first.setFocus(true);
+			}
+			
+		}
+	}
 
 	@Override
 	protected void setPriority(int priority) {
