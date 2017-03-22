@@ -54,11 +54,7 @@ public class Main extends Panel {
 			}
 		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.8f, 0.8f, 0.8f);
 		
-		button_options = new Button("OPTIONS", 800, 600, 3, 1, new Action() {
-			public void perform() {
-				Panels.show(Panels.DECK_STARTER);
-			}
-		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.8f, 0.8f, 0.8f);
+		button_options = new Button("OPTIONS", 800, 600, 3, 1, null).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.8f, 0.8f, 0.8f);
 		
 		button_exit = new Button("EXIT", 800, 700, 3, 1, new Action() {
 			public void perform() {

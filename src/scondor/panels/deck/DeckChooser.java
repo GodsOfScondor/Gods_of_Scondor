@@ -67,7 +67,7 @@ public class DeckChooser extends Panel {
 					}
 					
 					if (KeyBoard.isKeyTyped(KeyBoard.KEY_ENTER)) {
-						Client.send(new Message("lobby;"+getDeckID(names[current].getText())));
+						Client.send(new Message("lobby;deck;"+getDeckID(names[current].getText())));
 						Panels.show(Panels.LOBBY);
 					}
 					
@@ -92,8 +92,9 @@ public class DeckChooser extends Panel {
 		n = 0;
 		for (DeckData data : decks) {
 			
+			System.out.println(data==null);
 			names[n].setText(data.getName());
-			System.out.println(n);
+			
 			n++;
 		}
 		for (n=n+0;n<MAX;n++) names[n].setText("");

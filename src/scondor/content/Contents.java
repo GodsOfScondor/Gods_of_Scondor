@@ -46,7 +46,8 @@ public class Contents {
 	@SuppressWarnings("unchecked")
 	public void incoming(DeckList list) {
 		decks = (List<DeckData>) list.getEntry("LIST");
-//		System.out.println("Decks: "+decks.size());
+		System.out.println("Decks: "+decks.size());
+		for (DeckData data : decks) System.out.println(data==null);
 		synchronized (this) { notify(); }
 	}
 	

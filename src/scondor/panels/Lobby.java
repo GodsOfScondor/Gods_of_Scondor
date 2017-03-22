@@ -22,13 +22,22 @@ public class Lobby extends Panel {
 		super(1);
 		setBackground(new Texture("lobby"));
 		OutlineEffect effect = new OutlineEffect(0, 0, 0, 2);
-		ranked = new Button("RANKED", 300, 300, 4, 1, null).setColor(0.8f, 0.8f, 0.8f).setDamper(-0.2f).setEffect(effect);
-		online = new Button("ONLINE", 300, 400, 4, 1, null).setColor(0.8f, 0.8f, 0.8f).setDamper(-0.2f).setEffect(effect);
-		custom = new Button("CUSTOM", 300, 500, 4, 1, null).setColor(0.8f, 0.8f, 0.8f).setDamper(-0.2f).setEffect(effect);
+		
+		Action play = new Action() {
+			public void perform() {
+				if (ranked.isTargeted()) Client.send(new Message("lobby;session;ranked"));
+				else if (online.isTargeted()) Client.send(new Message("lobby;session;online"));
+				else if (custom.isTargeted()) Client.send(new Message("lobby;session;custom"));
+			}
+		};
+		
+		ranked = new Button("RANKED", 300, 300, 4, 1, play).setColor(0.8f, 0.8f, 0.8f).setDamper(-0.2f).setEffect(effect);
+		online = new Button("ONLINE", 300, 400, 4, 1, play).setColor(0.8f, 0.8f, 0.8f).setDamper(-0.2f).setEffect(effect);
+		custom = new Button("CUSTOM", 300, 500, 4, 1, play).setColor(0.8f, 0.8f, 0.8f).setDamper(-0.2f).setEffect(effect);
 		back = new Button("BACK", 800, 900, 3.5f, 1, new Action() {
 			public void perform() {
 				Panels.show(Panels.MAIN);
-				Client.send(new Message("lobby;-1"));
+				Client.send(new Message("lobby;exit"));
 			}
 		}).setColor(0.8f, 0.8f, 0.8f).setDamper(-0.2f).setEffect(effect);
 		
