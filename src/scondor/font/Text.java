@@ -216,7 +216,7 @@ public class Text implements Comparable<Text> {
 		for (Line line : TextMaster.getFont(font_id).getBuilder().createStructure(this)) {
 			for (Word word : line.getWords()) {
 				for (Character c : word.getCharacters()) {
-					width+=c.getxAdvance()*Display.getWidth()*size*(1/Maths.getScreenRatio());
+					width+=c.getxAdvance()*Display.getWidth()*size*Maths.getScreenRatio();
 				}
 			}
 		}
