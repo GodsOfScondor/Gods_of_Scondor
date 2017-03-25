@@ -20,7 +20,7 @@ public class Login extends Panel {
 	private Label username, password, save;
 	private TextField username_field, password_field;
 	private CheckBox save_box;
-	private Button login, exit;
+	private Button login, exit, no_account;
 	private OutlineEffect effect;
 	private Action login_action;
 	
@@ -52,6 +52,12 @@ public class Login extends Panel {
 			}
 		}).setColor(0.3f, 0.3f, 0.3f).setEffect(effect).setDamper(0.5f);
 		
+		no_account = new Button("Have no account?", 570, 800, 3, 1, new Action() {
+			public void perform() {
+				Panels.show(Panels.REGISTER);
+			}
+		}).setColor(0.3f, 0.3f, 0.3f).setEffect(effect).setDamper(0.5f);
+		
 		addAction(new Action() {
 			public void perform() {
 				if (isVisible()) {
@@ -73,6 +79,7 @@ public class Login extends Panel {
 		add(save);
 		
 		add(login);
+		add(no_account);
 		add(exit);
 		
 	}

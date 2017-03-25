@@ -7,10 +7,10 @@ import scondor.gnet.packet.Packet;
 import scondor.packets.CardList;
 import scondor.packets.DeckList;
 import scondor.packets.Message;
-import scondor.panels.Panels;
 import scondor.panels.deck.DeckStarter;
 import scondor.panels.shop.ShopHandler;
 import scondor.util.Action;
+import scondor.util.Messanger;
 
 public class Listener extends ClientEventListener {
 
@@ -54,15 +54,7 @@ public class Listener extends ClientEventListener {
 					else if (code < 7) msg = ShopHandler.msgFromServer(code);
 					else if (code < 8) msg = DeckStarter.msgFromServer(code);
 					
-					if (msg.equalsIgnoreCase("nopopup")) return;
-					
-					String[] buffer = msg.split(":");
-					
-					if (buffer.length==2) {
-						Panels.popup(buffer[1], Float.parseFloat(buffer[0].split(",")[0]), Float.parseFloat(buffer[0].split(",")[1]), Float.parseFloat(buffer[0].split(",")[2]));
-					} else {
-						Panels.popup(buffer[2], Float.parseFloat(buffer[0].split(",")[0]), Float.parseFloat(buffer[0].split(",")[1]), Float.parseFloat(buffer[0].split(",")[2]), Integer.parseInt(buffer[1]));
-					}
+					Messanger.popup(msg);
 				}
 			});
 		}

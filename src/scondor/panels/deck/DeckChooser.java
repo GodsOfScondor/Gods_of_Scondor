@@ -67,7 +67,7 @@ public class DeckChooser extends Panel {
 					}
 					
 					if (KeyBoard.isKeyTyped(KeyBoard.KEY_ENTER)) {
-						Client.send(new Message("lobby;deck;"+getDeckID(names[current].getText())));
+						Client.send(new Message("lobby;deck;0"));//+getDeckID(names[current].getText())));
 						Panels.show(Panels.LOBBY);
 					}
 					
@@ -78,10 +78,10 @@ public class DeckChooser extends Panel {
 		
 	}
 	
-	private int getDeckID(String name) {
-		for (DeckData deck : decks) if (deck.getName().equalsIgnoreCase(name)) return deck.getID();
-		return -1;
-	}
+//	private int getDeckID(String name) {
+//		for (DeckData deck : decks) if (deck.getName().equalsIgnoreCase(name)) return deck.getID();
+//		return -1;
+//	}
 	
 	private void setContents() {
 		
