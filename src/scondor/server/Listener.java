@@ -7,6 +7,7 @@ import scondor.gnet.packet.Packet;
 import scondor.packets.CardList;
 import scondor.packets.DeckList;
 import scondor.packets.Message;
+import scondor.packets.State;
 import scondor.panels.deck.DeckStarter;
 import scondor.panels.shop.ShopHandler;
 import scondor.util.Action;
@@ -46,17 +47,35 @@ public class Listener extends ClientEventListener {
 		if (packet instanceof Message) {
 			Client.add(new Action() {
 				public void perform() {
-					int code = Integer.parseInt((String) packet.getEntry("MESSAGE"));
 					
-					String msg = "1,0,0:Invalid code!";
 					
-					if (code < 5) msg = Engine.getConnection().msgFromServer(code);
-					else if (code < 7) msg = ShopHandler.msgFromServer(code);
-					else if (code < 8) msg = DeckStarter.msgFromServer(code);
+					String message = (String) packet.getEntry("MESSAGE");
+//					String[] parts = message.split(";");
 					
-					Messanger.popup(msg);
+					if (message.startsWith("fight;")) {
+						
+						// TODO start fight!
+						
+					} else {
+						int code = Integer.parseInt(message);
+						
+						String msg = "1,0,0:Invalid code!";
+						
+						if (code < 5) msg = Engine.getConnection().msgFromServer(code);
+						else if (code < 7) msg = ShopHandler.msgFromServer(code);
+						else if (code < 8) msg = DeckStarter.msgFromServer(code);
+						
+						Messanger.popup(msg);
+					}
 				}
 			});
+		}
+		
+		/*
+		 * incoming game state
+		 */
+		if (packet instanceof State) {
+			System.out.println("YEAAAAAAAAAAH");
 		}
 		
 		/*
