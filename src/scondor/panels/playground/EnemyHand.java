@@ -18,7 +18,7 @@ public class EnemyHand extends Panel {
 		enemy_handcards = new Picture[MAX_CARDS];
 		Texture tex = new Texture("card_back");
 		for (n=0;n<MAX_CARDS;n++) {
-			enemy_handcards[n] = new Picture(tex, 0, -130, 80, 110);
+			enemy_handcards[n] = new Picture(tex, 0, 130, 80, 110);
 			enemy_handcards[n].setLayer(0.1f-0.001f*n);
 			add(enemy_handcards[n]);
 		}
