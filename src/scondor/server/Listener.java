@@ -8,8 +8,11 @@ import scondor.packets.CardList;
 import scondor.packets.DeckList;
 import scondor.packets.Message;
 import scondor.packets.State;
+import scondor.panels.Panels;
 import scondor.panels.deck.DeckStarter;
 import scondor.panels.shop.ShopHandler;
+import scondor.session.GameType;
+import scondor.session.PlayerSideData;
 import scondor.util.Action;
 import scondor.util.Messanger;
 
@@ -48,13 +51,21 @@ public class Listener extends ClientEventListener {
 			Client.add(new Action() {
 				public void perform() {
 					
-					
 					String message = (String) packet.getEntry("MESSAGE");
-//					String[] parts = message.split(";");
+					String[] parts = message.split(";");
+					
+					System.out.println(message);
 					
 					if (message.startsWith("fight;")) {
 						
-						// TODO start fight!
+						if (parts[1].startsWith("exit")) {
+							
+						} else if (parts[1].startsWith("start")) {
+							GameType type = GameType.valueOf(parts[2].toUpperCase());
+							String enemy = parts[3];
+							Panels.getPlayground().initData(type, enemy);
+							Panels.show(Panels.PLAYGROUND);
+						}
 						
 					} else {
 						int code = Integer.parseInt(message);
@@ -75,7 +86,12 @@ public class Listener extends ClientEventListener {
 		 * incoming game state
 		 */
 		if (packet instanceof State) {
-			System.out.println("YEAAAAAAAAAAH");
+
+			PlayerSideData player = (PlayerSideData) packet.getEntry("PLAYER1");
+			PlayerSideData enemy = (PlayerSideData) packet.getEntry("PLAYER2");
+			String params = (String) packet.getEntry("PARAMS");
+			Panels.getPlayground().updateData(player, enemy, params);
+			
 		}
 		
 		/*

@@ -32,6 +32,8 @@ public class Panels {
 	private static Panel current;
 	private static int key;
 	
+	private static Playground playground;
+	
 	public static void init() {
 		current = null;
 		panels.put(LOGIN, new Login());
@@ -43,7 +45,8 @@ public class Panels {
 		panels.put(DECK_CHOOSER, new DeckChooser());
 		panels.put(DECK_BUILDER, new DeckBuilder());
 		panels.put(DECK_STARTER, new DeckStarter());
-		panels.put(PLAYGROUND, new Playground());
+		playground = new Playground();
+		panels.put(PLAYGROUND, playground);
 	}
 	
 	public static void show(int key) {
@@ -72,6 +75,10 @@ public class Panels {
 
 	public static boolean isOpen(int panel) {
 		return key == panel;
+	}
+	
+	public static Playground getPlayground() {
+		return playground;
 	}
 	
 }
