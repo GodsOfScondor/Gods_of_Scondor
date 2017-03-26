@@ -50,7 +50,7 @@ public class Main extends Panel {
 		
 		button_deck = new Button("DECK", 800, 500, 3, 1, new Action() {
 			public void perform() {
-				
+				Panels.show(Panels.PLAYGROUND);
 			}
 		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.8f, 0.8f, 0.8f);
 		

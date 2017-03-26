@@ -30,11 +30,11 @@ public class Login extends Panel {
 		setBackground(new Texture("lobby"));
 		
 		effect = new OutlineEffect(0.5f, 0.5f, 0.5f, 0.8f);
-		username = new Label("Username:", 500, 300, 5, 1).setEffect(effect);
-		password = new Label("Password:", 500, 400, 5, 1).setEffect(effect);
+		username = new Label("Username:", 300, 300, 5, 1).setEffect(effect);
+		password = new Label("Password:", 300, 400, 5, 1).setEffect(effect);
 		
-		username_field = new TextField(700, 320, 200, 30);
-		password_field = new TextField(700, 420, 200, 30).setHided(true);
+		username_field = new TextField(500, 320, 400, 30);
+		password_field = new TextField(500, 420, 400, 30).setHided(true);
 		
 		save_box = new CheckBox(700, 500, 1.2f);
 		save = new Label("Remember me", 730, 500, 3, 1).setEffect(effect).setColor(1, 1, 1);

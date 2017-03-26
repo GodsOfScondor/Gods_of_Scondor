@@ -9,6 +9,7 @@ import scondor.panels.authentification.Register;
 import scondor.panels.deck.DeckBuilder;
 import scondor.panels.deck.DeckChooser;
 import scondor.panels.deck.DeckStarter;
+import scondor.panels.playground.Playground;
 import scondor.panels.shop.Shop;
 
 public class Panels {
@@ -22,6 +23,7 @@ public class Panels {
 	public static final int DECK_CHOOSER = 6;
 	public static final int DECK_BUILDER = 7;
 	public static final int DECK_STARTER = 8;
+	public static final int PLAYGROUND = 9;
 	
 	public static final int FADEIN = 70;
 	public static final int FADEOUT = 30;
@@ -41,6 +43,7 @@ public class Panels {
 		panels.put(DECK_CHOOSER, new DeckChooser());
 		panels.put(DECK_BUILDER, new DeckBuilder());
 		panels.put(DECK_STARTER, new DeckStarter());
+		panels.put(PLAYGROUND, new Playground());
 	}
 	
 	public static void show(int key) {

@@ -85,5 +85,9 @@ public class Picture extends Component implements EffectAble<Picture> {
 		img.resetEffects();
 		return this;
 	}
+
+	public void setLayer(float layer) {
+		this.img.setLayer(layer);
+	}
 	
 }
