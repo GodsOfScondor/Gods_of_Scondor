@@ -1,35 +1,48 @@
 package scondor.panels.shop;
 
-import scondor.components.Card;
+import java.util.ArrayList;
+
 import scondor.components.Picture;
 import scondor.deck.card.CardData;
 import scondor.image.Texture;
 
 public class Packs {
 
-	private Card card;
-	private Picture pic;
+	public static ArrayList<Packs> allPacks = new ArrayList<>();
 
-	Texture card_border = new Texture("card_gn_common");
-	Texture deck_border = new Texture("arrow");
-	
-	public Packs(PackType type, CardData data, int x, int y, float size) {
-		card = new Card(data, x, y, size);
-		
+	private Picture card;
+	private CardData data;
+	private PackType type;
+
+	Texture closed = new Texture("card_gn_common");
+	Texture open = new Texture("arrow");
+
+	public Packs(PackType type, CardData data, int x, int y, int width, int height) {
+		this.data = data;
+		this.type = type;
+
 		switch (type) {
 		case I_CLOSED:
-//			pic = new Picture()
-			break;
-		case I_OPEN:
-
+			card = new Picture(closed, x, y, width, height);
 			break;
 		case X_CLOSED:
-
+			card = new Picture(closed, x, y, width, height);
+			break;
+		case I_OPEN:
+			card = new Picture(open, x, y, width, height);
 			break;
 		}
 	}
 
-	public void setCard(Card card) {
-		this.card = card;
+	public CardData getData() {
+		return data;
+	}
+
+	public Picture getPicture() {
+		return card;
+	}
+
+	public PackType getPackType() {
+		return type;
 	}
 }
