@@ -16,4 +16,9 @@ public class SpellCardData extends CardData {
 		super(id, name, description, mana_cost, mana_type);
 	}
 
+	@Override
+	public CardData cloneCard() {
+		return new SpellCardData(id, name, description, mana_cost, mana_type);
+	}
+
 }

@@ -43,5 +43,10 @@ public class TroopCardData extends CardData {
 	public void setCountdown(int countdown) {
 		this.countdown = countdown;
 	}
+
+	@Override
+	public CardData cloneCard() {
+		return new TroopCardData(attack, name, description, attack, mana_type, attack, live, countdown);
+	}
 	
 }

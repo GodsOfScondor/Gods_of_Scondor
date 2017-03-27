@@ -8,7 +8,7 @@ public abstract class CardData implements Serializable {
 	
 	private static final long serialVersionUID = 5034278386011906460L;
 	
-	private int id;
+	protected int id;
 	protected String name;
 	protected String description;
 	protected int mana_cost;
@@ -26,6 +26,8 @@ public abstract class CardData implements Serializable {
 		this.mana_cost = mana_cost;
 		this.mana_type = mana_type;
 	}
+	
+	public abstract CardData cloneCard();
 	
 	public int getID() {
 		return id;

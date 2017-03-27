@@ -25,5 +25,10 @@ public class FieldCardData extends CardData {
 	public void setLinger(int linger) {
 		this.linger = linger;
 	}
+
+	@Override
+	public CardData cloneCard() {
+		return new FieldCardData(id, name, description, linger, mana_type, linger);
+	}
 	
 }
