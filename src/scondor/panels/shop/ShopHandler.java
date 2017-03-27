@@ -10,6 +10,7 @@ public class ShopHandler {
 	private static boolean buying;
 	private static final int SHOP_SUCCES = 5;
 	private static final int SHOP_FAIL = 6;
+	private static int money;
 
 	public static void buy(PackType type) {
 		if (!buying) {
@@ -36,7 +37,10 @@ public class ShopHandler {
 	}
 
 	public static void updateMoney(int money) {
-		
+		ShopHandler.money = money;
 	}
 
+	public static int getMoney() {
+		return money;
+	}
 }

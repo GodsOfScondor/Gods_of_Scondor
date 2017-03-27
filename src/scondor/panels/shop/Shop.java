@@ -12,13 +12,16 @@ import scondor.font.effect.OutlineEffect;
 import scondor.image.Texture;
 import scondor.inputs.Mouse;
 import scondor.mana.ManaType;
+import scondor.packets.Message;
 import scondor.panels.EffectAble;
 import scondor.panels.Panels;
+import scondor.server.Client;
 import scondor.util.Action;
 
 public class Shop extends Panel {
 
 	private Label title;
+	private Label money;
 	private Button shop, exit;
 	private OutlineEffect effect;
 	private Card preview;
@@ -27,9 +30,11 @@ public class Shop extends Panel {
 	public Shop() {
 		super(1);
 		setBackground(new Texture("shop"));
+		Client.send(new Message("money"));
 
 		effect = new OutlineEffect(0.5f, 0.5f, 0.5f, 0.8f);
 		title = new Label("ONLY TODAY: FREE CARDS FOR EVERYONE!!! ...just 9,99$/Card", 50, 50, 5, 1).setEffect(effect);
+		money = new Label("", 0, 0, 2, 3).setEffect(effect);
 
 		shop = new Button("BUY", 210, 500, 5, 1, new Action() {
 			public void perform() {
@@ -51,6 +56,7 @@ public class Shop extends Panel {
 		addAction(new Action() {
 			public void perform() {
 				if (isVisible()) {
+					money.setText("Your curren money: " + ShopHandler.getMoney());
 					for (Packs deck : Packs.allPacks) {
 						if (deck.getPicture().isMouseOver()) {
 							deck.getPicture().setWidth(30);
@@ -92,6 +98,7 @@ public class Shop extends Panel {
 
 		add(preview);
 		add(title);
+		add(money);
 		add(shop);
 		add(exit);
 	}
