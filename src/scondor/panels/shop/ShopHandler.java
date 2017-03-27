@@ -35,4 +35,8 @@ public class ShopHandler {
 		return Messanger.nopopup();
 	}
 
+	public static void updateMoney(int money) {
+		
+	}
+
 }

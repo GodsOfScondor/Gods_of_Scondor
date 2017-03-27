@@ -52,10 +52,13 @@ public class Listener extends ClientEventListener {
 				public void perform() {
 					
 					String message = (String) packet.getEntry("MESSAGE");
-					String[] parts = message.split(";");
+					final String[] parts = message.split(";");
 					
 					System.out.println(message);
 					
+					/*
+					 * fight command from server
+					 */
 					if (message.startsWith("fight;")) {
 						
 						if (parts[1].startsWith("exit")) {
@@ -67,7 +70,23 @@ public class Listener extends ClientEventListener {
 							Panels.show(Panels.PLAYGROUND);
 						}
 						
-					} else {
+					} 
+					
+					/*
+					 * answer to money request
+					 */
+					else if (message.startsWith("money;")) {
+						Client.add(new Action() {
+							public void perform() {
+								ShopHandler.updateMoney(Integer.parseInt(parts[1]));
+							}
+						});
+					}
+					
+					/*
+					 * MSG code from Server
+					 */
+					else {
 						int code = Integer.parseInt(message);
 						
 						String msg = "1,0,0:Invalid code!";
