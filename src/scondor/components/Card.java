@@ -132,6 +132,7 @@ public class Card extends Component implements EffectAble<Card> {
 		if (hasData()) {
 			this.name.setText(data.getName());
 			this.description.setText(data.getDescription());
+			System.out.println("ID: " + data.getID());
 			this.sprite.getTex().setX(data.getID()%32);
 			this.sprite.getTex().setY(data.getID()/32);
 		} else {
@@ -145,6 +146,27 @@ public class Card extends Component implements EffectAble<Card> {
 
 	public boolean hasData() {
 		return data!=null;
+	}
+
+	public void setLayer(float layer) {
+		card.setLayer(layer-0.0001f);
+		sprite.setLayer(layer);
+		name.setLayer(layer);
+		description.setLayer(layer);
+	}
+
+	public void setX(int x) {
+		card.setX(x);
+		sprite.setX(x);
+		name.setXY(x,this.y);
+		description.setXY(x,this.y);
+	}
+	
+	public void setY(int y) {
+		card.setX(y);
+		sprite.setX(x);
+		name.setXY(this.x,y);
+		description.setXY(this.x,x);
 	}
 	
 }

@@ -10,6 +10,7 @@ import scondor.packets.Message;
 import scondor.packets.State;
 import scondor.panels.Panels;
 import scondor.panels.deck.DeckStarter;
+import scondor.panels.playground.Playground;
 import scondor.panels.shop.ShopHandler;
 import scondor.session.GameType;
 import scondor.session.PlayerSideData;
@@ -48,6 +49,7 @@ public class Listener extends ClientEventListener {
 		 * msg from server
 		 */
 		if (packet instanceof Message) {
+			
 			Client.add(new Action() {
 				public void perform() {
 					
@@ -101,11 +103,20 @@ public class Listener extends ClientEventListener {
 		 * incoming game state
 		 */
 		if (packet instanceof State) {
-
-			PlayerSideData player = (PlayerSideData) packet.getEntry("PLAYER1");
-			PlayerSideData enemy = (PlayerSideData) packet.getEntry("PLAYER2");
-			String params = (String) packet.getEntry("PARAMS");
-			Panels.getPlayground().updateData(player, enemy, params);
+			
+			Client.add(new Action() {
+				public void perform() {
+					
+					PlayerSideData player = (PlayerSideData) packet.getEntry("PLAYER1");
+					PlayerSideData enemy = (PlayerSideData) packet.getEntry("PLAYER2");
+					
+					String params = (String) packet.getEntry("PARAMS");
+					
+					Playground playground = Panels.getPlayground();
+					playground.updateData(player, enemy, params);
+					
+				}
+			});
 			
 		}
 		
@@ -117,5 +128,6 @@ public class Listener extends ClientEventListener {
 		}
 		
 	}
+
 
 }
