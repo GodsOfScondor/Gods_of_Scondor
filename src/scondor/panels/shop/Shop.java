@@ -46,7 +46,6 @@ public class Shop extends Panel {
 		exit = new Button("BACK", 810, 600, 5, 1, new Action() {
 			public void perform() {
 				Panels.show(Panels.MAIN);
-				;
 			}
 		}).setEffect(effect).setDamper(0.2f);
 
