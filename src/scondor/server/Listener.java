@@ -76,11 +76,6 @@ public class Listener extends ClientEventListener {
 					 * answer to money request
 					 */
 					else if (message.startsWith("money;")) {
-						/*Client.add(new Action() {
-							public void perform() {
-								ShopHandler.updateMoney(Integer.parseInt(parts[1]));
-							}
-						});*/
 						ShopHandler.updateMoney(Integer.parseInt(parts[1]));
 					}
 					

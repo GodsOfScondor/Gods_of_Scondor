@@ -111,6 +111,8 @@ public class Connection {
 			
 			file = new File(PATH);
 			
+			if (file.exists()==false) file.createNewFile();
+			
 			if (!save) {
 			
 			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));

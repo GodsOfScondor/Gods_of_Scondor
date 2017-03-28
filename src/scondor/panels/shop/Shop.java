@@ -25,7 +25,7 @@ public class Shop extends Panel {
 	private Button shop, exit;
 	private OutlineEffect effect;
 	private Card preview;
-	private PackType type;
+	private PackType type=null;
 
 	public Shop() {
 		super(1);
@@ -38,7 +38,9 @@ public class Shop extends Panel {
 
 		shop = new Button("BUY", 210, 500, 5, 1, new Action() {
 			public void perform() {
+				if(type!=null) {
 				ShopHandler.buy(type);
+				}
 			}
 		}).setEffect(effect).setDamper(0.2f);
 		exit = new Button("BACK", 810, 600, 5, 1, new Action() {
