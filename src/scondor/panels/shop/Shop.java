@@ -8,7 +8,9 @@ import scondor.components.Component;
 import scondor.components.Label;
 import scondor.components.Panel;
 import scondor.deck.card.troops.TroopCardData;
+import scondor.font.effect.GlowEffect;
 import scondor.font.effect.OutlineEffect;
+import scondor.font.effect.ShadowEffect;
 import scondor.image.Texture;
 import scondor.inputs.Mouse;
 import scondor.mana.ManaType;
@@ -23,31 +25,37 @@ public class Shop extends Panel {
 	private Label title;
 	private Label money;
 	private Button shop, exit;
-	private OutlineEffect effect;
+	private OutlineEffect outline;
+	private GlowEffect glow;
+	private ShadowEffect shadow;
 	private Card preview;
-	private PackType type=null;
+	private PackType type = null;
 
 	public Shop() {
 		super(1);
 		setBackground(new Texture("shop"));
 		Client.send(new Message("money"));
 
-		effect = new OutlineEffect(0.5f, 0.5f, 0.5f, 0.8f);
-		title = new Label("ONLY TODAY: FREE CARDS FOR EVERYONE!!! ...just 9,99$/Card", 50, 50, 5, 1).setEffect(effect);
-		money = new Label("", 0, 0, 2, 3).setEffect(effect);
+		outline = new OutlineEffect(0.5f, 0.5f, 0.5f, 0.8f);
+		glow = new GlowEffect(0.5f, 0.5f, 0.5f, 0.5f);
+		shadow = new ShadowEffect(0.5f, 0.5f, 0.5f, 0.5f);
 
-		shop = new Button("BUY", 210, 500, 5, 1, new Action() {
+		title = new Label("ONLY TODAY: FREE CARDS FOR EVERYONE!!! ...just 9,99$/Card", 50, 50, 5, 1).setEffect(outline)
+				.setEffect(glow).setEffect(shadow);
+		money = new Label("", 50, 950, 2, 2).setEffect(outline).setEffect(glow).setEffect(shadow);
+
+		shop = new Button("BUY", 510, 500, 5, 1, new Action() {
 			public void perform() {
-				if(type!=null) {
-				ShopHandler.buy(type);
+				if (type != null) {
+					ShopHandler.buy(type);
 				}
 			}
-		}).setEffect(effect).setDamper(0.2f);
+		}).setEffect(outline).setEffect(glow).setEffect(shadow).setDamper(0.2f);
 		exit = new Button("BACK", 810, 600, 5, 1, new Action() {
 			public void perform() {
 				Panels.show(Panels.MAIN);
 			}
-		}).setEffect(effect).setDamper(0.2f);
+		}).setEffect(outline).setEffect(glow).setEffect(shadow).setDamper(0.2f);
 
 		addAction(new Action() {
 			public void perform() {
@@ -57,7 +65,7 @@ public class Shop extends Panel {
 		addAction(new Action() {
 			public void perform() {
 				if (isVisible()) {
-					money.setText("Your curren money: " + ShopHandler.getMoney());
+					money.setText("Your current money: " + ShopHandler.getMoney());
 					for (Packs deck : Packs.allPacks) {
 						if (deck.getPicture().isMouseOver()) {
 							deck.getPicture().setWidth(30);
