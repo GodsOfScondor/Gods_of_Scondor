@@ -25,7 +25,7 @@ public class Contents {
 
 		request("request;cardlist");
 		request("request;decklist");
-		Client.send(new Message("money"));
+		Client.sendToServer(new Message("money"));
 
 		System.out.println("... finished content loading!");
 
@@ -33,7 +33,7 @@ public class Contents {
 
 	public void request(String request) {
 		try {
-			Client.send(new Message(request));
+			Client.sendToServer(new Message(request));
 			synchronized (this) {
 				wait();
 			}

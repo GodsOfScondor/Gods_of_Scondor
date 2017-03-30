@@ -30,7 +30,7 @@ public class Shop extends Panel {
 	public Shop() {
 		super(1);
 		setBackground(new Texture("shop"));
-		Client.send(new Message("money"));
+		Client.sendToServer(new Message("money"));
 
 		effect = new OutlineEffect(0.5f, 0.5f, 0.5f, 0.8f);
 		title = new Label("ONLY TODAY: FREE CARDS FOR EVERYONE!!! ...just 9,99$/Card", 50, 50, 5, 1).setEffect(effect);

@@ -67,7 +67,7 @@ public class DeckChooser extends Panel {
 					}
 					
 					if (KeyBoard.isKeyTyped(KeyBoard.KEY_ENTER)) {
-						Client.send(new Message("lobby;deck;0"));//+getDeckID(names[current].getText())));
+						Client.sendToServer(new Message("lobby;deck;0"));//+getDeckID(names[current].getText())));
 						Panels.show(Panels.LOBBY);
 					}
 					

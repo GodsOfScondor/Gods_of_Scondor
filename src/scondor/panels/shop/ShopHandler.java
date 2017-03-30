@@ -15,7 +15,7 @@ public class ShopHandler {
 	public static void buy(PackType type) {
 		if (!buying) {
 			buying = true;
-			Client.send(new Message("buy;" + type.toString()));
+			Client.sendToServer(new Message("buy;" + type.toString()));
 		}
 	}
 

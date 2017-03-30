@@ -25,9 +25,9 @@ public class Lobby extends Panel {
 		
 		Action play = new Action() {
 			public void perform() {
-				if (ranked.isTargeted()) Client.send(new Message("lobby;session;ranked"));
-				else if (online.isTargeted()) Client.send(new Message("lobby;session;online"));
-				else if (custom.isTargeted()) Client.send(new Message("lobby;session;custom"));
+				if (ranked.isTargeted()) Client.sendToServer(new Message("lobby;session;ranked"));
+				else if (online.isTargeted()) Client.sendToServer(new Message("lobby;session;online"));
+				else if (custom.isTargeted()) Client.sendToServer(new Message("lobby;session;custom"));
 			}
 		};
 		
@@ -37,7 +37,7 @@ public class Lobby extends Panel {
 		back = new Button("BACK", 800, 900, 3.5f, 1, new Action() {
 			public void perform() {
 				Panels.show(Panels.MAIN);
-				Client.send(new Message("lobby;exit"));
+				Client.sendToServer(new Message("lobby;exit"));
 			}
 		}).setColor(0.8f, 0.8f, 0.8f).setDamper(-0.2f).setEffect(effect);
 		

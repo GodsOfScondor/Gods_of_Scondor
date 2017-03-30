@@ -66,10 +66,20 @@ public class Listener extends ClientEventListener {
 						if (parts[1].startsWith("exit")) {
 							
 						} else if (parts[1].startsWith("start")) {
+							
 							GameType type = GameType.valueOf(parts[2].toUpperCase());
 							String enemy = parts[3];
 							Panels.getPlayground().initData(type, enemy);
 							Panels.show(Panels.PLAYGROUND);
+							
+						} else if (parts[1].equalsIgnoreCase("action")) {
+							
+							if (parts[2].equalsIgnoreCase("turn")) {
+								
+							} else if (parts[2].equalsIgnoreCase("turn")) {
+								
+							}
+							
 						}
 						
 					} 
