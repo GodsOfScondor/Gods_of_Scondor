@@ -8,6 +8,7 @@ import scondor.components.Panel;
 import scondor.deck.card.CardData;
 import scondor.panels.EffectAble;
 import scondor.panels.Panels;
+import scondor.util.Action;
 
 public class PlayerHand extends Panel {
 	
@@ -19,10 +20,22 @@ public class PlayerHand extends Panel {
 		super(1);
 		handcards = new Card[MAX_CARDS];
 		for (n=0;n<MAX_CARDS;n++) {
-			handcards[n] = new Card(null, -200, 600, 2);
+			handcards[n] = new Card(null, -200, 1000, 2);
 			handcards[n].setLayer(0.1f-0.01f*n);
 			add(handcards[n]);
 		}
+		
+		addAction(new Action() {
+			public void perform() {
+				
+				if (Panels.getPlayground().isOnTurn()) {
+					for (n=0;n<MAX_CARDS;n++) if (handcards[n].isVisible()) handcards[n].setY(860);
+				} else {
+					for (n=0;n<MAX_CARDS;n++) if (handcards[n].isVisible()) handcards[n].setY(920);
+				}
+				
+			}
+		});
 		
 	}
 	

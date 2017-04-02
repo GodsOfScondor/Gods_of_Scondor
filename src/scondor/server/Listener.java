@@ -75,9 +75,9 @@ public class Listener extends ClientEventListener {
 						} else if (parts[1].equalsIgnoreCase("action")) {
 							
 							if (parts[2].equalsIgnoreCase("turn")) {
-								
-							} else if (parts[2].equalsIgnoreCase("turn")) {
-								
+								Panels.getPlayground().setOnTurn(true);
+							} else if (parts[2].equalsIgnoreCase("wait")) {
+								Panels.getPlayground().setOnTurn(false);
 							}
 							
 						}

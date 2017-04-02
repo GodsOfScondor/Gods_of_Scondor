@@ -127,6 +127,10 @@ public class Card extends Component implements EffectAble<Card> {
 		return this;
 	}
 	
+	public void setTransparency() {
+		
+	}
+	
 	public void setData(CardData data) {
 		this.data = data;
 		if (hasData()) {
@@ -163,10 +167,17 @@ public class Card extends Component implements EffectAble<Card> {
 	}
 	
 	public void setY(int y) {
-		card.setX(y);
-		sprite.setX(x);
+		card.setY(y);
+		sprite.setY(x);
 		name.setXY(this.x,y);
 		description.setXY(this.x,x);
+	}
+
+	public void setTransparency(float transparency) {
+		card.setTransparency(transparency);
+		sprite.setTransparency(transparency);
+		name.setTransparency(transparency);
+		description.setTransparency(transparency);
 	}
 	
 }
