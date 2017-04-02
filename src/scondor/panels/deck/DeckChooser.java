@@ -5,15 +5,18 @@ import java.util.List;
 
 import scondor.Engine;
 import scondor.components.Button;
+import scondor.components.Card;
 import scondor.components.Component;
 import scondor.components.Label;
 import scondor.components.Panel;
 import scondor.components.Picture;
 import scondor.deck.DeckData;
+import scondor.deck.card.troops.TroopCardData;
 import scondor.font.effect.OutlineEffect;
 import scondor.image.Texture;
 import scondor.inputs.KeyBoard;
 import scondor.inputs.Mouse;
+import scondor.mana.ManaType;
 import scondor.packets.Message;
 import scondor.panels.EffectAble;
 import scondor.panels.Panels;
@@ -35,6 +38,9 @@ public class DeckChooser extends Panel {
 	public DeckChooser() {
 		super(1);
 		super.setBackground(new Texture("lobby"));
+		
+		Card card = new Card(new TroopCardData(0, "", "", 1, ManaType.WILD, 1, 1, 1), 100, 100, 10);
+		add(card);
 		
 		titel = new Label("Choose your deck to play:", 50, 50, 4, 1);
 		add(titel);
