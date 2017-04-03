@@ -139,10 +139,10 @@ public class Listener extends ClientEventListener {
 		 */
 		else if (packet instanceof CardList) {
 			
-			String params = (String) packet.getEntry("PARAMS");
+			final String params = (String) packet.getEntry("PARAMS");
 			
 			@SuppressWarnings("unchecked")
-			List<CardData> cards = (List<CardData>) packet.getEntry("LIST");
+			final List<CardData> cards = (List<CardData>) packet.getEntry("LIST");
 			
 			if (params.startsWith("shop;")) {
 				

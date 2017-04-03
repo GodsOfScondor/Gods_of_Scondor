@@ -8,7 +8,6 @@ import scondor.components.Card;
 import scondor.components.Component;
 import scondor.components.Label;
 import scondor.components.Panel;
-import scondor.components.Picture;
 import scondor.deck.card.CardData;
 import scondor.deck.card.troops.TroopCardData;
 import scondor.font.effect.GlowEffect;
@@ -22,7 +21,6 @@ import scondor.panels.EffectAble;
 import scondor.panels.Panels;
 import scondor.server.Client;
 import scondor.util.Action;
-import scondor.util.Maths;
 
 public class Shop extends Panel {
 
@@ -33,9 +31,8 @@ public class Shop extends Panel {
 	private GlowEffect glow;
 	private ShadowEffect shadow;
 	private Card preview;
-	private Card postview;
 	private PackType type = null;
-	private Picture blackfade;
+	private ProductShowcase showcase;
 
 	public Shop() {
 		super(1);
@@ -98,7 +95,9 @@ public class Shop extends Panel {
 				}
 			}
 		});
-
+		
+		showcase = new ProductShowcase();
+		
 		Packs pack1 = new Packs(PackType.I_CLOSED, null, 300, 370, 25, 40);
 		Packs.allPacks.add(pack1);
 
@@ -110,15 +109,9 @@ public class Shop extends Panel {
 		}
 
 		preview = new Card(null, 50, 550, 3);
-		postview = new Card(null, 50, 50, 5).setLayer(0.2f);
 
-		blackfade = new Picture(new Texture("colors/black"), 0, 0, 1000, 1 + (int) (1000 / Maths.getScreenRatio()));
-		blackfade.setLayer(0.3f);// set auf kleiner um picture vor darkscreen zu
-									// bringen
-
-		add(blackfade);
+		add(showcase);
 		add(preview);
-		add(postview);
 		add(title);
 		add(money);
 		add(shop);
@@ -132,11 +125,8 @@ public class Shop extends Panel {
 		for (Component comp : comps)
 			if (comp instanceof EffectAble<?>)
 				((EffectAble<?>) comp).fade(0, 1, Panels.FADEIN);
-
-		this.blackfade.stop();
-		this.blackfade.setVisible(false);
-		this.postview.stop();
-		this.postview.setVisible(false);
+		this.showcase.stop();
+		this.showcase.setVisible(false);
 	}
 
 	@Override
@@ -149,12 +139,10 @@ public class Shop extends Panel {
 	}
 
 	protected void showData(List<CardData> cards, PackType type) {
-		this.blackfade.fade(0.0f, 0.6f, 200);
 
 		switch (type.toString()) {
 		case "I_CLOSED":
-			postview.setData(cards.get(0));
-			postview.fade(0.0f, 1f, 200);
+			this.showcase.addData(cards.get(0));
 			break;
 		case "I_OPEN":
 
@@ -163,5 +151,6 @@ public class Shop extends Panel {
 
 			break;
 		}
+		this.showcase.swipeIn();
 	}
 }
