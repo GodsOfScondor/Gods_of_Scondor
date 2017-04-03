@@ -1,5 +1,6 @@
 package scondor.panels.shop;
 
+import java.util.List;
 import java.util.Random;
 
 import scondor.components.Button;
@@ -7,6 +8,8 @@ import scondor.components.Card;
 import scondor.components.Component;
 import scondor.components.Label;
 import scondor.components.Panel;
+import scondor.components.Picture;
+import scondor.deck.card.CardData;
 import scondor.deck.card.troops.TroopCardData;
 import scondor.font.effect.GlowEffect;
 import scondor.font.effect.OutlineEffect;
@@ -19,6 +22,7 @@ import scondor.panels.EffectAble;
 import scondor.panels.Panels;
 import scondor.server.Client;
 import scondor.util.Action;
+import scondor.util.Maths;
 
 public class Shop extends Panel {
 
@@ -29,12 +33,14 @@ public class Shop extends Panel {
 	private GlowEffect glow;
 	private ShadowEffect shadow;
 	private Card preview;
+	private Card postview;
 	private PackType type = null;
+	private Picture blackfade;
 
 	public Shop() {
 		super(1);
 		setBackground(new Texture("shop"));
-		Client.send(new Message("money"));
+		Client.sendToServer(new Message("money"));
 
 		outline = new OutlineEffect(0.5f, 0.5f, 0.5f, 0.8f);
 		glow = new GlowEffect(0.5f, 0.5f, 0.5f, 0.5f);
@@ -104,8 +110,15 @@ public class Shop extends Panel {
 		}
 
 		preview = new Card(null, 50, 550, 3);
+		postview = new Card(null, 50, 50, 5).setLayer(0.2f);
 
+		blackfade = new Picture(new Texture("colors/black"), 0, 0, 1000, 1 + (int) (1000 / Maths.getScreenRatio()));
+		blackfade.setLayer(0.3f);// set auf kleiner um picture vor darkscreen zu
+									// bringen
+
+		add(blackfade);
 		add(preview);
+		add(postview);
 		add(title);
 		add(money);
 		add(shop);
@@ -115,9 +128,15 @@ public class Shop extends Panel {
 	@Override
 	public void swipeIn() {
 		fade(0, 1, Panels.FADEIN);
+
 		for (Component comp : comps)
 			if (comp instanceof EffectAble<?>)
 				((EffectAble<?>) comp).fade(0, 1, Panels.FADEIN);
+
+		this.blackfade.stop();
+		this.blackfade.setVisible(false);
+		this.postview.stop();
+		this.postview.setVisible(false);
 	}
 
 	@Override
@@ -129,4 +148,20 @@ public class Shop extends Panel {
 
 	}
 
+	protected void showData(List<CardData> cards, PackType type) {
+		this.blackfade.fade(0.0f, 0.6f, 200);
+
+		switch (type.toString()) {
+		case "I_CLOSED":
+			postview.setData(cards.get(0));
+			postview.fade(0.0f, 1f, 200);
+			break;
+		case "I_OPEN":
+
+			break;
+		case "X_CLOSED":
+
+			break;
+		}
+	}
 }

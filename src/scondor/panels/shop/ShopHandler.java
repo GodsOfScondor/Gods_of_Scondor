@@ -1,5 +1,8 @@
 package scondor.panels.shop;
 
+import java.util.List;
+
+import scondor.deck.card.CardData;
 import scondor.packets.Message;
 import scondor.panels.Panels;
 import scondor.server.Client;
@@ -15,7 +18,7 @@ public class ShopHandler {
 	public static void buy(PackType type) {
 		if (!buying) {
 			buying = true;
-			Client.send(new Message("buy;" + type.toString()));
+			Client.sendToServer(new Message("buy;" + type.toString()));
 		}
 	}
 
@@ -24,8 +27,6 @@ public class ShopHandler {
 		buying = false;
 
 		if (code == SHOP_SUCCES) {
-
-			return Messanger.build("Succesfully bought!", Panels.SHOP, 0, 1, 0);
 
 		} else if (code == SHOP_FAIL) {
 
@@ -40,7 +41,23 @@ public class ShopHandler {
 		ShopHandler.money = money;
 	}
 
+	/**
+	 * 
+	 * 
+	 *
+	 * 
+	 */
 	public static int getMoney() {
 		return money;
 	}
+
+	/*
+	 * 
+	 * 
+	 * 
+	 */
+	public static void incomingData(List<CardData> cards, PackType type) {
+		Panels.getShop().showData(cards, type);
+	}
+	
 }

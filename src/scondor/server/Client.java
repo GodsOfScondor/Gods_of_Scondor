@@ -25,7 +25,7 @@ public class Client extends GNetClient {
 			catch (InterruptedException e) { e.printStackTrace(); }
 	}
 	
-	public static void send(Packet packet) {
+	public static void sendToServer(Packet packet) {
 		server.sendPacket(packet);
 //		if (packet instanceof Message) System.out.println((String) packet.getEntry("MESSAGE"));
 	}

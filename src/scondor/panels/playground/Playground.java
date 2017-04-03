@@ -11,12 +11,28 @@ import scondor.session.PlayerSideData;
 public class Playground extends Panel {
 	
 	private EnemyHand enemy_hand;
+	private PlayerHand player_hand;
+	private ControllPanel controll;
+	
+	private boolean onturn = false;
 	
 	public Playground() {
 		super(1);
 		super.setBackground(new Texture("colors/white"));
 		enemy_hand = new EnemyHand();
+		player_hand = new PlayerHand();
+		controll = new ControllPanel();
 		add(enemy_hand);
+		add(player_hand);
+		add(controll);
+	}
+	
+	public boolean isOnTurn() {
+		return onturn;
+	}
+	
+	public void setOnTurn(boolean onturn) {
+		this.onturn = onturn;
 	}
 	
 	public void initData(GameType type, String enemy) {
@@ -25,6 +41,7 @@ public class Playground extends Panel {
 	public void updateData(PlayerSideData player, PlayerSideData enemy, String params) {
 		
 		enemy_hand.updateCards(enemy.getHand().size());
+		player_hand.updateCards(player.getHand());
 		
 	}
 

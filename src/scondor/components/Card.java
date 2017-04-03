@@ -124,6 +124,17 @@ public class Card extends Component implements EffectAble<Card> {
 
 	@Override
 	public Card stop() {
+		
+		card.stopEffects();
+		sprite.stopEffects();
+		name.stopEffects();
+		description.stopEffects();
+		
+		card.resetEffects();
+		sprite.resetEffects();
+		name.resetEffects();
+		description.resetEffects();
+		
 		return this;
 	}
 	
@@ -132,6 +143,7 @@ public class Card extends Component implements EffectAble<Card> {
 		if (hasData()) {
 			this.name.setText(data.getName());
 			this.description.setText(data.getDescription());
+			System.out.println("ID: " + data.getID());
 			this.sprite.getTex().setX(data.getID()%32);
 			this.sprite.getTex().setY(data.getID()/32);
 		} else {
@@ -145,6 +157,38 @@ public class Card extends Component implements EffectAble<Card> {
 
 	public boolean hasData() {
 		return data!=null;
+	}
+
+	public Card setLayer(float layer) {
+		card.setLayer(layer-0.0001f);
+		sprite.setLayer(layer);
+		name.setLayer(layer);
+		description.setLayer(layer);
+		return this;
+	}
+
+	public Card setX(int x) {
+		card.setX(x);
+		sprite.setX(x);
+		name.setXY(x,this.y);
+		description.setXY(x,this.y);
+		return this;
+	}
+	
+	public Card setY(int y) {
+		card.setY(y);
+		sprite.setY(x);
+		name.setXY(this.x,y);
+		description.setXY(this.x,x);
+		return this;
+	}
+
+	public Card setTransparency(float transparency) {
+		card.setTransparency(transparency);
+		sprite.setTransparency(transparency);
+		name.setTransparency(transparency);
+		description.setTransparency(transparency);
+		return this;
 	}
 	
 }

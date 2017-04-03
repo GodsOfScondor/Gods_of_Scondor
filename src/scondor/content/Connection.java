@@ -61,7 +61,7 @@ public class Connection {
 				}
 
 				if (save)
-					Client.send(new Authentication(username, password));
+					Client.sendToServer(new Authentication(username, password));
 				else
 					Panels.show(Panels.LOGIN);
 
@@ -105,14 +105,14 @@ public class Connection {
 		this.password = password;
 		this.license = license;
 
-		Client.send(new Verification(username, password, license));
+		Client.sendToServer(new Verification(username, password, license));
 	}
 
 	public void login(String username, String password) {
 		this.username = username;
 		this.password = password;
 
-		Client.send(new Authentication(username, password));
+		Client.sendToServer(new Authentication(username, password));
 	}
 
 	private void saveData() {

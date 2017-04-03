@@ -53,7 +53,7 @@ public class DeckStarter extends Panel {
 			pic.setHeight(pic.getCompHeight()+10);
 			setDescription(description);
 			if (Mouse.isButtonTyped(0)) {
-				Client.send(new Message("starter;"+id));
+				Client.sendToServer(new Message("starter;"+id));
 			}
 		} else {
 			pic.setX(pic.getCompX());

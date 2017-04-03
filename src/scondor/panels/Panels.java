@@ -33,6 +33,7 @@ public class Panels {
 	private static int key;
 	
 	private static Playground playground;
+	private static Shop shop;
 	
 	public static void init() {
 		current = null;
@@ -41,7 +42,8 @@ public class Panels {
 		panels.put(MAIN, new Main());
 		panels.put(POPUP, new PopUp());
 		panels.put(LOBBY, new Lobby());
-		panels.put(SHOP, new Shop());
+		shop = new Shop();
+		panels.put(SHOP, shop);
 		panels.put(DECK_CHOOSER, new DeckChooser());
 		panels.put(DECK_BUILDER, new DeckBuilder());
 		panels.put(DECK_STARTER, new DeckStarter());
@@ -79,6 +81,10 @@ public class Panels {
 	
 	public static Playground getPlayground() {
 		return playground;
+	}
+	
+	public static Shop getShop() {
+		return shop;
 	}
 	
 }
