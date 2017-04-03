@@ -16,7 +16,7 @@ public class Card extends Component implements EffectAble<Card> {
 	private float size;
 	private CardData data;
 	
-	private static final Texture SPRITE_SHEET = new Texture("icons", 32, 32);
+	private static final Texture SPRITE_SHEET = new Texture("colors/black", 1, 1);
 	
 	public Card(CardData data, int x, int y, float size) {
 		super(x, y, (int)(50*size), (int)(80*size));
@@ -28,7 +28,8 @@ public class Card extends Component implements EffectAble<Card> {
 		card.setLayer(0.48f);
 		
 		sprite = new Image(new Texture(SPRITE_SHEET,0,0), x, y, 0, 0, -1);
-		sprite.setLayer(0.481f);
+		sprite.setLayer(0.479f);
+		sprite.setTransparency(0.8f);
 		
 		name = new Text("", 0, 0, size*0.3f, 1, -1);
 		description = new Text("", 0, 0, size*0.3f, 3, -1);
@@ -143,7 +144,6 @@ public class Card extends Component implements EffectAble<Card> {
 		if (hasData()) {
 			this.name.setText(data.getName());
 			this.description.setText(data.getDescription());
-			System.out.println("ID: " + data.getID());
 			this.sprite.getTex().setX(data.getID()%32);
 			this.sprite.getTex().setY(data.getID()/32);
 		} else {
@@ -172,6 +172,7 @@ public class Card extends Component implements EffectAble<Card> {
 		sprite.setX(x);
 		name.setXY(x,this.y);
 		description.setXY(x,this.y);
+		setSize(size);
 		return this;
 	}
 	
@@ -180,6 +181,7 @@ public class Card extends Component implements EffectAble<Card> {
 		sprite.setY(x);
 		name.setXY(this.x,y);
 		description.setXY(this.x,x);
+		setSize(size);
 		return this;
 	}
 
