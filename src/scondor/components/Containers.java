@@ -3,10 +3,12 @@ package scondor.components;
 import java.util.ArrayList;
 import java.util.List;
 
+import scondor.panels.Lobby;
 import scondor.panels.Main;
 import scondor.panels.PopUp;
 import scondor.panels.authentification.Login;
 import scondor.panels.authentification.Register;
+import scondor.panels.deck.DeckChooser;
 
 public class Containers {
 	
@@ -16,6 +18,7 @@ public class Containers {
 	public static final int POPUP = 3;
 	public static final int LOBBY = 4;
 	public static final int DECK_STARTER = 5;
+	public static final int DECK_CHOOSER = 6;
 	
 
 	private static List<Container> containers = new ArrayList<>();
@@ -25,6 +28,8 @@ public class Containers {
 	private static Main main;
 	private static Login login;
 	private static Register register;
+	private static Lobby lobby;
+	private static DeckChooser deck_chooser;
 	
 	private static Container current;
 	
@@ -35,10 +40,14 @@ public class Containers {
 		main = new Main();
 		login = new Login();
 		register = new Register();
+		lobby = new Lobby();
+		deck_chooser = new DeckChooser();
 		
 		containers.add(main);
 		containers.add(login);
 		containers.add(register);
+		containers.add(lobby);
+		containers.add(deck_chooser);
 		
 	}
 	
@@ -63,6 +72,14 @@ public class Containers {
 	
 	public static Register getRegister() {
 		return register;
+	}
+	
+	public static Lobby getLobby() {
+		return lobby;
+	}
+	
+	public static DeckChooser getDeckChooser() {
+		return deck_chooser;
 	}
 	
 	public static void update() {

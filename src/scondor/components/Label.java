@@ -12,7 +12,6 @@ public class Label extends Component {
 		super(x, y, -1, -1, depending);
 		this.text = new Text(text, x, y, size, font, -1);
 		super.width = this.text.getWidth();
-		System.out.println(text + "|" + super.getCompWidth());
 		super.height = this.text.getHeight();
 		this.text.setTransparency(0f);
 	}
@@ -71,10 +70,12 @@ public class Label extends Component {
 	
 	public void setCompX(int x) {
 		text.setX(x);
+		super.setCompX(x);
 	}
 	
 	public void setCompY(int y) {
 		text.setY(y);
+		super.setCompY(y);
 	}
 	
 }

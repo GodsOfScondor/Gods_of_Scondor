@@ -3,6 +3,7 @@ package scondor.panels;
 import scondor.components.Container;
 import scondor.components.Containers;
 import scondor.components.Label;
+import scondor.components.Picture;
 import scondor.components.TextButton;
 import scondor.font.effect.OutlineEffect;
 import scondor.image.Images;
@@ -15,30 +16,32 @@ public class PopUp extends Container {
 	
 	private TextButton button;
 	private Label text;
+	private Picture background;
 	private Container container;
 	
 	public PopUp() {
 		
 		super(PRIORITY);
 		
-		super.setBackground(Images.COLOR_BLACK);
-		
 		/*
 		 * create components
 		 */
 		
+		background = new Picture(Images.COLOR_BLACK, false);
 		button = new TextButton("NULL", 500, 500, 4, 0, new Action() {
 			public void perform() {
 				if (container!=null) Containers.show(container);
-				fade(0.8f, 0, 30);
+				fade(1, 0, 30);
+				background.fade(0.9f, 0, 30);
 			}
-		}, false).setEffect(new OutlineEffect(1, 1, 1, 3));
-		text = new Label("NULL", 500, 350, 4, 0, false).setEffect(new OutlineEffect(0, 0, 0, 3));
+		}, true).setEffect(new OutlineEffect(1, 1, 1, 3));
+		text = new Label("NULL", 500, 350, 4, 0, true).setEffect(new OutlineEffect(1, 1, 1, 3));
 		
 		/*
 		 * add components to container
 		 */
 		
+		super.add(background);
 		super.add(button);
 		super.add(text);
 		
@@ -63,9 +66,8 @@ public class PopUp extends Container {
 	public void popup(Container container, String msg, float r, float g, float b) {
 		
 		this.container = container;
-		fade(0, 0.9f, 50);
-		text.fade(0, 1, 50);
-		button.fade(0, 1, 50);
+		fade(0, 1f, 50);
+		background.fade(0, 0.9f, 50);
 		
 		text.setColor(new Color(r, g, b));
 		text.setText(msg);

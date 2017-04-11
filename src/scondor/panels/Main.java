@@ -46,7 +46,7 @@ public class Main extends Container {
 		
 		button_battle = new TextButton("PLAY", 800, 300, 3, 1, new Action() {
 			public void perform() {
-//				Panels.show(Panels.DECK_CHOOSER);
+				Containers.show(Containers.getDeckChooser());
 			}
 		}, true).setEffect(glow_effect).setColor(gray);
 		

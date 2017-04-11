@@ -17,6 +17,8 @@ public class Images {
 	
 	public static Texture ICON_ARROW;
 	
+	public static Texture BUTTON_BORDER;
+	
 	public static void load() {
 		
 		WALLPAPER_LOBBY = new Texture("lobby");
@@ -33,6 +35,7 @@ public class Images {
 		TEST_IMG = new Texture("img_test");
 		
 		ICON_ARROW = new Texture("arrow");
+		BUTTON_BORDER = new Texture("button_border");
 	}
 	
 }

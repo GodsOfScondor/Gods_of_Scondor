@@ -2,6 +2,7 @@ package scondor.content;
 
 import java.util.List;
 
+import scondor.components.Containers;
 import scondor.deck.DeckData;
 import scondor.deck.card.CardData;
 import scondor.packets.CardList;
@@ -59,16 +60,17 @@ public class Contents {
 	public void incoming(DeckList list) {
 		decks = (List<DeckData>) list.getEntry("LIST");
 		System.out.println("Decks: " + decks.size());
-		for (DeckData data : decks)
-			System.out.println(data == null);
 		synchronized (this) {
 			notify();
 		}
+		Client.add(new Action() {
+			public void perform() {
+				Containers.getDeckChooser().setData(decks);
+			}
+		});
 	}
 
-	public void close() {
-
-	}
+	public void close() {}
 
 	public List<CardData> getAvaibleCards() {
 		return cards;
