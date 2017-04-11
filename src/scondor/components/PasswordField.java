@@ -13,7 +13,10 @@ public class PasswordField extends TextField {
 	@Override
 	protected void update() {
 		over = (Mouse.isButtonTyped(0) && Mouse.X >= x && Mouse.X <= x + width && Mouse.Y >= y && Mouse.Y/Maths.getScreenRatio() <= (y + height*Maths.getScreenRatio()));
-		if (over) focus = true;
+		if (over) {
+			Containers.focusField(this);
+			focus = true;
+		}
 		else if (Mouse.isButtonTyped(0)) focus = false;
 		
 		if (focus) {
@@ -27,7 +30,7 @@ public class PasswordField extends TextField {
 						line = line + KeyBoard.getCurrent();
 						text.setText(generateHidedText(line.length()));
 						text.recreate();
-						this.cursor.setX(x+text.getWidth()+5-(!line.isEmpty()?20:0));
+						this.cursor.setX(x+text.getWidth()+5-(!line.isEmpty()?5:0));
 					}
 				}
 			}
@@ -36,7 +39,7 @@ public class PasswordField extends TextField {
 					line = line.substring(0, line.length()-1);
 					text.setText(generateHidedText(line.length()));
 					text.recreate();
-					this.cursor.setX(x+text.getWidth()-(!line.isEmpty()?20:0));
+					this.cursor.setX(x+text.getWidth()+(line.isEmpty()?20:0));
 					if (line.length()==0) this.cursor.setX(x);
 				} else this.cursor.setX(x);
 			}

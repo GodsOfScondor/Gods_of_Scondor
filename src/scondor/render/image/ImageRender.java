@@ -34,7 +34,6 @@ public class ImageRender implements Render {
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		
 		shader.start();
-		
 		shader.loadPriority(priority);
 		
 		for (Image img : list) {

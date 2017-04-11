@@ -20,6 +20,7 @@ public class TextMeshCreator {
 
 	public TextMeshCreator(File metaFile) {
 		metaData = new MetaFile(metaFile);
+		SPACE_WIDTH = (float) metaData.getSpaceWidth();
 	}
 
 	public TextMeshData createTextMesh(Text text) {
@@ -76,7 +77,6 @@ public class TextMeshCreator {
 							letter.getXMaxTextureCoord(), letter.getYMaxTextureCoord());
 					curserX += letter.getxAdvance() * text.getSize();
 				}
-				SPACE_WIDTH = (float) metaData.getSpaceWidth();
 				curserX += metaData.getSpaceWidth() * text.getSize();
 			}
 			curserX = 0;

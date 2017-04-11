@@ -32,6 +32,14 @@ public class TextField extends Component {
 	public String getText() {
 		return line;
 	}
+	
+	public boolean isFocused() {
+		return focus;
+	}
+	
+	public void setFocus(boolean focus) {
+		this.focus = focus;
+	}
 
 	@Override
 	public void fade(float start, float end, int duration) {
@@ -53,7 +61,10 @@ public class TextField extends Component {
 	protected void update() {
 		
 		over = (Mouse.isButtonTyped(0) && Mouse.X >= x && Mouse.X <= x + width && Mouse.Y >= y && Mouse.Y/Maths.getScreenRatio() <= (y + height*Maths.getScreenRatio()));
-		if (over) focus = true;
+		if (over) {
+			Containers.focusField(this);
+			focus = true;
+		}
 		else if (Mouse.isButtonTyped(0)) focus = false;
 		
 		if (focus) {
@@ -67,7 +78,7 @@ public class TextField extends Component {
 						line = line + KeyBoard.getCurrent();
 						text.setText(line);
 						text.recreate();
-						this.cursor.setX(x+text.getWidth()+5-(!line.isEmpty()?20:0));
+						this.cursor.setX(x+text.getWidth()+5-(!line.isEmpty()?5:0));
 					}
 				}
 			}
@@ -76,7 +87,7 @@ public class TextField extends Component {
 					line = line.substring(0, line.length()-1);
 					text.setText(line);
 					text.recreate();
-					this.cursor.setX(x+text.getWidth()-(!line.isEmpty()?20:0));
+					this.cursor.setX(x+text.getWidth()+(line.isEmpty()?20:0));
 					if (line.length()==0) this.cursor.setX(x);
 				} else this.cursor.setX(x);
 			}

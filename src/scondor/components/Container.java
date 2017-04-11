@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import scondor.image.Texture;
+import scondor.inputs.KeyBoard;
 import scondor.util.Action;
 import scondor.util.Slide;
 
@@ -22,6 +23,7 @@ public abstract class Container implements Fadeable {
 	}
 	
 	public abstract void refresh();
+	public abstract int getID();
 	
 	public void setBackground(Texture tex) {
 		Picture pic = new Picture(tex, true);
@@ -37,6 +39,56 @@ public abstract class Container implements Fadeable {
 	}
 	
 	public void update() {
+		
+		if (Containers.isOpen(this)) if (KeyBoard.isKeyTyped(KeyBoard.KEY_TAB)) {
+			
+			TextField current = null;
+			TextField next = null;
+			TextField first = null;
+			
+			for (Component comp : comps) {
+				if (comp instanceof TextField) {
+					if (((TextField)comp).isFocused()) {
+						current = (TextField) comp;
+						break;
+					}
+				}
+			}
+			
+			for (Component comp : comps) if (comp instanceof TextField) {
+				if (current==comp) {
+					((TextField)comp).setFocus(false);
+					continue;
+				}
+				if (current!=null) {
+					if (comp.getCompY()>=current.getCompY()) {
+						if (next!=null) {
+							if (comp.getCompY() < next.getCompY()) {
+								next = (TextField) comp;
+							}
+						} else {
+							next = (TextField) comp;
+						}
+					}
+				} else {
+					current = (TextField) comp;
+					next = (TextField) comp;
+				}
+			}
+			
+			if (next!=null) next.setFocus(true);
+			else {
+				for (Component comp : comps) if (comp instanceof TextField) {
+					if (first!=null) {
+						if (comp.getCompY() < first.getCompY()) first = (TextField) comp;
+					} else {
+						first = (TextField) comp;
+					}
+				}
+				first.setFocus(true);
+			}
+			
+		}
 		
 		for (Action action : actions)action.perform();
 		

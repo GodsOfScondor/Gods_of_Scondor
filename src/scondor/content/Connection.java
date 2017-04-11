@@ -70,7 +70,6 @@ public class Connection {
 			} else {
 
 				Containers.show(Containers.getRegister());
-				Containers.popup("Test", 1, 0, 0);
 
 			}
 
@@ -85,13 +84,13 @@ public class Connection {
 		case USER_ALREADY_ONLINE:
 			return Messanger.build("User is already online!", 1, 0, 0);
 		case WRONG_PASSWORD:
-//			return Messanger.build("Wrong Password!", Panels.LOGIN, 1, 0, 0);
+			return Messanger.build("Wrong Password!", Containers.LOGIN, 1, 0, 0);
 		case LOGIN_SUCCESFULL:
 			saveData();
 			contents = new Contents();
 			contents.load();
-//			int panel = contents.getAvaibleCards().size() == 0 ? Panels.DECK_STARTER : Panels.MAIN;
-//			return Messanger.build("Login succesfully!", panel, 0, 1, 0);
+			int panel = contents.getAvaibleCards().size() == 0 ? Containers.DECK_STARTER : Containers.MAIN;
+			return Messanger.build("Login succesfully!", panel, 0, 1, 0);
 		case WRONG_LICENSE:
 			return Messanger.build("License is wrong!", 1, 0, 0);
 		case USERNAME_ALREADY_EXISTS:

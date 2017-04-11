@@ -11,6 +11,7 @@ import scondor.components.TextButton;
 import scondor.components.TextField;
 import scondor.font.effect.OutlineEffect;
 import scondor.image.Images;
+import scondor.inputs.KeyBoard;
 import scondor.util.Action;
 import scondor.util.Color;
 
@@ -22,6 +23,7 @@ public class Login extends Container {
 	private PasswordField password_field;
 	private CheckBox save_box;
 	private TextButton login, exit, no_account;
+	private Action login_action;
 	
 	public Login() {
 		super(PRIORITY);
@@ -52,7 +54,7 @@ public class Login extends Container {
 		save_box = new CheckBox(700, 510, 1f, true);
 		save = new Label("Remember me", 730, 500, 3, 1, true).setEffect(outline_effect).setColor(white);
 		
-		Action login_action = new Action() {
+		login_action = new Action() {
 			public void perform() {
 				Engine.getConnection().login(username_field.getText(), password_field.getText());
 			}
@@ -95,11 +97,16 @@ public class Login extends Container {
 
 	@Override
 	public void refresh() {
-//		if (Panels.isOpen(Panels.LOGIN))
-//			Engine.getConnection().save_data = save_box.isSelected();
-//		if (KeyBoard.isKeyTyped(KeyBoard.KEY_ENTER)) {
-//			login_action.perform();
-//		}
+		if (Containers.isOpen(Containers.getLogin()))
+			Engine.getConnection().save_data = save_box.isChecked();
+		if (KeyBoard.isKeyTyped(KeyBoard.KEY_ENTER)) {
+			login_action.perform();
+		}
+	}
+
+	@Override
+	public int getID() {
+		return Containers.LOGIN;
 	}
 	
 }

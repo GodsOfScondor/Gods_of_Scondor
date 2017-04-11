@@ -11,9 +11,10 @@ public class Label extends Component {
 	public Label(String text, int x, int y, float size, int font, boolean depending) {
 		super(x, y, -1, -1, depending);
 		this.text = new Text(text, x, y, size, font, -1);
-		this.text.setTransparency(0f);
 		super.width = this.text.getWidth();
+		System.out.println(text + "|" + super.getCompWidth());
 		super.height = this.text.getHeight();
+		this.text.setTransparency(0f);
 	}
 
 	public Label setColor(Color color) {
@@ -29,6 +30,7 @@ public class Label extends Component {
 	public void setText(String text) {
 		this.text.setText(text);
 		this.text.recreate();
+		super.setCompWidth(this.text.getWidth());
 	}
 	
 	public void setSize(float size) {

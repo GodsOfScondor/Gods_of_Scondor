@@ -2,6 +2,7 @@ package scondor.panels;
 
 import scondor.GodsOfScondor;
 import scondor.components.Container;
+import scondor.components.Containers;
 import scondor.components.Label;
 import scondor.components.Picture;
 import scondor.components.TextButton;
@@ -74,7 +75,8 @@ public class Main extends Container {
 		 * create labels 
 		 */
 		
-		titel = new Label("Gods of Scondor", 150, 100, 8, 2, true).setEffect(glow_effect).setColor(yellow);
+		titel = new Label("Gods of Scondor", 150, 100, 8, 1, true).setEffect(glow_effect).setColor(yellow);
+		
 		
 		/*
 		 * create pictures
@@ -110,6 +112,11 @@ public class Main extends Container {
 		else if (button_options.isMouseOver()) arrow.setCompY(608);
 		else if (button_exit.isMouseOver()) arrow.setCompY(708);
 		else arrow.setCompY(1000);
+	}
+
+	@Override
+	public int getID() {
+		return Containers.MAIN;
 	}
 	
 }

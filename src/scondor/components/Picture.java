@@ -26,6 +26,10 @@ public class Picture extends Component {
 		img.setLayer(0.499f);
 		img.setTransparency(0f);
 	}
+	
+	public void setLayer(float layer) {
+		img.setLayer(layer);
+	}
 
 	@Override
 	public void fade(float start, float end, int duration) {

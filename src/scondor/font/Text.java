@@ -219,7 +219,8 @@ public class Text implements Comparable<Text> {
 				for (Character c : word.getCharacters()) {
 					width+=c.getxAdvance()*size;
 				}
-				width += TextMaster.getFont(font_id).getBuilder().SPACE_WIDTH*size;
+				
+				width += TextMaster.getFont(font_id).getBuilder().SPACE_WIDTH;
 			}
 		}
 		width *= 1000;

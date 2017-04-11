@@ -102,4 +102,9 @@ public class Register extends Container {
 //		if (Panels.isOpen(Panels.REGISTER)) Engine.getConnection().save_data = save_box.isSelected();
 	}
 
+	@Override
+	public int getID() {
+		return Containers.REGISTER;
+	}
+
 }
