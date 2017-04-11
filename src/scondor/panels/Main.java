@@ -95,11 +95,10 @@ public class Main extends Container {
 		super.add(arrow);
 		
 		/*
-		 * validate and make it visible 
+		 * validate container
 		 */
 		
 		super.validate();
-		super.fade(0, 1, 0);
 		
 	}
 

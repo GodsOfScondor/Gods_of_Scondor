@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
+import scondor.components.Containers;
 import scondor.gnet.packet.Packet;
 import scondor.packets.Authentication;
 import scondor.packets.CardList;
@@ -62,13 +63,14 @@ public class Connection {
 				if (save)
 					Client.sendToServer(new Authentication(username, password));
 				else
-//					Panels.show(Panels.LOGIN);
+					Containers.show(Containers.getLogin());
 
 				reader.close();
 
 			} else {
 
-//				Panels.show(Panels.REGISTER);
+				Containers.show(Containers.getRegister());
+				Containers.popup("Test", 1, 0, 0);
 
 			}
 

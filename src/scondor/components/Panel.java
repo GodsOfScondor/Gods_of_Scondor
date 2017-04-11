@@ -2,14 +2,24 @@ package scondor.components;
 
 import scondor.image.Texture;
 import scondor.util.Action;
+import scondor.util.Maths;
 
 public class Panel extends Component {
 	
 	private ContainerPanel container;
 	
+	public Panel(Texture tex, boolean depending) {
+		super(0, 0, 1000, (int) (1 + 1000*Maths.getScreenRatio()), depending);
+		container = new ContainerPanel(tex , x, y, width, height, depending);
+	}
+	
 	public Panel(int x, int y, int width, int height, Texture tex, boolean depending) {
 		super(x, y, width, height, depending);
 		container = new ContainerPanel(tex , x, y, width, height, depending);
+	}
+	
+	public void setReactVisibility(float react_visibility) {
+		container.setReactVisibility(react_visibility);
 	}
 	
 	public void add(Component comp) {
@@ -25,11 +35,17 @@ public class Panel extends Component {
 	private static class ContainerPanel extends Container {
 		
 		private boolean depending;
+		private float react_visibility;
 		
 		public ContainerPanel(Texture tex, int x, int y, int width, int height, boolean depending) {
 			super(-1);
 			if (tex!=null) super.add(new Picture(tex, x, y, width, height, true));
 			this.depending = depending;
+			this.react_visibility = 0.9f;
+		}
+		
+		public void setReactVisibility(float react_visibility) {
+			this.react_visibility = react_visibility;
 		}
 
 		@Override
@@ -41,8 +57,7 @@ public class Panel extends Component {
 		
 		@Override
 		public void update() {
-			for (Action action : actions)action.perform();
-			
+			for (Action action : actions) action.perform();
 			if (slide != null) {
 				visibility = slide.getValue()/1000f;
 				if (slide.hasFinished()) {
@@ -55,7 +70,7 @@ public class Panel extends Component {
 			if (!depending) {
 				for (Component comp : comps) if (comp.isDepending()) comp.fade(visibility);
 			}
-			if (visibility>0.99f) {
+			if (super.visibility>react_visibility) {
 				refresh();
 				for (Component comp : comps) comp.update();
 			}
@@ -90,7 +105,9 @@ public class Panel extends Component {
 	}
 
 	@Override
-	protected void update() {}
+	protected void update() {
+		container.update();
+	}
 
 	@Override
 	protected void fade(float visibility) {

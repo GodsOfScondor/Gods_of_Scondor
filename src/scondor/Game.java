@@ -1,17 +1,17 @@
 package scondor;
 
-import scondor.components.ComponentMaster;
+import scondor.components.Containers;
 
 public class Game {
 	
 	public static void init() {
 		
-		ComponentMaster.init();
+		Containers.init();
 		
 	}
 	
 	public static void update() {
-		ComponentMaster.update();
+		Containers.update();
 	}
 	
 	public static void close() {

@@ -19,7 +19,7 @@ public class TextField extends Component {
 	
 	public TextField(int x, int y, int width, int height, boolean depending) {
 		super(x, y, width, height, depending);
-		this.bg = new Image(Images.COLOR_GREEN, x-1, y-1, width+2, height+2, -1);
+		this.bg = new Image(Images.COLOR_WHITE, x-1, y-1, width+2, height+2, -1);
 		this.fg = new Image(Images.COLOR_BLACK, x, y, width, height, -1);
 		this.cursor = new Image(Images.COLOR_WHITE, x, y+2, 1, height-4, -1);
 		this.text = new Text("", x+2, y+2, height/10f, 3, -1);
@@ -27,6 +27,10 @@ public class TextField extends Component {
 		this.bg.setLayer(0.49f);
 		this.fg.setLayer(0.48f);
 		this.cursor.setLayer(0.47f);
+	}
+	
+	public String getText() {
+		return line;
 	}
 
 	@Override

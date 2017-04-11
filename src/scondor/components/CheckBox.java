@@ -12,7 +12,7 @@ public class CheckBox extends IconButton {
 	private int padding;
 	
 	public CheckBox(int x, int y, float size, boolean depending) {
-		super(Images.COLOR_BLACK, x, y, (int)(30*size), (int)(30*size), null, depending);
+		super(Images.COLOR_BLACK, x, y, (int)(20*size), (int)(20*size), null, depending);
 		padding = (int) (size*2);
 		inside = new Image(Images.COLOR_GREEN, x+padding,y+padding, width-(2*padding), height-(2*padding), -1);
 		super.img.setLayer(0.49f);
