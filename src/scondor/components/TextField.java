@@ -2,76 +2,57 @@ package scondor.components;
 
 import scondor.font.Text;
 import scondor.image.Image;
-import scondor.image.Texture;
+import scondor.image.Images;
 import scondor.inputs.KeyBoard;
 import scondor.inputs.Mouse;
-import scondor.panels.EffectAble;
 import scondor.util.Maths;
 
-public class TextField extends Component implements EffectAble<TextField> {
+public class TextField extends Component {
+
+	protected Text text;
+	protected Image bg,fg, cursor;
+	protected boolean focus;
+	protected boolean cursor_visible, over;
+	protected int time;
+	protected String line = "";
+	protected int offset_x, offset_y;
 	
-	private Text text;
-	private Image bg,fg, cursor;
-	private String line = "";
-	private boolean focus;
-	private int time;
-	private boolean cursor_visible, hide;
-	private static final Texture WHITE = new Texture("colors/white");
-	private static final Texture BLACK = new Texture("colors/black");
-	
-	public TextField(int x, int y, int width, int height) {
-		super(x, y, width, height);
-		this.bg = new Image(WHITE, x-1, y-1, width+2, height+2, -1);
-		this.fg = new Image(BLACK, x, y, width, height, -1);
-		this.cursor = new Image(WHITE, x, y+2, 1, height-4, -1);
+	public TextField(int x, int y, int width, int height, boolean depending) {
+		super(x, y, width, height, depending);
+		this.bg = new Image(Images.COLOR_GREEN, x-1, y-1, width+2, height+2, -1);
+		this.fg = new Image(Images.COLOR_BLACK, x, y, width, height, -1);
+		this.cursor = new Image(Images.COLOR_WHITE, x, y+2, 1, height-4, -1);
 		this.text = new Text("", x+2, y+2, height/10f, 3, -1);
 		this.text.setColor(1, 1, 1);
-		this.bg.setLayer(0.452f);
-		this.fg.setLayer(0.451f);
-		this.cursor.setLayer(0.45f);
+		this.bg.setLayer(0.49f);
+		this.fg.setLayer(0.48f);
+		this.cursor.setLayer(0.47f);
 	}
 
 	@Override
-	protected void discard() {
-		if (this.bg!=null&&this.fg!=null&&text!=null&&cursor!=null) {
-			this.bg.setTransparency(0f);
-			this.fg.setTransparency(0f);
-			this.text.setTransparency(0f);
-			this.cursor.setTransparency(0f);
-		}
+	public void fade(float start, float end, int duration) {
+		cursor.fade(start, end, duration);
+		bg.fade(start, end, duration);
+		fg.fade(start, end, duration);
+		text.fade(start, end, duration);
 	}
 
 	@Override
-	protected void showup() {
-		if (this.bg!=null&&this.fg!=null&&text!=null&&cursor!=null) {
-			this.bg.setTransparency(1f);
-			this.fg.setTransparency(1f);
-			this.text.setTransparency(1f);
-			this.cursor.setTransparency(1f);
-		}
+	protected void destroy() {
+		cursor.destroy();
+		bg.destroy();
+		fg.destroy();
+		text.destroy();
 	}
 
 	@Override
-	protected void destroyComp() {
-		if (this.bg!=null&&this.fg!=null&&text!=null&&cursor!=null) {
-			this.bg.destroy();
-			this.fg.destroy();
-			this.text.destroy();
-			this.cursor.destroy();
-		}
-	}
-
-	public void setFocus(boolean focus) {
-		this.focus = focus;
-	}
-	
-	@Override
-	protected void refresh() {
-		if (Mouse.isButtonTyped(0) && Mouse.X >= x && Mouse.X <= x + width && Mouse.Y >= y && Mouse.Y <= y + (int)(height*Maths.getScreenRatio())) {
-			focus = true;
-		} else if (Mouse.isButtonTyped(0)) focus = false;
+	protected void update() {
 		
-		if (focus && isVisible()) {
+		over = (Mouse.isButtonTyped(0) && Mouse.X >= x && Mouse.X <= x + width && Mouse.Y >= y && Mouse.Y/Maths.getScreenRatio() <= (y + height*Maths.getScreenRatio()));
+		if (over) focus = true;
+		else if (Mouse.isButtonTyped(0)) focus = false;
+		
+		if (focus) {
 			time++;
 			time%=50;
 			if (time==0) cursor_visible = !cursor_visible;
@@ -80,20 +61,19 @@ public class TextField extends Component implements EffectAble<TextField> {
 				if (KeyBoard.getCurrent() !='~') {
 					if (text.getWidth()+20<width) {
 						line = line + KeyBoard.getCurrent();
-						if (!hide) text.setText(line);
-						else text.setText(generateHidedText(line.length()));
+						text.setText(line);
 						text.recreate();
-						this.cursor.setX(x+text.getWidth()+5);
+						this.cursor.setX(x+text.getWidth()+5-(!line.isEmpty()?20:0));
 					}
 				}
 			}
 			if (KeyBoard.isKeyTyped(KeyBoard.KEY_BACK)) {
 				if (line.length()>0) {
 					line = line.substring(0, line.length()-1);
-					if (!hide) text.setText(line);
-					else text.setText(generateHidedText(line.length()));
+					text.setText(line);
 					text.recreate();
-					this.cursor.setX(x+text.getWidth());
+					this.cursor.setX(x+text.getWidth()-(!line.isEmpty()?20:0));
+					if (line.length()==0) this.cursor.setX(x);
 				} else this.cursor.setX(x);
 			}
 		} else {
@@ -101,73 +81,42 @@ public class TextField extends Component implements EffectAble<TextField> {
 		}
 	}
 
-	private String generateHidedText(int length) {
-		String str = "";
-		for (int n=0;n<length;n++) str = str+"*";
-		return str;
-	}
-
 	@Override
-	protected void setPriority(int priority) {
-		if (this.bg!=null&&this.fg!=null&&text!=null&&cursor!=null) {
-			this.bg.setPriority(priority);
-			this.fg.setPriority(priority);
-			this.text.setPriority(priority);
-			this.cursor.setPriority(priority);
+	protected void fade(float visibility) {
+		if (super.isDepending()) {
+			text.setTransparency(visibility);
+			cursor.setTransparency(visibility);
+			bg.setTransparency(visibility);
+			fg.setTransparency(visibility);
 		}
 	}
-	
-	public String getText() {
-		return line;
-	}
 
 	@Override
-	public TextField fade(float start, float end, int time) {
-		bg.fade(start, end, time);
-		fg.fade(start, end, time);
-		cursor.fade(start, end, time);
-		text.fade(start, end, time);
-		return this;
+	protected void validate(int priority) {
+		text.validate(priority);
+		cursor.validate(priority);
+		bg.validate(priority);
+		fg.validate(priority);
 	}
 	
 	@Override
-	public TextField slideX(int start, int end, int time) {
-		bg.slideX(start, end, time);
-		fg.slideX(start, end, time);
-		cursor.slideX(start, end, time);
-		text.slideX(start, end, time);
-		return this;
+	public void setCompX(int x) {
+		offset_x = x;
+		cursor.setX(offset_x+cursor.getX());
+		bg.setX(offset_x+bg.getX());
+		fg.setX(offset_x+fg.getX());
+		text.setX(offset_x+text.getX());
+		super.setCompX(x);
 	}
 	
 	@Override
-	public TextField slideY(int start, int end, int time) {
-		bg.slideY(start, end, time);
-		fg.slideY(start, end, time);
-		cursor.slideY(start, end, time);
-		text.slideY(start, end, time);
-		return this;
+	public void setCompY(int y) {
+		offset_y = y;
+		cursor.setY(offset_y+cursor.getY());
+		bg.setY(offset_y+bg.getY());
+		fg.setY(offset_y+fg.getY());
+		text.setY(offset_y+text.getY());
+		super.setCompY(y);
 	}
 	
-	@Override
-	public TextField stop() {
-		bg.stopEffects();
-		bg.resetEffects();
-		fg.stopEffects();
-		fg.resetEffects();
-		cursor.stopEffects();
-		cursor.resetEffects();
-		text.stopEffects();
-		text.resetEffects();
-		return this;
-	}
-
-	public boolean isFocused() {
-		return focus;
-	}
-	
-	public TextField setHided(boolean hide) {
-		this.hide = hide;
-		return this;
-	}
-
 }

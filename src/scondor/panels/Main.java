@@ -1,111 +1,116 @@
 package scondor.panels;
 
 import scondor.GodsOfScondor;
-import scondor.components.Button;
-import scondor.components.Component;
+import scondor.components.Container;
 import scondor.components.Label;
-import scondor.components.Panel;
 import scondor.components.Picture;
+import scondor.components.TextButton;
 import scondor.font.effect.GlowEffect;
-import scondor.image.Texture;
+import scondor.image.Images;
 import scondor.util.Action;
+import scondor.util.Color;
 
-public class Main extends Panel {
-
-	private Button button_battle;
-	private Button button_shop;
-	private Button button_deck;
-	private Button button_options;
-	private Button button_exit;
+public class Main extends Container {
+	
+	private static final int PRIORITY = 1;
+	private TextButton button_battle;
+	private TextButton button_shop;
+	private TextButton button_deck;
+	private TextButton button_options;
+	private TextButton button_exit;
 	
 	private Picture arrow;
-	private Label label;
-
+	private Label titel;
+	
 	public Main() {
-		/*
-		 * create panel
-		 */
-		super(1);
-		setBackground(new Texture("bg"));
+		super(PRIORITY);
 		
 		/*
-		 * create picture
+		 * set background
 		 */
-		arrow = new Picture(new Texture("arrow"), 780, 400, 20, 20);
+		
+		super.setBackground(Images.WALLPAPER_MAIN);
+		
+		/*
+		 * create effects and colors
+		 */
+		
+		GlowEffect glow_effect = new GlowEffect(0,0,0, 3);
+		Color gray = new Color(0.8f, 0.8f, 0.8f);
+		Color yellow = new Color(0.5f, 0.5f, 0.05f);
 		
 		/*
 		 * create buttons
 		 */
-		button_battle = new Button("PLAY", 800, 300, 3, 1, new Action() {
+		
+		button_battle = new TextButton("PLAY", 800, 300, 3, 1, new Action() {
 			public void perform() {
-				Panels.show(Panels.DECK_CHOOSER);
+//				Panels.show(Panels.DECK_CHOOSER);
 			}
-		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.8f, 0.8f, 0.8f);
+		}, true).setEffect(glow_effect).setColor(gray);
 		
-		button_shop = new Button("SHOP", 800, 400, 3, 1, new Action() {
+		button_shop = new TextButton("SHOP", 800, 400, 3, 1, new Action() {
 			public void perform() {
-				Panels.show(Panels.SHOP);
+//				Panels.show(Panels.SHOP);
 			}
-		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.8f, 0.8f, 0.8f);
+		}, true).setEffect(glow_effect).setColor(gray);
 		
-		button_deck = new Button("DECK", 800, 500, 3, 1, new Action() {
+		
+		button_deck = new TextButton("DECK", 800, 500, 3, 1, new Action() {
 			public void perform() {
-				Panels.show(Panels.PLAYGROUND);
+//				Panels.show(Panels.PLAYGROUND);
 			}
-		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.8f, 0.8f, 0.8f);
+		}, true).setEffect(glow_effect).setColor(gray);
 		
-		button_options = new Button("OPTIONS", 800, 600, 3, 1, null).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.8f, 0.8f, 0.8f);
+		button_options = new TextButton("OPTIONS", 800, 600, 3, 1, null, true).setEffect(glow_effect).setColor(gray);
 		
-		button_exit = new Button("EXIT", 800, 700, 3, 1, new Action() {
+		button_exit = new TextButton("EXIT", 800, 700, 3, 1, new Action() {
 			public void perform() {
 				GodsOfScondor.close();
 			}
-		}).setEffect(new GlowEffect(0,0,0, 3)).setColor(0.8f, 0.8f, 0.8f);
+		}, true).setEffect(glow_effect).setColor(gray);
 		
 		/*
-		 * create labels
+		 * create labels 
 		 */
-		label = new Label("Gods of Scondor", 150, 100, 8, 2).setEffect(new GlowEffect(0,0,0,2)).setColor(0.5f, 0.5f, 0.05f);
+		
+		titel = new Label("Gods of Scondor", 150, 100, 8, 2, true).setEffect(glow_effect).setColor(yellow);
 		
 		/*
-		 * create checkbox
+		 * create pictures
 		 */
-		/*
-		 * add actions to panel 
-		 */
-		addAction(new Action() {
-			public void perform() {
-				if (button_battle.isTargeted()) arrow.setY(310);
-				else if (button_shop.isTargeted()) arrow.setY(410);
-				else if (button_deck.isTargeted()) arrow.setY(510);
-				else if (button_options.isTargeted()) arrow.setY(610);
-				else if (button_exit.isTargeted()) arrow.setY(710);
-				else arrow.setY(1000);
-			}
-		});
 		
-		/*b
-		 * add comps to panel
+		arrow = new Picture(Images.ICON_ARROW, 780, 400, 20, 20, true);
+		
+		/*
+		 * add components to container
 		 */
-		add(label);
-		add(button_exit);
-		add(button_battle);
-		add(button_options);
-		add(button_shop);
-		add(button_deck);
-		add(arrow);
+		
+		super.add(button_battle);
+		super.add(button_shop);
+		super.add(button_deck);
+		super.add(button_options);
+		super.add(button_exit);
+		super.add(titel);
+		super.add(arrow);
+		
+		/*
+		 * validate and make it visible 
+		 */
+		
+		super.validate();
+		super.fade(0, 1, 0);
+		
 	}
 
 	@Override
-	public void swipeIn() {
-		fade(0, 1, Panels.FADEIN);
-		for (Component comp : comps) if (comp instanceof EffectAble<?>) ((EffectAble<?>) comp).fade(0, 1, Panels.FADEIN);
-	}
-
-	@Override
-	public void swipeOut() {
-		fade(1, 0, Panels.FADEOUT);
-		for (Component comp : comps) if (comp instanceof EffectAble<?>) ((EffectAble<?>) comp).fade(1, 0, Panels.FADEOUT);
+	public void refresh() {
+		if (button_battle.isMouseOver()) arrow.setCompY(308);
+		else if (button_shop.isMouseOver()) arrow.setCompY(408);
+		else if (button_deck.isMouseOver()) arrow.setCompY(508);
+		else if (button_options.isMouseOver()) arrow.setCompY(608);
+		else if (button_exit.isMouseOver()) arrow.setCompY(708);
+		else arrow.setCompY(1000);
 	}
 	
 }

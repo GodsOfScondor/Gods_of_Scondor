@@ -1,11 +1,9 @@
 package scondor.font;
 
-import org.lwjgl.opengl.Display;
-
 import scondor.font.effect.FontEffect;
+import scondor.font.mesh.TextMeshCreator;
 import scondor.render.RenderMaster;
 import scondor.render.font.FontShader;
-import scondor.util.Maths;
 import scondor.util.Slide;
 
 public class Text implements Comparable<Text> {
@@ -29,10 +27,8 @@ public class Text implements Comparable<Text> {
 	private FontEffect effect;
 	private int priority = -1;
 	
-	private Slide slide_x;
-	private Slide slide_y;
 	private Slide slide_transparency;
-	private int s_x,s_y,s_transparency;
+	private int s_transparency;
 	
 	private float b_transparency;
 	private int b_x,b_y;
@@ -46,7 +42,7 @@ public class Text implements Comparable<Text> {
 		this.transparency = 1;
 		this.font_id = font_id;
 		this.layer = 0.5f;
-		setPriority(priority);
+		validate(priority);
 	}
 	
 	public Text(String text, int x, int y, float size, FontEffect effect, int priority) {
@@ -57,10 +53,10 @@ public class Text implements Comparable<Text> {
 		this.line_size = 1;
 		this.transparency = 1;
 		this.effect = effect;
-		setPriority(priority);
+		validate(priority);
 	}
 	
-	public void setPriority(int priority) {
+	public void validate(int priority) {
 		if (this.priority == -1) if (priority != -1) {
 			this.priority = priority;
 			RenderMaster.addText(this, priority);
@@ -101,17 +97,16 @@ public class Text implements Comparable<Text> {
 		return y;
 	}
 	
-	public void setXY(int x, int y) {
+	public void setX(int x) {
 		this.x = x;
+	}
+	
+	public void setY(int y) {
 		this.y = y;
 	}
 	
 	public void setLineSize(int size) {
 		this.line_size = size/1000f;
-	}
-	
-	public void setSize(float size) {
-		this.size = size;
 	}
 
 	public int getMesh() {
@@ -202,6 +197,12 @@ public class Text implements Comparable<Text> {
 		TextMaster.removeText(this);
 		TextMaster.addText(this);
 	}
+	
+	public void setSize(float size) {
+		this.size = size;
+		TextMaster.removeText(this);
+		TextMaster.addText(this);
+	}
 
 	public float getTransparency() {
 		return transparency;
@@ -212,15 +213,21 @@ public class Text implements Comparable<Text> {
 	}
 	
 	public int getWidth() {
-		int width = 0;
+		float width = 0;
 		for (Line line : TextMaster.getFont(font_id).getBuilder().createStructure(this)) {
 			for (Word word : line.getWords()) {
 				for (Character c : word.getCharacters()) {
-					width+=c.getxAdvance()*Display.getWidth()*size*Maths.getScreenRatio();
+					width+=c.getxAdvance()*size;
 				}
+				width += TextMaster.getFont(font_id).getBuilder().SPACE_WIDTH*size;
 			}
 		}
+		width *= 1000;
 		return (int) (width);
+	}
+	
+	public int getHeight() {
+		return (int) (size*TextMeshCreator.LINE_HEIGHT*1000);
 	}
 
 	public int getFontID() {
@@ -252,46 +259,12 @@ public class Text implements Comparable<Text> {
 	
 	/**
 	 * 
-	 * @param start - start x
-	 * @param end - end x
-	 * @param time - frames to slide
-	 * 
-	 */
-	public void slideX(int start, int end, int time) {
-		b_x = x;
-		slide_x = new Slide(start, end, time);
-		x = start;
-		slide_x.run();
-		s_x=0;
-	}
-	
-	/**
-	 * 
-	 * @param start - start y
-	 * @param end - end y
-	 * @param time - frames to slide
-	 * 
-	 */
-	public void slideY(int start, int end, int time) {
-		b_y = y;
-		slide_y = new Slide(start, end, time);
-		y = start;
-		slide_y.run();
-		s_y=0;
-	}
-	
-	/**
-	 * 
 	 * stops effects
 	 * 
 	 */
 	public void stopEffects() {
 		slide_transparency = null;
 		s_transparency = 0;
-		slide_x = null;
-		s_x = 0;
-		slide_y = null;
-		s_y = 0;
 	}
 	
 	/**
@@ -322,34 +295,6 @@ public class Text implements Comparable<Text> {
 				slide_transparency.destroy();
 				slide_transparency=null;
 				s_transparency=0;
-			}
-		}
-		
-		/*
-		 * slide x
-		 */
-		if (slide_x!=null) {
-			x = slide_x.getValue();
-			s_x++;
-			if (s_x>=slide_x.getTime()) {
-				x = slide_x.getEndValue();
-				slide_x.destroy();
-				slide_x=null;
-				s_x=0;
-			}
-		}
-		
-		/*
-		 * slide y
-		 */
-		if (slide_y!=null) {
-			y = slide_y.getValue();
-			s_y++;
-			if (s_y>=slide_y.getTime()) {
-				y = slide_y.getEndValue();
-				slide_y.destroy();
-				slide_y=null;
-				s_y=0;
 			}
 		}
 	}

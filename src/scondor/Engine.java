@@ -1,6 +1,7 @@
 package scondor;
 
 import scondor.content.Connection;
+import scondor.image.Images;
 import scondor.inputs.KeyBoard;
 import scondor.inputs.Mouse;
 import scondor.render.RenderMaster;
@@ -19,6 +20,7 @@ public class Engine {
 		client = new Client();
 		
 		Window.init();
+		Images.load();
 		RenderMaster.init();
 		Utils.init();
 		

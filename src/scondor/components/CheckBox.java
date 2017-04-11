@@ -1,101 +1,69 @@
 package scondor.components;
 
 import scondor.image.Image;
-import scondor.image.Texture;
+import scondor.image.Images;
 import scondor.inputs.Mouse;
-import scondor.panels.EffectAble;
-import scondor.util.Maths;
 
-public class CheckBox extends Component implements EffectAble<CheckBox> {
+public class CheckBox extends IconButton {
 	
-	private Image box;
-	private boolean select,target;
-	private static final int SIZE = 20;
+	private Image inside;
+	private boolean checked;
+	private float start_transparency;
+	private int padding;
 	
-	private static final Texture TEX_BOX = new Texture("box");
-	private static final Texture TEX_BOX_SELECTED = new Texture("box_sel");
+	public CheckBox(int x, int y, float size, boolean depending) {
+		super(Images.COLOR_BLACK, x, y, (int)(30*size), (int)(30*size), null, depending);
+		padding = (int) (size*2);
+		inside = new Image(Images.COLOR_GREEN, x+padding,y+padding, width-(2*padding), height-(2*padding), -1);
+		super.img.setLayer(0.49f);
+		inside.setLayer(0.48f);
+		start_transparency = 0.2f;
+		inside.setTransparency(start_transparency);
+	}
 	
-	public CheckBox(int x, int y, float size) {
-		super(x, y, (int)(30*size), (int)(SIZE*size));
-		this.box = new Image(TEX_BOX, x, y, (int)(SIZE*size), (int)(SIZE*size), -1);
-		this.box.setTransparency(0.7f);
-		this.box.setLayer(0.4f);
+	public boolean isChecked() {
+		return checked;
 	}
-
+	
 	@Override
-	protected void discard() {
-		if (box!=null) box.setTransparency(0f);
-	}
-
-	@Override
-	protected void showup() {
-		if (box!=null) {
-			box.setTransparency(1f);
-		}
-	}
-
-	@Override
-	protected void destroyComp() {
-		if (box!=null) box.destroy();
-	}
-
-	@Override
-	protected void refresh() {
-		if (isVisible()) {
-			if (Mouse.X >= x && Mouse.X <= x + width && Mouse.Y >= y && Mouse.Y <= y + height*Maths.getScreenRatio()) {
-				
-				if (Mouse.isButtonTyped(0)) select = !select;
-				
-				target = true;
-				this.box.setTransparency(1);
-				
-			} else {
-				
-				this.box.setTransparency(0.7f);
-				target = false;
-				
+	protected void update() {
+		super.update();
+		
+		if (super.isMouseOver()) {
+			if (Mouse.isButtonTyped(0)) {
+				checked = !checked;
 			}
-			if (select) box.setTex(TEX_BOX_SELECTED);
-			else box.setTex(TEX_BOX);
 		}
+		
+		inside.setTransparency(checked?1f:start_transparency);
+		
 	}
 	
-	public boolean isTargeted() {
-		return target;
+	@Override
+	protected void fade(float visibility) {
+		if (super.isDepending()) {
+			inside.setTransparency(Math.min(start_transparency, visibility));
+			
+		}
+		super.fade(visibility);
 	}
 	
-	public boolean isSelected() {
-		return select;
+	@Override
+	public void setCompX(int x) {
+		inside.setX(padding+x);
+		super.setCompX(x);
+	}
+	
+	@Override
+	public void setCompY(int y) {
+		inside.setY(padding+y);
+		super.setCompY(y);
+	}
+	
+	@Override
+	protected void validate(int priority) {
+		super.validate(priority);
+		inside.validate(priority);
 	}
 
-	@Override
-	protected void setPriority(int priority) {
-		if (box!=null) box.setPriority(priority);
-	}
-	
-	@Override
-	public CheckBox fade(float start, float end, int time) {
-		box.fade(start, end, time);
-		return this;
-	}
-	
-	@Override
-	public CheckBox slideX(int start, int end, int time) {
-		box.slideX(start, end, time);
-		return this;
-	}
-	
-	@Override
-	public CheckBox slideY(int start, int end, int time) {
-		box.slideY(start, end, time);
-		return this;
-	}
-	
-	@Override
-	public CheckBox stop() {
-		box.stopEffects();
-		box.resetEffects();
-		return this;
-	}
-	
 }

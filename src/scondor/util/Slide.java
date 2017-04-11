@@ -48,6 +48,10 @@ public class Slide {
 		return current;
 	}
 	
+	public boolean hasFinished() {
+		return !run;
+	}
+	
 	public int getStartValue() {
 		return start;
 	}

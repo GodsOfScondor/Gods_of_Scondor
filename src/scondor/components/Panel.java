@@ -1,132 +1,106 @@
 package scondor.components;
 
-import scondor.image.Image;
 import scondor.image.Texture;
-import scondor.inputs.KeyBoard;
-import scondor.panels.EffectAble;
-import scondor.panels.SwipeAble;
-import scondor.util.Maths;
+import scondor.util.Action;
 
-public abstract class Panel extends Component implements SwipeAble, EffectAble<Panel> {
+public class Panel extends Component {
 	
-	private Image background;
-	private int priority;
+	private ContainerPanel container;
 	
-	public Panel(int x, int y, int width, int height, int priority) {
-		super(x, y, width, height);
-		this.priority = priority;
+	public Panel(int x, int y, int width, int height, Texture tex, boolean depending) {
+		super(x, y, width, height, depending);
+		container = new ContainerPanel(tex , x, y, width, height, depending);
 	}
 	
-	public Panel(int priority) {
-		super(0, 0, 1000, 1 + (int) (1000/Maths.getScreenRatio()));
-		this.priority = priority;
+	public void add(Component comp) {
+		comp.setCompX(x+comp.getCompX());
+		comp.setCompY(y+comp.getCompY());
+		container.add(comp);
 	}
 	
-	public Panel setBackground(Texture tex) {
-		if (background!=null) {
-			background.destroy();
+	public void remove(Component comp) {
+		container.remove(comp);
+	}
+	
+	private static class ContainerPanel extends Container {
+		
+		private boolean depending;
+		
+		public ContainerPanel(Texture tex, int x, int y, int width, int height, boolean depending) {
+			super(-1);
+			if (tex!=null) super.add(new Picture(tex, x, y, width, height, true));
+			this.depending = depending;
 		}
-		this.background = new Image(tex, x, y, width, height, -1);
-		return this;
-	}
-	
-	public void show() {
-		validate(priority);
-		setVisible(true);
-	}
-	
-	@Override
-	protected void discard() {
-		if (background!=null) background.setTransparency(0f);
-	}
 
-	@Override
-	protected void showup() {
-		if (background!=null) background.setTransparency(1f);
-	}
-	
-	@Override
-	protected void destroyComp() {
-		if (background!=null) background.destroy();
-	}
-
-	@Override
-	protected void refresh() {
-		if (isVisible()) if (KeyBoard.isKeyTyped(KeyBoard.KEY_TAB)) {
-			TextField current = null;
-			TextField next = null;
-			TextField first = null;
-			
-			for (Component comp : comps) if (comp instanceof TextField) {
-				if (((TextField)comp).isFocused()) {
-					current = (TextField) comp;
-					break;
-				}
-			}
-			
-			for (Component comp : comps) if (comp instanceof TextField) {
-				if (current==comp) {
-					((TextField)comp).setFocus(false);
-					continue;
-				}
-				if (current!=null) {
-					if (comp.getCompY()>=current.getCompY()) {
-						if (next!=null) {
-							if (comp.getCompY() < next.getCompY()) {
-								next = (TextField) comp;
-							}
-						} else {
-							next = (TextField) comp;
-						}
-					}
-				} else {
-					current = (TextField) comp;
-					next = (TextField) comp;
-				}
-			}
-			
-			if (next!=null) next.setFocus(true);
-			else {
-				for (Component comp : comps) if (comp instanceof TextField) {
-					if (first!=null) {
-						if (comp.getCompY() < first.getCompY()) first = (TextField) comp;
-					} else {
-						first = (TextField) comp;
-					}
-				}
-				first.setFocus(true);
-			}
-			
+		@Override
+		public void refresh() {}
+		
+		public void setPriority(int priority) {
+			this.priority = priority;
 		}
+		
+		@Override
+		public void update() {
+			for (Action action : actions)action.perform();
+			
+			if (slide != null) {
+				visibility = slide.getValue()/1000f;
+				if (slide.hasFinished()) {
+					slide.destroy();
+					slide = null;
+				}
+			}
+			
+			for (Action action : actions) action.perform();
+			if (!depending) {
+				for (Component comp : comps) if (comp.isDepending()) comp.fade(visibility);
+			}
+			if (visibility>0.99f) {
+				refresh();
+				for (Component comp : comps) comp.update();
+			}
+		}
+		
+		public void fade(float visibility) {
+			for (Component comp : comps) {
+				if (comp.isDepending()) {
+					comp.fade(visibility);
+				}
+			}
+		}
+		
+	}
+	
+	public boolean isVisible() {
+		return container.visibility>0.99f;
+	}
+	
+	public boolean isInVisible() {
+		return container.visibility<0.01f;
 	}
 
 	@Override
-	protected void setPriority(int priority) {
-		if (background!=null) background.setPriority(priority);
+	public void fade(float start, float end, int duration) {
+		if (!super.isDepending()) container.fade(start, end, duration);
 	}
-	
+
 	@Override
-	public Panel fade(float start, float end, int time) {
-		if (background!=null) background.fade(start, end, time);
-		return this;
+	protected void destroy() {
+		container.destroy();
 	}
-	
+
 	@Override
-	public Panel slideX(int start, int end, int time) {
-		if (background!=null) background.slideX(start, end, time);
-		return this;
+	protected void update() {}
+
+	@Override
+	protected void fade(float visibility) {
+		if (super.isDepending()) container.fade(visibility);
 	}
-	
+
 	@Override
-	public Panel slideY(int start, int end, int time) {
-		if (background!=null) background.slideY(start, end, time);
-		return this;
-	}
-	
-	@Override
-	public Panel stop() {
-		for (Component comp : comps) if (comp instanceof EffectAble<?>) ((EffectAble<?>) comp).stop();
-		return this;
+	protected void validate(int priority) {
+		container.setPriority(priority);
+		container.validate();
 	}
 	
 }

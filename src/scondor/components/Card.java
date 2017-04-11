@@ -3,194 +3,124 @@ package scondor.components;
 import scondor.deck.card.CardData;
 import scondor.font.Text;
 import scondor.image.Image;
-import scondor.image.Texture;
-import scondor.panels.EffectAble;
+import scondor.image.Images;
 
-public class Card extends Component implements EffectAble<Card> {
+public class Card extends Component {
 	
-	private Image card;
-	private Image sprite;
+	private Image layout;
+	private Image image;
 	private Text name;
 	private Text description;
 	
-	private float size;
 	private CardData data;
+	private float size;
 	
-	private static final Texture SPRITE_SHEET = new Texture("colors/black", 1, 1);
-	
-	public Card(CardData data, int x, int y, float size) {
-		super(x, y, (int)(50*size), (int)(80*size));
+	public Card(CardData data, int x, int y, float size, boolean depending) {
+		super(x, y, 0, 0, depending);
 		
 		this.data = data;
 		this.size = size;
 		
-		card = new Image(new Texture("card_gn_common"), x, y, super.width, super.height, -1);
-		card.setLayer(0.48f);
+		layout = new Image(Images.LAYOUT_GREEN_COMMON, 0,0,0,0, -1);
+		image = new Image(Images.TEST_IMG, 0,0,0,0, -1);
+		name = new Text(data.getName(), 0,0,0, 1, -1);
+		description = new Text(data.getDescription(), 0,0,0, 3, -1);
+		image.setLayer(0.49f);
+		layout.setLayer(0.48f);
+		name.setLayer(0.47f);
+		description.setLayer(0.46f);
 		
-		sprite = new Image(new Texture(SPRITE_SHEET,0,0), x, y, 0, 0, -1);
-		sprite.setLayer(0.479f);
-		sprite.setTransparency(0.8f);
-		
-		name = new Text("", 0, 0, size*0.3f, 1, -1);
-		description = new Text("", 0, 0, size*0.3f, 3, -1);
-		
-		setData(data);
+		setSize(x,y,size);
 	}
-
-	@Override
-	protected void discard() {
-		if (card != null) card.setTransparency(0f);
-		if (sprite != null) sprite.setTransparency(0f);
-		if (name != null) name.setTransparency(0f);
-		if (description != null) description.setTransparency(0f);
-	}
-
-	@Override
-	protected void showup() {
-		if (card != null) card.setTransparency(1f);
-		if (sprite != null) sprite.setTransparency(1f);
-		if (name != null) name.setTransparency(1f);
-		if (description != null) description.setTransparency(1f);
-	}
-
-	@Override
-	protected void destroyComp() {
-		if (card != null) card.destroy();
-		if (sprite != null) sprite.destroy();
-		if (name != null) name.destroy();
-		if (description != null) description.destroy();
-	}
-
-	@Override
-	protected void refresh() {
+	
+	public void changeData(CardData data) {
 		
 	}
-
-	@Override
-	protected void setPriority(int priority) {
-		if (card != null) card.setPriority(priority);
-		if (sprite != null) sprite.setPriority(priority);
-		if (name != null) name.setPriority(priority);
-		if (description != null) description.setPriority(priority);
+	
+	public void setSize(int x, int y, float size) {
+		
+		this.size = size;
+		
+		super.setCompX(x);
+		super.setCompY(y);
+		super.setCompWidth((int)(80*size));
+		super.setCompHeight((int)(120*size));
+		
+		layout.setX(x);
+		layout.setY(y);
+		layout.setWidth(super.getCompWidth());
+		layout.setHeight(super.getCompHeight());
+		
+		image.setX(x+(int)(6f*size));
+		image.setY(y+(int)(12*size));
+		image.setWidth((int) (super.getCompWidth()*0.85));
+		image.setHeight((int) (super.getCompHeight()*0.43));
+		
+		name.setText(data.getName());
+		name.setSize(size*0.7f);
+		name.setX(x+(int)(42*size)-(name.getWidth()/2));
+		name.setY(y+(int)(78*size));
+		
+		description.setText(data.getDescription());
+		description.setSize(size*0.3f);
+		description.setX(x+(int)(10*size));
+		description.setY(y+(int)(92*size));
+		description.setLineSize((int)(super.getCompWidth()*0.85));
 	}
 	
 	public float getSize() {
 		return size;
 	}
-	
-	public Card setSize(float size) {
-		this.size = size;
-		this.card.setWidth((int)(50*size));
-		this.card.setHeight((int)(80*size));
-		this.sprite.setX(x+(int)(size*5));
-		this.sprite.setY(y+(int)(size*10));
-		this.sprite.setWidth((int) (this.card.getWidth()*0.8f));
-		this.sprite.setHeight((int) (this.card.getHeight()*0.43f));
-		this.name.setSize(size*0.3f);
-		this.name.setXY(x+(int)((size*26)-(this.name.getWidth()*0.5f)), y+(int)(size*71));
-		this.name.recreate();
-		this.description.setXY(x+(int)((size*8)), y+(int)(size*83));
-		this.description.setLineSize((int) (size*36));
-		this.description.setSize(size*0.3f);
-		this.description.recreate();
-		return this;
+
+	@Override
+	public void fade(float start, float end, int duration) {
+		layout.fade(start, end, duration);
+		image.fade(start, end, duration);
+		name.fade(start, end, duration);
+		description.fade(start, end, duration);
 	}
 
 	@Override
-	public Card fade(float start, float end, int time) {
-		if (card != null) card.fade(start, end, time);
-		if (sprite != null) sprite.fade(start, end, time);
-		if (name != null) name.fade(start, end, time);
-		if (description != null) description.fade(start, end, time);
-		return this;
+	protected void destroy() {
+		layout.destroy();
+		image.destroy();
+		name.destroy();
+		description.destroy();
 	}
 
 	@Override
-	public Card slideX(int start, int end, int time) {
-		if (card != null) card.slideX(start, end, time);
-		if (sprite != null) sprite.slideX(start, end, time);
-		if (name != null) name.slideX(start, end, time);
-		if (description != null) description.slideX(start, end, time);
-		return this;
-	}
-
-	@Override
-	public Card slideY(int start, int end, int time) {
-		if (card != null) card.slideY(start, end, time);
-		if (sprite != null) sprite.slideY(start, end, time);
-		if (name != null) name.slideY(start, end, time);
-		if (description != null) description.slideY(start, end, time);
-		return this;
-	}
-
-	@Override
-	public Card stop() {
+	protected void update() {
 		
-		card.stopEffects();
-		sprite.stopEffects();
-		name.stopEffects();
-		description.stopEffects();
-		
-		card.resetEffects();
-		sprite.resetEffects();
-		name.resetEffects();
-		description.resetEffects();
-		
-		return this;
 	}
-	
-	public void setData(CardData data) {
-		this.data = data;
-		if (hasData()) {
-			this.name.setText(data.getName());
-			this.description.setText(data.getDescription());
-			this.sprite.getTex().setX(data.getID()%32);
-			this.sprite.getTex().setY(data.getID()/32);
-		} else {
-			this.name.setText("swag");
-			this.description.setText("");
-			this.sprite.getTex().setX(0);
-			this.sprite.getTex().setY(0);
+
+	@Override
+	protected void fade(float visibility) {
+		if (super.isDepending()) {
+			layout.setTransparency(visibility);
+			image.setTransparency(visibility);
+			name.setTransparency(visibility);
+			description.setTransparency(visibility);
 		}
-		setSize(size);
 	}
 
-	public boolean hasData() {
-		return data!=null;
-	}
-
-	public Card setLayer(float layer) {
-		card.setLayer(layer-0.0001f);
-		sprite.setLayer(layer);
-		name.setLayer(layer);
-		description.setLayer(layer);
-		return this;
-	}
-
-	public Card setX(int x) {
-		card.setX(x);
-		sprite.setX(x);
-		name.setXY(x,this.y);
-		description.setXY(x,this.y);
-		setSize(size);
-		return this;
+	@Override
+	protected void validate(int priority) {
+		layout.validate(priority);
+		image.validate(priority);
+		name.validate(priority);
+		description.validate(priority);
 	}
 	
-	public Card setY(int y) {
-		card.setY(y);
-		sprite.setY(x);
-		name.setXY(this.x,y);
-		description.setXY(this.x,x);
-		setSize(size);
-		return this;
+	@Override
+	public void setCompX(int x) {
+		setSize(x, y, size);
+		super.setCompX(x);
 	}
-
-	public Card setTransparency(float transparency) {
-		card.setTransparency(transparency);
-		sprite.setTransparency(transparency);
-		name.setTransparency(transparency);
-		description.setTransparency(transparency);
-		return this;
+	
+	@Override
+	public void setCompY(int y) {
+		setSize(x, y, size);
+		super.setCompY(y);
 	}
 	
 }

@@ -11,9 +11,6 @@ import scondor.packets.CardList;
 import scondor.packets.DeckList;
 import scondor.packets.Message;
 import scondor.packets.State;
-import scondor.panels.Panels;
-import scondor.panels.deck.DeckStarter;
-import scondor.panels.playground.Playground;
 import scondor.panels.shop.PackType;
 import scondor.panels.shop.ShopHandler;
 import scondor.session.GameType;
@@ -73,15 +70,15 @@ public class Listener extends ClientEventListener {
 							
 							GameType type = GameType.valueOf(parts[2].toUpperCase());
 							String enemy = parts[3];
-							Panels.getPlayground().initData(type, enemy);
-							Panels.show(Panels.PLAYGROUND);
+//							Panels.getPlayground().initData(type, enemy);
+//							Panels.show(Panels.PLAYGROUND);
 							
 						} else if (parts[1].equalsIgnoreCase("action")) {
 							
 							if (parts[2].equalsIgnoreCase("turn")) {
-								Panels.getPlayground().setOnTurn(true);
+//								Panels.getPlayground().setOnTurn(true);
 							} else if (parts[2].equalsIgnoreCase("wait")) {
-								Panels.getPlayground().setOnTurn(false);
+//								Panels.getPlayground().setOnTurn(false);
 							}
 							
 						}
@@ -105,7 +102,7 @@ public class Listener extends ClientEventListener {
 						
 						if (code < 5) msg = Engine.getConnection().msgFromServer(code);
 						else if (code < 7) msg = ShopHandler.msgFromServer(code);
-						else if (code < 8) msg = DeckStarter.msgFromServer(code);
+//						else if (code < 8) msg = DeckStarter.msgFromServer(code);
 						
 						Messanger.popup(msg);
 					}
@@ -126,8 +123,8 @@ public class Listener extends ClientEventListener {
 					
 					String params = (String) packet.getEntry("PARAMS");
 					
-					Playground playground = Panels.getPlayground();
-					playground.updateData(player, enemy, params);
+//					Playground playground = Panels.getPlayground();
+//					playground.updateData(player, enemy, params);
 					
 				}
 			});

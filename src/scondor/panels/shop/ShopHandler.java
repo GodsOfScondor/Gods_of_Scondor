@@ -4,7 +4,6 @@ import java.util.List;
 
 import scondor.deck.card.CardData;
 import scondor.packets.Message;
-import scondor.panels.Panels;
 import scondor.server.Client;
 import scondor.util.Messanger;
 
@@ -30,7 +29,7 @@ public class ShopHandler {
 
 		} else if (code == SHOP_FAIL) {
 
-			return Messanger.build("Not enough money!", Panels.SHOP, 1, 0, 0);
+//			return Messanger.build("Not enough money!", Panels.SHOP, 1, 0, 0);
 
 		}
 
@@ -57,7 +56,7 @@ public class ShopHandler {
 	 * 
 	 */
 	public static void incomingData(List<CardData> cards, PackType type) {
-		Panels.getShop().showData(cards, type);
+//		Panels.getShop().showData(cards, type);
 	}
 	
 }

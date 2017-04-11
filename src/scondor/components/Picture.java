@@ -2,92 +2,76 @@ package scondor.components;
 
 import scondor.image.Image;
 import scondor.image.Texture;
-import scondor.inputs.Mouse;
-import scondor.panels.EffectAble;
 import scondor.util.Maths;
 
-public class Picture extends Component implements EffectAble<Picture> {
+public class Picture extends Component {
 	
-	private Image img;
+	protected Image img;
 	
-	public Picture(Texture tex, int x, int y, int width, int height) {
-		super(x, y, width, height);
+	/*
+	 * full screen picture
+	 */
+	public Picture(Texture tex, boolean depending) {
+		super(0, 0, 1000, 1 + (int) (1000/Maths.getScreenRatio()), depending);
+		img = new Image(tex, super.getCompX(), super.getCompY(), super.getCompWidth(), super.getCompHeight(), -1);
+		img.setTransparency(0f);
+	}
+	
+	/*
+	 * picture in a rectangle
+	 */
+	public Picture(Texture tex, int x, int y, int width, int height, boolean depending) {
+		super(x, y, width, height, depending);
 		img = new Image(tex, x, y, width, height, -1);
-		img.setLayer(0.49f);
+		img.setLayer(0.499f);
+		img.setTransparency(0f);
 	}
 
 	@Override
-	protected void discard() {
-		if (img!=null) img.setTransparency(0f);
+	public void fade(float start, float end, int duration) {
+		img.fade(start, end, duration);
 	}
 
 	@Override
-	protected void showup() {
-		if (img!=null) img.setTransparency(1f);
+	protected void destroy() {
+		img.destroy();
 	}
 
 	@Override
-	protected void destroyComp() {
-		if (img!=null) img.destroy();
+	protected void fade(float visibility) {
+		img.setTransparency(visibility);
 	}
 
 	@Override
-	protected void refresh() {
-		
+	protected void validate(int priority) {
+		img.validate(priority);
 	}
 
 	@Override
-	protected void setPriority(int priority) {
-		if (img!=null) img.setPriority(priority);
-	}
+	protected void update() {}
 	
-	public void setX(int x) {
-		this.img.setX(x);
-	}
-	
-	public void setY(int y) {
-		this.img.setY(y);
-	}
-	
-	public void setWidth(int width) {
-		this.img.setWidth(width);
-	}
-	
-	public void setHeight(int height) {
-		this.img.setHeight(height);
-	}
-	
-	public boolean isMouseOver() {
-		return (Mouse.X >= img.getX() && Mouse.X <= img.getX()+img.getWidth() && Mouse.Y >= img.getY() && Mouse.Y <= img.getY() + img.getHeight() * Maths.getScreenRatio());
+	@Override
+	public void setCompX(int x) {
+		img.setX(x);
+		super.setCompX(x);
 	}
 	
 	@Override
-	public Picture fade(float start, float end, int time) {
-		img.fade(start, end, time);
-		return this;
+	public void setCompY(int y) {
+		img.setY(y);
+		super.setCompY(y);
 	}
 	
 	@Override
-	public Picture slideX(int start, int end, int time) {
-		img.slideX(start, end, time);
-		return this;
+	public void setCompWidth(int width) {
+		img.setWidth(width);
+		super.setCompWidth(width);
 	}
 	
 	@Override
-	public Picture slideY(int start, int end, int time) {
-		img.slideY(start, end, time);
-		return this;
-	}
-	
-	@Override
-	public Picture stop() {
-		img.stopEffects();
-		img.resetEffects();
-		return this;
-	}
-
-	public void setLayer(float layer) {
-		this.img.setLayer(layer);
+	public void setCompHeight(int height) {
+		img.setHeight(height);
+		super.setCompHeight(height);
 	}
 	
 }

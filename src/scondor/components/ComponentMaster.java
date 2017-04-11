@@ -3,16 +3,20 @@ package scondor.components;
 import java.util.ArrayList;
 import java.util.List;
 
+import scondor.panels.Main;
+
 public class ComponentMaster {
 	
-	protected static List<Component> comps = new ArrayList<>();
+	private static List<Container> container = new ArrayList<>();
+	private static Main main;
 	
 	public static void init() {
-		
+		main = new Main();
+		container.add(main);
 	}
 	
 	public static void update() {
-		for (Component comp: comps) comp.update();
+		for (Container cont: container) cont.update();
 	}
 	
 }

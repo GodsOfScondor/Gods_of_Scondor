@@ -2,96 +2,77 @@ package scondor.components;
 
 import scondor.font.Text;
 import scondor.font.effect.FontEffect;
-import scondor.panels.EffectAble;
+import scondor.util.Color;
 
-public class Label extends Component implements EffectAble<Label> {
+public class Label extends Component {
 	
 	private Text text;
 	
-	public Label(String text, int x, int y, float size, int font_id) {
-		super(x, y, 1, 1);
-		this.text = new Text(text, x, y, size, font_id, -1);
+	public Label(String text, int x, int y, float size, int font, boolean depending) {
+		super(x, y, -1, -1, depending);
+		this.text = new Text(text, x, y, size, font, -1);
+		this.text.setTransparency(0f);
+		super.width = this.text.getWidth();
+		super.height = this.text.getHeight();
 	}
-	
-	public Label setColor(float r, float g, float b) {
-		text.setColor(r, g, b);
-		return this;
-	}
-	
-	public Label setLineSize(int size) {
-		text.setLineSize(size);
-		return this;
-	}
-	
-	public Label setText(String text) {
-		this.text.setText(text);
-		this.text.recreate();
+
+	public Label setColor(Color color) {
+		text.setColor(color.r, color.g, color.b);
 		return this;
 	}
 	
 	public Label setEffect(FontEffect effect) {
-		if (text!=null) text.setEffect(effect);
+		text.setEffect(effect);
 		return this;
 	}
 	
-	@Override
-	protected void discard() {
-		if (text!=null) {
-			text.stopEffects();
-			text.setTransparency(0f);
-		}
+	public void setText(String text) {
+		this.text.setText(text);
+		this.text.recreate();
 	}
-
-	@Override
-	protected void showup() {
-		if (text!=null) text.setTransparency(1f);
+	
+	public void setSize(float size) {
+		this.text.setSize(size);
+		this.text.recreate();
 	}
-
+	
+	public String getText() {
+		return text.getText();
+	}
+	
+	public float getSize() {
+		return text.getSize();
+	}
+	
 	@Override
-	protected void destroyComp() {
+	protected void destroy() {
 		text.destroy();
 	}
 
 	@Override
-	protected void refresh() {}
-
-	@Override
-	protected void setPriority(int priority) {
-		text.setPriority(priority);
-	}
-	
-	@Override
-	public Label fade(float start, float end, int time) {
-		text.fade(start, end, time);
-		return this;
-	}
-	
-	@Override
-	public Label slideX(int start, int end, int time) {
-		text.slideX(start, end, time);
-		return this;
-	}
-	
-	@Override
-	public Label slideY(int start, int end, int time) {
-		text.slideY(start, end, time);
-		return this;
+	protected void fade(float visibility) {
+		text.setTransparency(visibility);
 	}
 
 	@Override
-	public Label stop() {
-		text.stopEffects();
-		text.resetEffects();
-		return this;
+	protected void validate(int priority) {
+		text.validate(priority);
 	}
 
-	public void setXY(int x, int y) {
-		text.setXY(x, y);
+	@Override
+	public void fade(float start, float end, int duration) {
+		text.fade(start, end, duration);
+	}
+
+	@Override
+	protected void update() {}
+	
+	public void setCompX(int x) {
+		text.setX(x);
 	}
 	
-	@Override
-	public int getCompWidth() {
-		return text.getWidth();
+	public void setCompY(int y) {
+		text.setY(y);
 	}
 	
 }

@@ -14,6 +14,7 @@ public class TextMeshCreator {
 
 	public static final double LINE_HEIGHT = 10/1000f*Maths.getScreenRatio();
 	public static final int SPACE_ASCII = 32;
+	public float SPACE_WIDTH = 32;
 
 	private MetaFile metaData;
 
@@ -68,9 +69,6 @@ public class TextMeshCreator {
 		List<Float> vertices = new ArrayList<Float>();
 		List<Float> textureCoords = new ArrayList<Float>();
 		for (Line line : lines) {
-//			if (text.isCentered()) {
-//				curserX = (line.getMaxLength() - line.getLineLength()) / 2;
-//			}
 			for (Word word : line.getWords()) {
 				for (Character letter : word.getCharacters()) {
 					addVerticesForCharacter(curserX, curserY, letter, text.getSize(), vertices);
@@ -78,6 +76,7 @@ public class TextMeshCreator {
 							letter.getXMaxTextureCoord(), letter.getYMaxTextureCoord());
 					curserX += letter.getxAdvance() * text.getSize();
 				}
+				SPACE_WIDTH = (float) metaData.getSpaceWidth();
 				curserX += metaData.getSpaceWidth() * text.getSize();
 			}
 			curserX = 0;
