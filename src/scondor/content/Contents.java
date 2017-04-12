@@ -10,6 +10,7 @@ import scondor.packets.DeckList;
 import scondor.packets.Message;
 import scondor.server.Client;
 import scondor.util.Action;
+import scondor.util.Messanger;
 
 public class Contents {
 
@@ -47,7 +48,7 @@ public class Contents {
 		if (((String) list.getEntry("PARAMS")).equalsIgnoreCase("starter cards")) {
 			Client.add(new Action() {
 				public void perform() {
-//					Messanger.popup(Messanger.build("Recieved starter deck!", Panels.MAIN, 0, 1, 0));
+					Messanger.popup(Messanger.build("Recieved starter deck!", Containers.MAIN, 0, 1, 0));
 				}
 			});
 		}

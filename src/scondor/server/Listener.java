@@ -12,6 +12,7 @@ import scondor.packets.CardList;
 import scondor.packets.DeckList;
 import scondor.packets.Message;
 import scondor.packets.State;
+import scondor.panels.deck.DeckStarter;
 import scondor.panels.shop.PackType;
 import scondor.panels.shop.ShopHandler;
 import scondor.session.GameType;
@@ -103,7 +104,7 @@ public class Listener extends ClientEventListener {
 						
 						if (code < 5) msg = Engine.getConnection().msgFromServer(code);
 						else if (code < 7) msg = ShopHandler.msgFromServer(code);
-//						else if (code < 8) msg = DeckStarter.msgFromServer(code);
+						else if (code < 8) msg = DeckStarter.msgFromServer(code);
 						
 						Messanger.popup(msg);
 					}

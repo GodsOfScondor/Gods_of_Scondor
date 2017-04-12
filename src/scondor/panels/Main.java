@@ -52,14 +52,14 @@ public class Main extends Container {
 		
 		button_shop = new TextButton("SHOP", 800, 400, 3, 1, new Action() {
 			public void perform() {
-//				Panels.show(Panels.SHOP);
+				Containers.show(Containers.getShop());
 			}
 		}, true).setEffect(glow_effect).setColor(gray);
 		
 		
 		button_deck = new TextButton("DECK", 800, 500, 3, 1, new Action() {
 			public void perform() {
-//				Panels.show(Panels.PLAYGROUND);
+				Containers.show(Containers.getDeckStarter());
 			}
 		}, true).setEffect(glow_effect).setColor(gray);
 		

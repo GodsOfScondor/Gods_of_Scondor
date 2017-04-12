@@ -105,6 +105,10 @@ public class Containers {
 		return shop;
 	}
 	
+	public static DeckStarter getDeckStarter() {
+		return deck_starter;
+	}
+	
 	public static void update() {
 		if (popup.visibility<0.01f) for (Container cont: containers) cont.update();
 		popup.update();

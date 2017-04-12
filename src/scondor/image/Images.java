@@ -4,6 +4,7 @@ public class Images {
 	
 	public static Texture WALLPAPER_LOBBY;
 	public static Texture WALLPAPER_MAIN;
+	public static Texture WALLPAPER_SHOP;
 	
 	public static Texture COLOR_BLACK;
 	public static Texture COLOR_WHITE;
@@ -22,11 +23,13 @@ public class Images {
 	public static Texture DECO_FRAMES;
 	
 	public static Texture CARD_BACK;
+	public static  Texture CARD_PACK_WILD;
 	
 	public static void load() {
 		
 		WALLPAPER_LOBBY = new Texture("lobby");
 		WALLPAPER_MAIN = new Texture("bg");
+		WALLPAPER_SHOP = new Texture("shop");
 		
 		COLOR_BLACK = new Texture("colors/black");
 		COLOR_WHITE = new Texture("colors/white");
@@ -44,6 +47,7 @@ public class Images {
 		DECO_FRAMES = new Texture("frame", 1, 2);
 		
 		CARD_BACK = new Texture("card_back");
+		CARD_PACK_WILD = new Texture("card_pack_gn");
 	}
 	
 }
