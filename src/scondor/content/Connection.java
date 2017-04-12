@@ -21,7 +21,7 @@ import scondor.util.Messanger;
 public class Connection {
 
 	private BufferedReader reader;
-	public boolean save_data = false;
+	public boolean save_data;
 	private boolean save = false;
 	private BufferedWriter writer;
 	private File file;
@@ -46,7 +46,7 @@ public class Connection {
 			file = new File(PATH);
 
 			if (file.exists()) {
-
+				Containers.getLogin();
 				reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
 
 				while ((line = reader.readLine()) != null) {
@@ -126,11 +126,11 @@ public class Connection {
 				file.createNewFile();
 			}
 
-			if (!save) {
+			if (save_data) {
 
 				writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
 
-				writer.write("save=" + (save_data || save));
+				writer.write("save=" + (save_data||save));
 				writer.newLine();
 
 				if (save_data) {
