@@ -15,7 +15,7 @@ public class Shop extends Container {
 		 * set background
 		 */
 		
-		super.setBackground(Images.WALLPAPER_MAIN);
+		super.setBackground(Images.WALLPAPER_SHOP);
 		
 		/*
 		 * create effects and colors

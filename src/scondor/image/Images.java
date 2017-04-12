@@ -4,6 +4,7 @@ public class Images {
 	
 	public static Texture WALLPAPER_LOBBY;
 	public static Texture WALLPAPER_MAIN;
+	public static Texture WALLPAPER_SHOP;
 	
 	public static Texture COLOR_BLACK;
 	public static Texture COLOR_WHITE;
@@ -27,6 +28,7 @@ public class Images {
 		
 		WALLPAPER_LOBBY = new Texture("lobby");
 		WALLPAPER_MAIN = new Texture("bg");
+		WALLPAPER_SHOP = new Texture("shop");
 		
 		COLOR_BLACK = new Texture("colors/black");
 		COLOR_WHITE = new Texture("colors/white");
