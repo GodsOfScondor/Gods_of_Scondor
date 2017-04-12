@@ -1,60 +1,75 @@
-//package scondor.panels.shop;
-//
-//import java.util.LinkedList;
-//import java.util.Queue;
-//
-//import scondor.components.Card;
-//import scondor.components.Panel;
-//import scondor.components.Picture;
-//import scondor.deck.card.CardData;
-//import scondor.image.Texture;
-//import scondor.util.Action;
-//import scondor.util.Maths;
-//
-//public class ProductShowcase extends Panel {
-//
-//	private static final int PRIORITY = 2;
-//	private Picture blackfade;
-//	private Card postview;
-//	private Queue<CardData> queue = new LinkedList<>();
-//	
-//	private CardData current;
-//	
-//	public ProductShowcase() {
-//		super(PRIORITY);
-//		blackfade = new Picture(new Texture("colors/black"), 0, 0, 1000, 1 + (int) (1000 / Maths.getScreenRatio()));
-//		blackfade.setLayer(0.3f);// set auf kleiner um picture vor darkscreen zu
-//									// bringen
-//		postview = new Card(null, 50, 50, 5).setLayer(0.2f);
-//		
-//		addAction(new Action() {
-//			@Override
-//			public void perform() {
-//				if ((current = queue.poll())!=null) {
-//					postview.setData(current);
-//					
-//				}
-//			}
-//		});
-//		
-//		add(blackfade);
-//		add(postview);
-//	}
-//	
-//	protected void addData(CardData data) {
-//		queue.add(data);
-//	}
-//
-//	@Override
-//	public void swipeIn() {
-//		this.blackfade.fade(0.0f, 0.6f, 200);
-//		this.postview.fade(0.0f, 1f, 200);
-//	}
-//
-//	@Override
-//	public void swipeOut() {
-//		this.blackfade.fade(0.6f, 0.0f, 200);
-//		this.postview.fade(1.0f, 0.0f, 200);
-//	}
-//	
-//}
+package scondor.panels.shop;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
+import scondor.components.Card;
+import scondor.components.Container;
+import scondor.components.Picture;
+import scondor.deck.card.CardData;
+import scondor.image.Images;
+import scondor.inputs.Mouse;
+
+public class ProductShowcase  extends Container {
+
+	private static final int PRIORITY = 2;
+	
+	private Picture black_fade;
+	private Card showcase;
+	private Queue<CardData> queue = new LinkedList<>();
+	
+	public ProductShowcase() {
+		super(PRIORITY);
+		
+		/*
+		 * create components
+		 */
+		
+		black_fade = new Picture(Images.COLOR_BLACK, false);
+		showcase = new Card(null, 500, 300, 3, false);
+		
+		/*
+		 * add components to container
+		 */
+		
+		super.add(black_fade);
+		super.add(showcase);
+		
+		/*
+		 *  validate container
+		 */
+		
+		super.validate();
+		
+	}
+	
+	public void incomingData(List<CardData> cards, PackType type) {
+		queue.clear();
+		for (CardData card : cards) queue.add(card);
+		showcase.changeData(queue.poll());
+		
+		black_fade.fade(0, 0.8f, 100);
+		showcase.fade(0, 1, 100);
+	}
+
+	@Override
+	public void refresh() {
+		if (Mouse.isButtonTyped(0)) {
+			CardData data = queue.poll();
+			if (data==null) {
+				System.out.println("end of list");
+			} else {
+				showcase.changeData(data);
+				showcase.fade(0, 1, 100);
+			}
+		}
+	}
+
+	@Override
+	public int getID() {
+		return -1;
+	}
+	
+
+}

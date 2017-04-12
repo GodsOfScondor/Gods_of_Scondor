@@ -30,6 +30,11 @@ public class Card extends Component {
 		name.setLayer(0.47f);
 		description.setLayer(0.46f);
 		
+		image.setTransparency(0f);
+		layout.setTransparency(0f);
+		name.setTransparency(0f);
+		description.setTransparency(0f);
+		
 		setSize(x,y,size);
 	}
 	

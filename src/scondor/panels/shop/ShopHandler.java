@@ -2,6 +2,7 @@ package scondor.panels.shop;
 
 import java.util.List;
 
+import scondor.components.Containers;
 import scondor.deck.card.CardData;
 import scondor.packets.Message;
 import scondor.server.Client;
@@ -56,7 +57,7 @@ public class ShopHandler {
 	 * 
 	 */
 	public static void incomingData(List<CardData> cards, PackType type) {
-//		Panels.getShop().showData(cards, type);
+		Containers.getShop().incomingData(cards, type);
 	}
 	
 }

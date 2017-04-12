@@ -1,14 +1,14 @@
 package scondor.panels.shop;
 
+import java.util.List;
 import java.util.Random;
 
 import scondor.components.Card;
 import scondor.components.Container;
 import scondor.components.Containers;
-import scondor.components.IconButton;
 import scondor.components.Label;
-import scondor.components.Picture;
 import scondor.components.TextButton;
+import scondor.deck.card.CardData;
 import scondor.deck.card.troops.TroopCardData;
 import scondor.font.effect.GlowEffect;
 import scondor.font.effect.OutlineEffect;
@@ -32,6 +32,7 @@ public class Shop extends Container {
 	private TextButton shop, exit;
 
 	private Card preview;
+	private ProductShowcase showcase;
 
 	private PackType type = null;
 
@@ -88,6 +89,12 @@ public class Shop extends Container {
 		preview = new Card(null, 50, 550, 3, true);
 		
 		/*
+		 * showcase stuff
+		 */
+		
+		showcase = new ProductShowcase();
+		
+		/*
 		 * add components to container
 		 */
 		
@@ -126,11 +133,19 @@ public class Shop extends Container {
 		} else {
 			preview.fade(1, 0, 50);
 		}
+		showcase.update();
 	}
 
 	@Override
 	public int getID() {
 		return Containers.SHOP;
+	}
+
+	public void incomingData(List<CardData> cards, PackType type) {
+		//2 Probleme:
+		//wenn diese methode aufgerufen wird dürfen die buttons im hintergrund nicht funktionieren
+		//nach mouseklick werden keine nächsten der gekauften karten angezeigt
+		showcase.incomingData(cards, type);
 	}
 
 }

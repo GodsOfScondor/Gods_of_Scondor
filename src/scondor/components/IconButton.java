@@ -3,7 +3,6 @@ package scondor.components;
 import scondor.image.Texture;
 import scondor.inputs.Mouse;
 import scondor.util.Action;
-import scondor.util.Maths;
 
 public class IconButton extends Picture {
 	
