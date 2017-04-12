@@ -45,6 +45,11 @@ public class Label extends Component {
 		return text.getSize();
 	}
 	
+	public Label setLineSize(int size) {
+		text.setLineSize(size);
+		return this;
+	}
+	
 	@Override
 	protected void destroy() {
 		text.destroy();

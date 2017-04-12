@@ -23,8 +23,8 @@ public class Card extends Component {
 		
 		layout = new Image(Images.LAYOUT_GREEN_COMMON, 0,0,0,0, -1);
 		image = new Image(Images.TEST_IMG, 0,0,0,0, -1);
-		name = new Text(data.getName(), 0,0,0, 1, -1);
-		description = new Text(data.getDescription(), 0,0,0, 3, -1);
+		name = new Text("", 0,0,0, 1, -1);
+		description = new Text("", 0,0,0, 3, -1);
 		image.setLayer(0.49f);
 		layout.setLayer(0.48f);
 		name.setLayer(0.47f);
@@ -56,12 +56,12 @@ public class Card extends Component {
 		image.setWidth((int) (super.getCompWidth()*0.85));
 		image.setHeight((int) (super.getCompHeight()*0.43));
 		
-		name.setText(data.getName());
+		if (data != null) name.setText(data.getName());
 		name.setSize(size*0.7f);
 		name.setX(x+(int)(42*size)-(name.getWidth()/2));
 		name.setY(y+(int)(78*size));
 		
-		description.setText(data.getDescription());
+		if (data != null) description.setText(data.getDescription());
 		description.setSize(size*0.3f);
 		description.setX(x+(int)(10*size));
 		description.setY(y+(int)(92*size));
@@ -70,6 +70,13 @@ public class Card extends Component {
 	
 	public float getSize() {
 		return size;
+	}
+	
+	public void setLayer(float layer) {
+		layout.setLayer(layer-0.001f);
+		image.setLayer(layer);
+		name.setLayer(layer-0.002f);
+		description.setLayer(layer-0.003f);
 	}
 
 	@Override

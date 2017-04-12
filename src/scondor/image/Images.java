@@ -19,6 +19,10 @@ public class Images {
 	
 	public static Texture BUTTON_BORDER;
 	
+	public static Texture DECO_FRAMES;
+	
+	public static Texture CARD_BACK;
+	
 	public static void load() {
 		
 		WALLPAPER_LOBBY = new Texture("lobby");
@@ -36,6 +40,10 @@ public class Images {
 		
 		ICON_ARROW = new Texture("arrow");
 		BUTTON_BORDER = new Texture("button_border");
+		
+		DECO_FRAMES = new Texture("frame", 1, 2);
+		
+		CARD_BACK = new Texture("card_back");
 	}
 	
 }

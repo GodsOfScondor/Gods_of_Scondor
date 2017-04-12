@@ -3,6 +3,7 @@ package scondor.server;
 import java.util.List;
 
 import scondor.Engine;
+import scondor.components.Containers;
 import scondor.deck.card.CardData;
 import scondor.gnet.client.ClientEventListener;
 import scondor.gnet.client.ServerModel;
@@ -70,15 +71,15 @@ public class Listener extends ClientEventListener {
 							
 							GameType type = GameType.valueOf(parts[2].toUpperCase());
 							String enemy = parts[3];
-//							Panels.getPlayground().initData(type, enemy);
-//							Panels.show(Panels.PLAYGROUND);
+							Containers.getPlayground().initData(type, enemy);
+							Containers.show(Containers.getPlayground());
 							
 						} else if (parts[1].equalsIgnoreCase("action")) {
 							
 							if (parts[2].equalsIgnoreCase("turn")) {
-//								Panels.getPlayground().setOnTurn(true);
+								Containers.getPlayground().setOnTurn(true);
 							} else if (parts[2].equalsIgnoreCase("wait")) {
-//								Panels.getPlayground().setOnTurn(false);
+								Containers.getPlayground().setOnTurn(false);
 							}
 							
 						}
@@ -123,8 +124,7 @@ public class Listener extends ClientEventListener {
 					
 					String params = (String) packet.getEntry("PARAMS");
 					
-//					Playground playground = Panels.getPlayground();
-//					playground.updateData(player, enemy, params);
+					Containers.getPlayground().updateData(player, enemy, params);
 					
 				}
 			});
