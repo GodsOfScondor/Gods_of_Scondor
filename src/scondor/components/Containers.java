@@ -10,6 +10,7 @@ import scondor.panels.authentification.Login;
 import scondor.panels.authentification.Register;
 import scondor.panels.deck.DeckChooser;
 import scondor.panels.playground.Playground;
+import scondor.panels.shop.Shop;
 
 public class Containers {
 	
@@ -22,6 +23,7 @@ public class Containers {
 	public static final int DECK_CHOOSER = 6;
 	public static final int DECK_BUILDER = 7;
 	public static final int PLAYERGROUND = 8;
+	public static final int SHOP = 9;
 	
 
 	private static List<Container> containers = new ArrayList<>();
@@ -33,7 +35,8 @@ public class Containers {
 	private static Register register;
 	private static Lobby lobby;
 	private static DeckChooser deck_chooser;
-	private static Playground playground;	
+	private static Playground playground;
+	private static Shop shop;
 	
 	private static Container current;
 	
@@ -47,6 +50,7 @@ public class Containers {
 		lobby = new Lobby();
 		deck_chooser = new DeckChooser();
 		playground = new Playground();
+		shop = new Shop();
 		
 		containers.add(main);
 		containers.add(login);
@@ -54,6 +58,7 @@ public class Containers {
 		containers.add(lobby);
 		containers.add(deck_chooser);
 		containers.add(playground);
+		containers.add(shop);
 		
 	}
 	
@@ -90,6 +95,10 @@ public class Containers {
 	
 	public static Playground getPlayground() {
 		return playground;
+	}
+	
+	public static Shop getShop() {
+		return shop;
 	}
 	
 	public static void update() {
