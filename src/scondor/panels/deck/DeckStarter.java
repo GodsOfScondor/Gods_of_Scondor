@@ -15,6 +15,7 @@ public class DeckStarter extends Container {
 	private static final int PRIORITY = 1;
 	private IconButton wild;
 	private Label description;
+	private Label titel;
 	
 	public DeckStarter() {
 		super(PRIORITY);
@@ -41,6 +42,7 @@ public class DeckStarter extends Container {
 		wild.setResize(1.2f);
 		
 		description = new Label("TEMPLATE", 500, 930, 2.5f, 1, false);
+		titel = new Label("CHOOSE YOUR STARTER DECK:", 10, 10, 5f, 1, true);
 		
 		/*
 		 * add components to container
@@ -48,6 +50,7 @@ public class DeckStarter extends Container {
 		
 		super.add(wild);
 		super.add(description);
+		super.add(titel);
 		
 		/*
 		 * validate container
