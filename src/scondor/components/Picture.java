@@ -2,11 +2,16 @@ package scondor.components;
 
 import scondor.image.Image;
 import scondor.image.Texture;
+import scondor.inputs.Mouse;
 import scondor.util.Maths;
 
 public class Picture extends Component {
 	
 	protected Image img;
+	protected float damper = 0.3f, visibility;
+	protected float resize = 1f;
+	protected boolean over, before, pressed;
+	protected int r_x,r_y,r_width,r_height;
 	
 	/*
 	 * full screen picture
@@ -15,6 +20,11 @@ public class Picture extends Component {
 		super(0, 0, 1000, 1 + (int) (1000/Maths.getScreenRatio()), depending);
 		img = new Image(tex, super.getCompX(), super.getCompY(), super.getCompWidth(), super.getCompHeight(), -1);
 		img.setTransparency(0f);
+		r_x = x;
+		r_y = y;
+		r_width = width;
+		r_height = height;
+		visibility = 1f;
 	}
 	
 	/*
@@ -25,10 +35,25 @@ public class Picture extends Component {
 		img = new Image(tex, x, y, width, height, -1);
 		img.setLayer(0.499f);
 		img.setTransparency(0f);
+		r_x = x;
+		r_y = y;
+		r_width = width;
+		r_height = height;
+		visibility = 1f;
 	}
 	
-	public void setLayer(float layer) {
+	public Picture setLayer(float layer) {
 		img.setLayer(layer);
+		return this;
+	}
+	
+	public Picture setResize(float resize) {
+		this.resize = resize;
+		return this;
+	}
+	
+	public boolean isMouseOver() {
+		return over;
 	}
 
 	@Override
@@ -52,7 +77,30 @@ public class Picture extends Component {
 	}
 
 	@Override
-	protected void update() {}
+	protected void update() {
+		
+		before = !over;
+		
+		over = (Mouse.X >= x && Mouse.X <= x + width && Mouse.Y >= y && Mouse.Y <= y + height*Maths.getScreenRatio());
+		pressed = (over && Mouse.isButtonPressed(0));
+		
+		if (over) {
+			if (before) {
+				fade(visibility-damper);
+				setCompWidth((int) (super.getCompWidth()*resize));
+				setCompHeight((int) (super.getCompHeight()*resize));
+				setCompX(r_x - (super.getCompWidth() - r_width)/2);
+				setCompY(r_y - (super.getCompHeight() - r_height)/2);
+			}
+		} else {
+			fade(visibility);
+			setCompWidth(r_width);
+			setCompHeight(r_height);
+			setCompX(r_x);
+			setCompY(r_y);
+		}
+		
+	}
 	
 	@Override
 	public void setCompX(int x) {

@@ -78,6 +78,10 @@ public class Card extends Component {
 		name.setLayer(layer-0.002f);
 		description.setLayer(layer-0.003f);
 	}
+	
+	public boolean hasData() {
+		return data!=null;
+	}
 
 	@Override
 	public void fade(float start, float end, int duration) {
