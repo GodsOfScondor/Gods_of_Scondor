@@ -94,7 +94,7 @@ public class Login extends Container {
 		
 		super.validate();
 	}
-
+	
 	@Override
 	public void refresh() {
 		if (Containers.isOpen(Containers.getLogin()))

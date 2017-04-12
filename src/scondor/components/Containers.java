@@ -123,7 +123,6 @@ public class Containers {
 	}
 	
 	public static void focusField(TextField field) {
-		System.out.println("know");
 		for (Component comp : current.comps) {
 			if (comp instanceof TextField) if (comp!=field) ((TextField) comp).setFocus(false);
 		}
