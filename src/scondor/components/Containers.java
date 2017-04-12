@@ -9,6 +9,7 @@ import scondor.panels.PopUp;
 import scondor.panels.authentification.Login;
 import scondor.panels.authentification.Register;
 import scondor.panels.deck.DeckChooser;
+import scondor.panels.deck.DeckStarter;
 import scondor.panels.playground.Playground;
 import scondor.panels.shop.Shop;
 
@@ -34,6 +35,7 @@ public class Containers {
 	private static Login login;
 	private static Register register;
 	private static Lobby lobby;
+	private static DeckStarter deck_starter;
 	private static DeckChooser deck_chooser;
 	private static Playground playground;
 	private static Shop shop;
@@ -48,6 +50,7 @@ public class Containers {
 		login = new Login();
 		register = new Register();
 		lobby = new Lobby();
+		deck_starter = new DeckStarter();
 		deck_chooser = new DeckChooser();
 		playground = new Playground();
 		shop = new Shop();
@@ -56,6 +59,7 @@ public class Containers {
 		containers.add(login);
 		containers.add(register);
 		containers.add(lobby);
+		containers.add(deck_starter);
 		containers.add(deck_chooser);
 		containers.add(playground);
 		containers.add(shop);

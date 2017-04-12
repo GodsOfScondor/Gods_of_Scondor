@@ -1,11 +1,14 @@
 package scondor.panels.deck;
 
 import scondor.components.Container;
+import scondor.components.Containers;
 
 public class DeckStarter extends Container {
 
-	public DeckStarter(int priority) {
-		super(priority);
+	private static final int PRIORITY = 1;
+
+	public DeckStarter() {
+		super(PRIORITY);
 	}
 
 	@Override
@@ -15,7 +18,7 @@ public class DeckStarter extends Container {
 
 	@Override
 	public int getID() {
-		return 0;
+		return Containers.DECK_STARTER;
 	}
 	
 	
