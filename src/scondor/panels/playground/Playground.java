@@ -12,6 +12,7 @@ public class Playground extends Container {
 
 	private PlayerHand player_hand;
 	private EnemyHand enemy_hand;
+	private Controller controller;
 	
 	private boolean onturn;
 	
@@ -22,7 +23,7 @@ public class Playground extends Container {
 		 * set background
 		 */
 		
-		super.setBackground(Images.COLOR_BLUE);
+		super.setBackground(Images.WALLPAPER_LOBBY);
 		
 		/*
 		 * create containers
@@ -30,9 +31,11 @@ public class Playground extends Container {
 		
 		player_hand = new PlayerHand();
 		enemy_hand = new EnemyHand();
+		controller = new Controller();
 		
 		player_hand.fade(0, 1, 0);
 		enemy_hand.fade(0, 1, 0);
+		controller.fade(0, 1, 0);
 		
 		/*
 		 * validate container
@@ -47,6 +50,8 @@ public class Playground extends Container {
 	
 	public void setOnTurn(boolean onturn) {
 		this.onturn = onturn;
+		if (onturn) controller.showMSG("Your turn!");
+		else controller.showMSG("Enemys turn!");
 	}
 	
 	public void initData(GameType type, String enemy) {
@@ -54,7 +59,7 @@ public class Playground extends Container {
 	}
 	
 	public void updateData(PlayerSideData player, PlayerSideData enemy, String params) {
-				
+	
 		enemy_hand.updateCards(enemy.getHand().size());
 		player_hand.updateCards(player.getHand());
 
@@ -62,7 +67,9 @@ public class Playground extends Container {
 
 	@Override
 	public void refresh() {
-		
+		player_hand.update();
+		enemy_hand.update();
+		controller.update();
 	}
 
 	@Override

@@ -25,12 +25,19 @@ public class EnemyHand extends Container {
 		for (n=0;n<MAX_CARDS;n++) {
 			handcards[n] = new Picture(Images.CARD_BACK, -100, -60, 80, 110, false);
 			handcards[n].setLayer(0.1f-0.001f*n);
-			add(handcards[n]);
 		}
 		
 		/*
 		 * add components to container
 		 */
+		
+		for (n=0;n<MAX_CARDS;n++) super.add(handcards[n]);
+		
+		/*
+		 * validate container
+		 */
+		
+		super.validate();
 		
 	}
 	
@@ -51,10 +58,10 @@ public class EnemyHand extends Container {
 		System.out.println("here");
 		if (Containers.getPlayground().isOnTurn()) {
 			for (n = 0; n < MAX_CARDS; n++)
-				if (n<amount) handcards[n].setCompY(860);
+				if (n<amount) handcards[n].setCompY(-120);
 		} else {
 			for (n = 0; n < MAX_CARDS; n++)
-				if (n<amount) handcards[n].setCompY(920);
+				if (n<amount) handcards[n].setCompY(-60);
 		}
 	}
 

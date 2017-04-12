@@ -53,6 +53,7 @@ public class Containers {
 		containers.add(register);
 		containers.add(lobby);
 		containers.add(deck_chooser);
+		containers.add(playground);
 		
 	}
 	

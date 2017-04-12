@@ -9,7 +9,7 @@ import scondor.deck.card.CardData;
 
 public class PlayerHand extends Container{
 
-	private static final int PRIORITY = 1;
+	private static final int PRIORITY = 2;
 
 	private Card[] handcards;
 	private int n;
