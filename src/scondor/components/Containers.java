@@ -23,7 +23,7 @@ public class Containers {
 	public static final int DECK_STARTER = 5;
 	public static final int DECK_CHOOSER = 6;
 	public static final int DECK_BUILDER = 7;
-	public static final int PLAYERGROUND = 8;
+	public static final int BATTLEFIELD = 8;
 	public static final int SHOP = 9;
 	
 
@@ -99,7 +99,7 @@ public class Containers {
 		return deck_chooser;
 	}
 	
-	public static Battlefield getPlayground() {
+	public static Battlefield getBattlefield() {
 		return playground;
 	}
 	

@@ -69,7 +69,7 @@ public class PlayerHand extends Container{
 
 	@Override
 	public void refresh() {
-		boolean onturn = Containers.getPlayground().isOnTurn();
+		boolean onturn = Containers.getBattlefield().isOnTurn();
 		for (n = 0; n < MAX_CARDS; n++) if (n<amount) handcards[n].setCompY(onturn?860:920);
 		for (n = 0; n < MAX_CARDS; n++) if (n<amount) if (handcards[n].isMouseOver() && (n==amount-1 || !handcards[n+1].isMouseOver())) {
 			

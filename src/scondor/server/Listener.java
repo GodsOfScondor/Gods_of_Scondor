@@ -4,6 +4,7 @@ import java.util.List;
 
 import scondor.Engine;
 import scondor.components.Containers;
+import scondor.containers.battlefield.endofgame.EndOfGameType;
 import scondor.containers.deck.DeckStarter;
 import scondor.containers.shop.PackType;
 import scondor.containers.shop.ShopHandler;
@@ -68,19 +69,21 @@ public class Listener extends ClientEventListener {
 						
 						if (parts[1].startsWith("exit")) {
 							
+							Containers.getBattlefield().end(EndOfGameType.valueOf(parts[2]));
+							
 						} else if (parts[1].startsWith("start")) {
 							
 							GameType type = GameType.valueOf(parts[2].toUpperCase());
 							String enemy = parts[3];
-							Containers.getPlayground().initData(type, enemy);
-							Containers.show(Containers.getPlayground());
+							Containers.getBattlefield().initData(type, enemy);
+							Containers.show(Containers.getBattlefield());
 							
 						} else if (parts[1].equalsIgnoreCase("action")) {
 							
 							if (parts[2].equalsIgnoreCase("turn")) {
-								Containers.getPlayground().setOnTurn(true);
+								Containers.getBattlefield().setOnTurn(true);
 							} else if (parts[2].equalsIgnoreCase("wait")) {
-								Containers.getPlayground().setOnTurn(false);
+								Containers.getBattlefield().setOnTurn(false);
 							}
 							
 						}
@@ -125,7 +128,7 @@ public class Listener extends ClientEventListener {
 					
 					String params = (String) packet.getEntry("PARAMS");
 					
-					Containers.getPlayground().updateData(player, enemy, params);
+					Containers.getBattlefield().updateData(player, enemy, params);
 					
 				}
 			});

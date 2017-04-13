@@ -55,7 +55,7 @@ public class EnemyHand extends Container {
 
 	@Override
 	public void refresh() {
-		if (Containers.getPlayground().isOnTurn()) {
+		if (Containers.getBattlefield().isOnTurn()) {
 			for (n = 0; n < MAX_CARDS; n++)
 				if (n<amount) handcards[n].setCompY(-120);
 		} else {
