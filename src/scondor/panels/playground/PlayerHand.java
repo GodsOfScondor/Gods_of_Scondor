@@ -6,12 +6,15 @@ import scondor.components.Card;
 import scondor.components.Container;
 import scondor.components.Containers;
 import scondor.deck.card.CardData;
+import scondor.inputs.Mouse;
 
 public class PlayerHand extends Container{
 
 	private static final int PRIORITY = 2;
 
 	private Card[] handcards;
+	private CardPreview preview;
+	
 	private int n;
 	private int MAX_CARDS = 8;
 
@@ -19,6 +22,13 @@ public class PlayerHand extends Container{
 	
 	public PlayerHand() {
 		super(PRIORITY);
+		
+		/*
+		 * create other containers
+		 */
+		
+		preview = new CardPreview();
+		preview.fade(0, 1, 0);
 		
 		/*
 		 * create components
@@ -59,13 +69,15 @@ public class PlayerHand extends Container{
 
 	@Override
 	public void refresh() {
-		if (Containers.getPlayground().isOnTurn()) {
-			for (n = 0; n < MAX_CARDS; n++)
-				if (n<amount) handcards[n].setCompY(860);
-		} else {
-			for (n = 0; n < MAX_CARDS; n++)
-				if (n<amount) handcards[n].setCompY(920);
+		boolean onturn = Containers.getPlayground().isOnTurn();
+		for (n = 0; n < MAX_CARDS; n++) if (n<amount) handcards[n].setCompY(onturn?860:920);
+		for (n = 0; n < MAX_CARDS; n++) if (n<amount) if (handcards[n].isMouseOver() && (n==amount-1 || !handcards[n+1].isMouseOver())) {
+			
+			handcards[n].setCompY(onturn?800:860);
+			if (Mouse.isButtonTyped(0)) preview.showCard(handcards[n].getData());
 		}
+		preview.update();
+		preview.refresh();
 	}
 
 	@Override

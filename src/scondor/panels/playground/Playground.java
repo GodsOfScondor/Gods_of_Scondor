@@ -50,8 +50,7 @@ public class Playground extends Container {
 	
 	public void setOnTurn(boolean onturn) {
 		this.onturn = onturn;
-		if (onturn) controller.showMSG("Your turn!");
-		else controller.showMSG("Enemys turn!");
+		controller.turn(onturn);
 	}
 	
 	public void initData(GameType type, String enemy) {

@@ -8,7 +8,7 @@ import scondor.util.Maths;
 public class Picture extends Component {
 	
 	protected Image img;
-	protected float damper = 0.3f, visibility;
+	protected float damper = 0f, visibility;
 	protected float resize = 1f;
 	protected boolean over, before, pressed;
 	protected int r_x,r_y,r_width,r_height;

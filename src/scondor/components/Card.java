@@ -4,6 +4,7 @@ import scondor.deck.card.CardData;
 import scondor.font.Text;
 import scondor.image.Image;
 import scondor.image.Images;
+import scondor.inputs.Mouse;
 import scondor.util.Maths;
 
 public class Card extends Component {
@@ -12,6 +13,8 @@ public class Card extends Component {
 	private Image image;
 	private Text name;
 	private Text description;
+	
+	private boolean over;
 	
 	private CardData data;
 	private float size;
@@ -37,6 +40,10 @@ public class Card extends Component {
 		description.setTransparency(0f);
 		
 		setSize(x,y,size);
+	}
+	
+	public boolean isMouseOver() {
+		return over;
 	}
 	
 	public void changeData(CardData data) {
@@ -88,6 +95,10 @@ public class Card extends Component {
 	public boolean hasData() {
 		return data!=null;
 	}
+	
+	public CardData getData() {
+		return data;
+	}
 
 	@Override
 	public void fade(float start, float end, int duration) {
@@ -107,7 +118,7 @@ public class Card extends Component {
 
 	@Override
 	protected void update() {
-		
+		over = (Mouse.X >= layout.getX() && Mouse.X <= layout.getX() + width && Mouse.Y >= layout.getY() && Mouse.Y <= layout.getY() + height*Maths.getScreenRatio());
 	}
 
 	@Override

@@ -22,6 +22,8 @@ public class Images {
 	
 	public static Texture DECO_FRAMES;
 	
+	public static Texture REFRESH;
+	
 	public static Texture CARD_BACK;
 	public static  Texture CARD_PACK_WILD;
 	
@@ -45,6 +47,8 @@ public class Images {
 		BUTTON_BORDER = new Texture("button_border");
 		
 		DECO_FRAMES = new Texture("frame", 1, 2);
+		
+		REFRESH = new Texture("refresh");
 		
 		CARD_BACK = new Texture("card_back");
 		CARD_PACK_WILD = new Texture("card_pack_gn");
