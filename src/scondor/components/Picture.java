@@ -58,6 +58,7 @@ public class Picture extends Component {
 
 	@Override
 	public void fade(float start, float end, int duration) {
+		visibility=end;
 		img.fade(start, end, duration);
 	}
 
@@ -81,7 +82,7 @@ public class Picture extends Component {
 		
 		before = !over;
 		
-		over = (Mouse.X >= x && Mouse.X <= x + width && Mouse.Y >= y && Mouse.Y <= y + height*Maths.getScreenRatio());
+		over = (Mouse.X >= img.getX() && Mouse.X <= img.getX() + width && Mouse.Y >= img.getY() && Mouse.Y <= img.getY() + height*Maths.getScreenRatio());
 		pressed = (over && Mouse.isButtonPressed(0));
 		
 		if (over) {
@@ -89,27 +90,29 @@ public class Picture extends Component {
 				fade(visibility-damper);
 				setCompWidth((int) (super.getCompWidth()*resize));
 				setCompHeight((int) (super.getCompHeight()*resize));
-				setCompX(r_x - (super.getCompWidth() - r_width)/2);
-				setCompY(r_y - (super.getCompHeight() - r_height)/2);
+				img.setX(r_x - (super.getCompWidth() - r_width)/2);
+				img.setY(r_y - (super.getCompHeight() - r_height)/2);
 			}
 		} else {
 			fade(visibility);
 			setCompWidth(r_width);
 			setCompHeight(r_height);
-			setCompX(r_x);
-			setCompY(r_y);
+			img.setX(r_x);
+			img.setY(r_y);
 		}
 		
 	}
 	
 	@Override
 	public void setCompX(int x) {
+		r_x = x;
 		img.setX(x);
 		super.setCompX(x);
 	}
 	
 	@Override
 	public void setCompY(int y) {
+		r_y = y;
 		img.setY(y);
 		super.setCompY(y);
 	}

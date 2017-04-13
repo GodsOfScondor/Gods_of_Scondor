@@ -19,6 +19,7 @@ import scondor.mana.ManaType;
 import scondor.packets.Message;
 import scondor.server.Client;
 import scondor.util.Action;
+import scondor.util.Maths;
 
 public class Shop extends Container {
 
@@ -86,7 +87,7 @@ public class Shop extends Container {
 		Packs pack2 = new Packs(PackType.I_OPEN, null, 330, 370, 25, 40);
 		Packs.allPacks.add(pack2);
 		
-		preview = new Card(null, 50, 550, 3, true);
+		preview = new Card(new TroopCardData(0, "EXAMPLE", "AAAAAAAAAAAAAAAAAAA", 1, ManaType.WILD, 1, 1, 1), 50, 550, 3, false);
 		
 		/*
 		 * showcase stuff
@@ -126,19 +127,37 @@ public class Shop extends Container {
 				}
 			}
 		}
-		if (preview.hasData()) {
-			// deckPreview = picBuffer;
-			preview.fade(0, 1, 50);
-
-		} else {
-			preview.fade(1, 0, 50);
-		}
+		/*
+		 * du kaust des nd per frame faden lossen!
+		 * auﬂerdem schoffst es somit bam schlieﬂen
+		 * vom Shop (zruck ins Main) de koatn sichtbar
+		 * gmocht wird. ( des hob i da gefixt mit ana
+		 * special function vom container | siehe discard())
+		 */
+//		if (preview.hasData()) {
+//			// deckPreview = picBuffer;
+//			preview.fade(0, 1, 50);
+//
+//		} else {
+//			preview.fade(1, 0, 50);
+//		}
 		showcase.update();
 	}
-
+	
 	@Override
 	public int getID() {
 		return Containers.SHOP;
+	}
+	
+	@Override
+	protected void showup() {
+		System.out.println(Maths.getScreenRatio());
+		preview.fade(0, 1, 0);
+	}
+	
+	@Override
+	protected void discard() {
+		preview.fade(1, 0, 0);
 	}
 
 	public void incomingData(List<CardData> cards, PackType type) {

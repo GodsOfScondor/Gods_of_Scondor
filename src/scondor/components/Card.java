@@ -4,6 +4,7 @@ import scondor.deck.card.CardData;
 import scondor.font.Text;
 import scondor.image.Image;
 import scondor.image.Images;
+import scondor.util.Maths;
 
 public class Card extends Component {
 	
@@ -64,12 +65,12 @@ public class Card extends Component {
 		if (data != null) name.setText(data.getName());
 		name.setSize(size*0.7f);
 		name.setX(x+(int)(42*size)-(name.getWidth()/2));
-		name.setY(y+(int)(78*size));
+		name.setY(y+(int)(58.3f*size*Maths.getScreenRatio()));
 		
 		if (data != null) description.setText(data.getDescription());
 		description.setSize(size*0.3f);
 		description.setX(x+(int)(10*size));
-		description.setY(y+(int)(92*size));
+		description.setY(y+(int)(71*size*Maths.getScreenRatio()));
 		description.setLineSize((int)(super.getCompWidth()*0.85));
 	}
 	
