@@ -82,7 +82,7 @@ public class Main extends Container {
 		 * create pictures
 		 */
 		
-		arrow = new Picture(Images.ICON_ARROW, 780, 400, 20, 20, true);
+		arrow = new Picture(Images.ICON_ARROW, 780, 400, 20, 20, false);
 		
 		/*
 		 * add components to container
@@ -112,6 +112,18 @@ public class Main extends Container {
 		else if (button_options.isMouseOver()) arrow.setCompY(608);
 		else if (button_exit.isMouseOver()) arrow.setCompY(708);
 		else arrow.setCompY(1000);
+	}
+	
+	@Override
+	protected void showup() {
+		System.out.println("shopup");
+		arrow.fade(0, 1, 0);
+	}
+	
+	@Override
+	protected void discard() {
+		System.out.println("discard");
+		arrow.fade(1, 0, 0);
 	}
 
 	@Override

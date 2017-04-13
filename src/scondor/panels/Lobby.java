@@ -120,6 +120,11 @@ public class Lobby extends Container {
 		if (!custom.isMouseOver()) desc_custom.fade(1, 0, 0);
 		
 	}
+	
+	@Override
+	protected void discard() {
+		sword.fade(1f, 0, 0);
+	}
 
 	@Override
 	public int getID() {

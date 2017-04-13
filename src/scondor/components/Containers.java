@@ -68,7 +68,9 @@ public class Containers {
 	
 	public static void show(Container container) {
 		current = container;
-		for (Container cont : containers) cont.fade(1, 0, 0);
+		for (Container cont : containers) {
+			cont.fade(0.01f, 0, 0);
+		}
 		container.fade(0, 1, 30);
 	}
 	

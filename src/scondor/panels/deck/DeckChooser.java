@@ -92,8 +92,6 @@ public class DeckChooser extends Container{
 	
 	public void setData(List<DeckData> decks) {
 		
-		System.out.println(decks.size());
-		
 		for (n=0;n<MAX*2;n++) {
 			
 			if (decks.size()>n) {
@@ -130,9 +128,7 @@ public class DeckChooser extends Container{
 	}
 
 	@Override
-	public void refresh() {
-		
-	}
+	public void refresh() {}
 
 	@Override
 	public int getID() {

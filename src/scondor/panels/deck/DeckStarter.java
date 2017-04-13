@@ -67,6 +67,7 @@ public class DeckStarter extends Container {
 
 	@Override
 	public void refresh() {
+		description.fade(0, 1, 0);
 		if (wild.isMouseOver()) setDescription("This deck combines the strength of WILD creatures. \"Together we are stronger!\"");
 		else setDescription("");
 	}
