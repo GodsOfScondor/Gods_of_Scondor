@@ -1,4 +1,4 @@
-package scondor.panels.authentification;
+package scondor.containers.authentification;
 
 import scondor.Engine;
 import scondor.GodsOfScondor;

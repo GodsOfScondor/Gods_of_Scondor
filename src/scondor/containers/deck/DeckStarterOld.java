@@ -1,5 +1,5 @@
-package scondor.panels.deck;
-//package scondor.panels.deck;
+package scondor.containers.deck;
+//package scondor.containers.deck;
 //
 //import scondor.components.Component;
 //import scondor.components.Label;

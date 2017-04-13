@@ -1,4 +1,4 @@
-package scondor.panels.playground;
+package scondor.containers.battlefield;
 
 import scondor.components.Container;
 import scondor.components.Containers;
@@ -6,7 +6,7 @@ import scondor.image.Images;
 import scondor.session.GameType;
 import scondor.session.PlayerSideData;
 
-public class Playground extends Container {
+public class Battlefield extends Container {
 
 	private static final int PRIORITY = 1;
 
@@ -16,7 +16,7 @@ public class Playground extends Container {
 	
 	private boolean onturn;
 	
-	public Playground() {
+	public Battlefield() {
 		super(PRIORITY);
 		
 		/*

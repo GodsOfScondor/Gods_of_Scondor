@@ -1,4 +1,4 @@
-package scondor.panels;
+package scondor.containers;
 
 import scondor.components.Container;
 import scondor.components.Containers;

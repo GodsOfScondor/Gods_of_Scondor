@@ -1,4 +1,4 @@
-package scondor.panels.playground;
+package scondor.containers.battlefield;
 
 import scondor.components.Container;
 import scondor.components.Containers;

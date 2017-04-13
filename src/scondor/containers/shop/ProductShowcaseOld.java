@@ -1,5 +1,5 @@
-package scondor.panels.shop;
-//package scondor.panels.shop;
+package scondor.containers.shop;
+//package scondor.containers.shop;
 //
 //import java.util.LinkedList;
 //import java.util.Queue;

@@ -3,15 +3,15 @@ package scondor.components;
 import java.util.ArrayList;
 import java.util.List;
 
-import scondor.panels.Lobby;
-import scondor.panels.Main;
-import scondor.panels.PopUp;
-import scondor.panels.authentification.Login;
-import scondor.panels.authentification.Register;
-import scondor.panels.deck.DeckChooser;
-import scondor.panels.deck.DeckStarter;
-import scondor.panels.playground.Playground;
-import scondor.panels.shop.Shop;
+import scondor.containers.Lobby;
+import scondor.containers.Main;
+import scondor.containers.PopUp;
+import scondor.containers.authentification.Login;
+import scondor.containers.authentification.Register;
+import scondor.containers.battlefield.Battlefield;
+import scondor.containers.deck.DeckChooser;
+import scondor.containers.deck.DeckStarter;
+import scondor.containers.shop.Shop;
 
 public class Containers {
 	
@@ -37,7 +37,7 @@ public class Containers {
 	private static Lobby lobby;
 	private static DeckStarter deck_starter;
 	private static DeckChooser deck_chooser;
-	private static Playground playground;
+	private static Battlefield playground;
 	private static Shop shop;
 	
 	private static Container current;
@@ -52,7 +52,7 @@ public class Containers {
 		lobby = new Lobby();
 		deck_starter = new DeckStarter();
 		deck_chooser = new DeckChooser();
-		playground = new Playground();
+		playground = new Battlefield();
 		shop = new Shop();
 		
 		containers.add(main);
@@ -99,7 +99,7 @@ public class Containers {
 		return deck_chooser;
 	}
 	
-	public static Playground getPlayground() {
+	public static Battlefield getPlayground() {
 		return playground;
 	}
 	

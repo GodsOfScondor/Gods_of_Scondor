@@ -1,4 +1,4 @@
-package scondor.panels.shop;
+package scondor.containers.shop;
 
 import java.util.ArrayList;
 

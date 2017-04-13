@@ -1,4 +1,4 @@
-package scondor.panels.playground;
+package scondor.containers.battlefield;
 
 import java.util.List;
 

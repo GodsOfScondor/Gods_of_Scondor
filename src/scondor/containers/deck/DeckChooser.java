@@ -1,4 +1,4 @@
-package scondor.panels.deck;
+package scondor.containers.deck;
 
 import java.util.List;
 
