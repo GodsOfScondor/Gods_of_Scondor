@@ -118,11 +118,6 @@ public class Main extends Container {
 	protected void showup() {
 		arrow.fade(0, 1, 0);
 	}
-	
-	@Override
-	protected void discard() {
-		arrow.fade(1, 0, 0);
-	}
 
 	@Override
 	public int getID() {
