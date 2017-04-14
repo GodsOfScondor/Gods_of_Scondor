@@ -55,6 +55,10 @@ public class Picture extends Component {
 	public boolean isMouseOver() {
 		return over;
 	}
+	
+	public float getVisibility() {
+		return img.getTransparency();
+	}
 
 	@Override
 	public void fade(float start, float end, int duration) {

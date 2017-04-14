@@ -19,10 +19,13 @@ import scondor.mana.ManaType;
 import scondor.packets.Message;
 import scondor.server.Client;
 import scondor.util.Action;
-import scondor.util.Maths;
 
 public class Shop extends Container {
 
+	private static final int PRIORITY = 1;
+	
+	private boolean shopButtonsActive=true;
+	
 	private OutlineEffect outline;
 	private GlowEffect glow;
 	private ShadowEffect shadow;
@@ -36,8 +39,6 @@ public class Shop extends Container {
 	private ProductShowcase showcase;
 
 	private PackType type = null;
-
-	private static final int PRIORITY = 1;
 
 	public Shop() {
 		super(PRIORITY);
@@ -68,8 +69,7 @@ public class Shop extends Container {
 
 		shop = new TextButton("BUY", 510, 500, 5.0f, 1, new Action() {
 			public void perform() {
-				if (type != null) {
-					System.out.println();
+				if (type != null && shopButtonsActive) {
 					ShopHandler.buy(type);
 				}
 			}
@@ -77,15 +77,21 @@ public class Shop extends Container {
 
 		exit = new TextButton("BACK", 810, 600, 5, 1, new Action() {
 			public void perform() {
+				if(shopButtonsActive) {
 				Containers.show(Containers.getMain());
+				System.out.println("I bims ein scheiﬂ back-button und i geh obwoi i nd geh soit!");
+				}
 			}
 		}, true).setEffect(outline).setEffect(glow).setEffect(shadow).setDamper(0.2f);
 
 		Packs pack1 = new Packs(PackType.I_CLOSED, null, 300, 370, 25, 40);
 		Packs.allPacks.add(pack1);
 
-		Packs pack2 = new Packs(PackType.I_OPEN, null, 330, 370, 25, 40);
+		Packs pack2 = new Packs(PackType.I_OPEN, null, 350, 370, 25, 40);
 		Packs.allPacks.add(pack2);
+		
+		Packs pack3 = new Packs(PackType.X_CLOSED, null, 400, 370, 25, 40);
+		Packs.allPacks.add(pack3);
 		
 		preview = new Card(new TroopCardData(0, "EXAMPLE", "AAAAAAAAAAAAAAAAAAA", 1, ManaType.WILD, 1, 1, 1), 50, 550, 3, false);
 		
@@ -94,6 +100,7 @@ public class Shop extends Container {
 		 */
 		
 		showcase = new ProductShowcase();
+		showcase.fade(0, 1, 0);
 		
 		/*
 		 * add components to container
@@ -127,20 +134,6 @@ public class Shop extends Container {
 				}
 			}
 		}
-		/*
-		 * du kaust des nd per frame faden lossen!
-		 * auﬂerdem schoffst es somit bam schlieﬂen
-		 * vom Shop (zruck ins Main) de koatn sichtbar
-		 * gmocht wird. ( des hob i da gefixt mit ana
-		 * special function vom container | siehe discard())
-		 */
-//		if (preview.hasData()) {
-//			// deckPreview = picBuffer;
-//			preview.fade(0, 1, 50);
-//
-//		} else {
-//			preview.fade(1, 0, 50);
-//		}
 		showcase.update();
 	}
 	
@@ -151,7 +144,6 @@ public class Shop extends Container {
 	
 	@Override
 	protected void showup() {
-		System.out.println(Maths.getScreenRatio());
 		preview.fade(0, 1, 0);
 	}
 	
@@ -161,10 +153,15 @@ public class Shop extends Container {
 	}
 
 	public void incomingData(List<CardData> cards, PackType type) {
-		//2 Probleme:
-		//wenn diese methode aufgerufen wird d¸rfen die buttons im hintergrund nicht funktionieren
-		//nach mouseklick werden keine n‰chsten der gekauften karten angezeigt
+		shopButtonsActive = false;
 		showcase.incomingData(cards, type);
 	}
-
+	
+	public boolean getShopButtonsActive() {
+		return shopButtonsActive;
+	}
+	
+	public void setShopButtonsActive(boolean shopButtonsActive) {
+		this.shopButtonsActive = shopButtonsActive;
+	}
 }
