@@ -66,7 +66,6 @@ public class ProductShowcase extends Container {
 			if (Mouse.isButtonTyped(0)) {
 				CardData data = queue.poll();
 				if (data == null) {
-					// end of queue
 					Containers.getShop().setShopButtonsActive(true);
 					showcase.changeData(null);
 					showcase.fade(1, 0, 100);

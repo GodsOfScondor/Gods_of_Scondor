@@ -78,8 +78,8 @@ public class Shop extends Container {
 		exit = new TextButton("BACK", 810, 600, 5, 1, new Action() {
 			public void perform() {
 				if(shopButtonsActive) {
-				Containers.show(Containers.getMain());
-				System.out.println("I bims ein scheiﬂ back-button und i geh obwoi i nd geh soit!");
+					Containers.show(Containers.getMain());
+					System.out.println("I bims ein scheiﬂ back-button und i geh obwoi i nd geh soit!");
 				}
 			}
 		}, true).setEffect(outline).setEffect(glow).setEffect(shadow).setDamper(0.2f);
