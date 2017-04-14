@@ -2,11 +2,13 @@ package scondor.containers.battlefield;
 
 import scondor.components.Container;
 import scondor.components.Containers;
+import scondor.components.Picture;
 import scondor.containers.battlefield.endofgame.EndOfGame;
 import scondor.containers.battlefield.endofgame.EndOfGameType;
 import scondor.image.Images;
 import scondor.session.GameType;
 import scondor.session.PlayerSideData;
+import scondor.util.Maths;
 
 public class Battlefield extends Container {
 
@@ -17,6 +19,8 @@ public class Battlefield extends Container {
 	private Controller controller;
 	private EndOfGame endofgame;
 	
+	private Picture battle_bar;
+	
 	private boolean onturn;
 	
 	public Battlefield() {
@@ -26,7 +30,7 @@ public class Battlefield extends Container {
 		 * set background
 		 */
 		
-		super.setBackground(Images.WALLPAPER_LOBBY);
+		super.setBackground(Images.BATTLEFIELD_FIELD);
 		
 		/*
 		 * create containers
@@ -37,10 +41,26 @@ public class Battlefield extends Container {
 		controller = new Controller();
 		endofgame = new EndOfGame();
 		
+		/*
+		 * make containers visible (for updating)
+		 */
+		
 		player_hand.fade(0, 1, 0);
 		enemy_hand.fade(0, 1, 0);
 		controller.fade(0, 1, 0);
 		endofgame.fade(0, 1, 0);
+		
+		/*
+		 * create components
+		 */
+		
+		battle_bar = new Picture(Images.BATTLEFIELD_BAR, 0, 750, 1000,1+(int) (250/Maths.getScreenRatio()), true).setLayer(0.49f);
+		
+		/*
+		 * add components to container
+		 */
+		
+		super.add(battle_bar);
 		
 		/*
 		 * validate container

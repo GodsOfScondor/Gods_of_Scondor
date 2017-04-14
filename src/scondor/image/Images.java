@@ -27,6 +27,9 @@ public class Images {
 	public static Texture CARD_BACK;
 	public static  Texture CARD_PACK_WILD;
 	
+	public static Texture BATTLEFIELD_BAR;
+	public static Texture BATTLEFIELD_FIELD;
+	
 	public static void load() {
 		
 		WALLPAPER_LOBBY = new Texture("lobby");
@@ -52,6 +55,10 @@ public class Images {
 		
 		CARD_BACK = new Texture("card_back");
 		CARD_PACK_WILD = new Texture("card_pack_gn");
+		
+		BATTLEFIELD_BAR = new Texture(new Texture("bar", 1, 2), 0, 1);
+		BATTLEFIELD_FIELD = new Texture("battlefield");
+		
 	}
 	
 }

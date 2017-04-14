@@ -97,7 +97,7 @@ public class Lobby extends Container {
 		super.validate();
 		
 	}
-
+	
 	@Override
 	public void refresh() {
 		
@@ -124,6 +124,9 @@ public class Lobby extends Container {
 	@Override
 	protected void discard() {
 		sword.fade(1f, 0, 0);
+		desc_ranked.fade(1, 0, 0);
+		desc_online.fade(1, 0, 0);
+		desc_custom.fade(1, 0, 0);
 	}
 
 	@Override

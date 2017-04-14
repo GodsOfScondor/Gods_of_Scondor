@@ -59,7 +59,7 @@ public class PlayerHand extends Container{
 		for (n = 0; n < MAX_CARDS; n++) {
 			if (n < handcards.size()) {
 				this.handcards[n].changeData(handcards.get(n));
-				this.handcards[n].setCompX(440 - 40 * n + (((handcards.size() - n) * 40) / 2));
+				this.handcards[n].setCompX(460 - 40 * n + (((handcards.size() - n) * 40) / 2));
 				this.handcards[n].fade(0, 1, 0);
 			} else {
 				this.handcards[n].fade(1, 0, 0);

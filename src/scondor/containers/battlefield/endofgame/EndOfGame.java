@@ -1,10 +1,13 @@
 package scondor.containers.battlefield.endofgame;
 
 import scondor.components.Container;
+import scondor.components.Containers;
 import scondor.components.Label;
 import scondor.components.Picture;
+import scondor.components.TextButton;
 import scondor.font.effect.OutlineEffect;
 import scondor.image.Images;
+import scondor.util.Action;
 import scondor.util.Color;
 
 public class EndOfGame extends Container {
@@ -13,6 +16,7 @@ public class EndOfGame extends Container {
 	
 	private Picture black_fade;
 	private Label end_msg;
+	private TextButton back;
 	
 	public EndOfGame() {
 		super(PRIORITY);
@@ -30,6 +34,11 @@ public class EndOfGame extends Container {
 		
 		black_fade = new Picture(Images.COLOR_BLACK, false);
 		end_msg = new Label("", 500, 400, 7, 2, false).setColor(white).setEffect(outline);
+		back = new TextButton("Back to main menu?", 500, 600, 2, 3, new Action() {
+			public void perform() {
+				Containers.show(Containers.getMain());
+			}
+		}, false).setColor(white).setEffect(outline);
 		
 		/*
 		 * add components add container
@@ -37,6 +46,7 @@ public class EndOfGame extends Container {
 		
 		super.add(black_fade);
 		super.add(end_msg);
+		super.add(back);
 		
 		/*
 		 * validata container
@@ -62,6 +72,8 @@ public class EndOfGame extends Container {
 			end_msg.setText("Enemey disconnected!");
 			end_msg.setCompX(500-(end_msg.getCompWidth()/2));
 			end_msg.fade(0, 1, 100);
+			back.setCompX(500-(back.getCompWidth()/2));
+			back.fade(0, 1, 100);
 			break;
 		case SURRENDER_LOSE:
 			break;
@@ -71,6 +83,12 @@ public class EndOfGame extends Container {
 			break;
 		}
 		
+	}
+	
+	@Override
+	protected void discard() {
+		end_msg.fade(0.1f, 0, 0);
+		back.fade(0.1f, 0, 0);
 	}
 
 	@Override
