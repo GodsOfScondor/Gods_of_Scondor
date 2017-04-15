@@ -66,7 +66,11 @@ public class PlayerHand extends Container{
 			}
 		}
 	}
-
+	
+	public void discardCardPreview() {
+		preview.discard();
+	}
+	
 	@Override
 	public void refresh() {
 		boolean onturn = Containers.getBattlefield().isOnTurn();

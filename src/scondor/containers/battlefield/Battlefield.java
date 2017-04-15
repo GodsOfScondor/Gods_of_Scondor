@@ -93,6 +93,22 @@ public class Battlefield extends Container {
 
 	}
 
+	public PlayerHand getPlayerhand() {
+		return player_hand;
+	}
+
+	public EnemyHand getEnemyhand() {
+		return enemy_hand;
+	}
+
+	public Controller getController() {
+		return controller;
+	}
+
+	public EndOfGame getEndOfGame() {
+		return endofgame;
+	}
+
 	@Override
 	public void refresh() {
 		player_hand.update();
