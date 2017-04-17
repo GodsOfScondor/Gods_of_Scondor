@@ -86,7 +86,8 @@ public class EndOfGame extends Container {
 	}
 	
 	@Override
-	protected void discard() {
+	public void discard() {
+		black_fade.fade(0.1f, 0, 0);
 		end_msg.fade(0.1f, 0, 0);
 		back.fade(0.1f, 0, 0);
 	}

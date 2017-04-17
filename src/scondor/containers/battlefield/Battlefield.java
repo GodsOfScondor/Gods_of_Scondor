@@ -18,6 +18,7 @@ public class Battlefield extends Container {
 	private EnemyHand enemy_hand;
 	private Controller controller;
 	private EndOfGame endofgame;
+	private BattleMenu menu;
 	
 	private Picture battle_bar;
 	
@@ -40,6 +41,7 @@ public class Battlefield extends Container {
 		enemy_hand = new EnemyHand();
 		controller = new Controller();
 		endofgame = new EndOfGame();
+		menu = new BattleMenu();
 		
 		/*
 		 * make containers visible (for updating)
@@ -49,6 +51,7 @@ public class Battlefield extends Container {
 		enemy_hand.fade(0, 1, 0);
 		controller.fade(0, 1, 0);
 		endofgame.fade(0, 1, 0);
+		menu.fade(0, 1, 0);
 		
 		/*
 		 * create components
@@ -92,6 +95,16 @@ public class Battlefield extends Container {
 		player_hand.updateCards(player.getHand());
 
 	}
+	
+	@Override
+	public void discard() {
+		player_hand.discardCardPreview();
+		player_hand.discard();
+		enemy_hand.discard();
+		controller.discard();
+		menu.discard();
+		endofgame.discard();
+	}
 
 	public PlayerHand getPlayerhand() {
 		return player_hand;
@@ -108,13 +121,14 @@ public class Battlefield extends Container {
 	public EndOfGame getEndOfGame() {
 		return endofgame;
 	}
-
+	
 	@Override
 	public void refresh() {
 		player_hand.update();
 		enemy_hand.update();
 		controller.update();
 		endofgame.update();
+		menu.update();
 	}
 
 	@Override

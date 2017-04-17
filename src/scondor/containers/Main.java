@@ -115,12 +115,12 @@ public class Main extends Container {
 	}
 	
 	@Override
-	protected void showup() {
+	public void showup() {
 		arrow.fade(0, 1, 0);
 	}
 	
 	@Override
-	protected void discard() {
+	public void discard() {
 		arrow.fade(1, 0, 0);
 	}
 

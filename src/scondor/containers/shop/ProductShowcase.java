@@ -56,7 +56,7 @@ public class ProductShowcase extends Container {
 	}
 
 	@Override
-	protected void showup() {
+	public void showup() {
 		black_fade.fade(0.1f, 0, 0);
 	}
 

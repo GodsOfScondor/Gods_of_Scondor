@@ -8,7 +8,7 @@ import scondor.components.Containers;
 import scondor.deck.card.CardData;
 import scondor.inputs.Mouse;
 
-public class PlayerHand extends Container{
+public class PlayerHand extends Container {
 
 	private static final int PRIORITY = 2;
 
@@ -69,6 +69,11 @@ public class PlayerHand extends Container{
 	
 	public void discardCardPreview() {
 		preview.discard();
+	}
+	
+	@Override
+	public void discard() {
+		for (n = 0; n < MAX_CARDS; n++) this.handcards[n].fade(1, 0, 0);
 	}
 	
 	@Override

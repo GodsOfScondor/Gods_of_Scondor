@@ -122,7 +122,7 @@ public class Lobby extends Container {
 	}
 	
 	@Override
-	protected void discard() {
+	public void discard() {
 		sword.fade(1f, 0, 0);
 		desc_ranked.fade(1, 0, 0);
 		desc_online.fade(1, 0, 0);

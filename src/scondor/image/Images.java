@@ -17,6 +17,7 @@ public class Images {
 	public static Texture TEST_IMG;
 	
 	public static Texture ICON_ARROW;
+	public static Texture ICON_MENU;
 	
 	public static Texture BUTTON_BORDER;
 	
@@ -47,6 +48,7 @@ public class Images {
 		TEST_IMG = new Texture("img_test");
 		
 		ICON_ARROW = new Texture("arrow");
+		ICON_MENU = new Texture("menu");
 		BUTTON_BORDER = new Texture("button_border");
 		
 		DECO_FRAMES = new Texture("frame", 1, 2);

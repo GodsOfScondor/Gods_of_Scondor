@@ -52,7 +52,12 @@ public class EnemyHand extends Container {
 			}
 		}
 	}
-
+	
+	@Override
+	public void discard() {
+		for (n=0;n<MAX_CARDS;n++) this.handcards[n].fade(1, 0, 0);
+	}
+	
 	@Override
 	public void refresh() {
 		if (Containers.getBattlefield().isOnTurn()) {

@@ -143,12 +143,12 @@ public class Shop extends Container {
 	}
 	
 	@Override
-	protected void showup() {
+	public void showup() {
 		preview.fade(0, 1, 0);
 	}
 	
 	@Override
-	protected void discard() {
+	public void discard() {
 		preview.fade(1, 0, 0);
 	}
 

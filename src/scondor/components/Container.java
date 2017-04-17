@@ -98,9 +98,9 @@ public abstract class Container implements Fadeable {
 	/*
 	 * special funtion methods can be overriden if needed
 	 */
-	protected void runInBackGround() {}
-	protected void showup() {}
-	protected void discard() {}
+	public void runInBackGround() {}
+	public void showup() {}
+	public void discard() {}
 	
 	/*
 	 * textfield mechanics

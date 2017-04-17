@@ -44,7 +44,7 @@ public class CardPreview extends Container {
 	}
 	
 	@Override
-	protected void discard() {
+	public void discard() {
 		preview.fade(1, 0, 0);
 	}
 
