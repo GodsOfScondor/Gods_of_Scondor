@@ -4,6 +4,9 @@ import scondor.components.Container;
 import scondor.components.IconButton;
 import scondor.components.Label;
 import scondor.image.Images;
+import scondor.packets.Message;
+import scondor.server.Client;
+import scondor.util.Action;
 
 public class Controller extends Container {
 
@@ -23,7 +26,12 @@ public class Controller extends Container {
 		
 		switch_msg = new Label("", 0, 400, 6, 2, false);
 		timer = new Label("", 940, 892, 3, 3, false);
-		switch_button = new IconButton(Images.REFRESH, 900, 860, 80, 80, null, true);
+		switch_button = new IconButton(Images.REFRESH, 900, 860, 80, 80, new Action() {
+			@Override
+			public void perform() {
+				Client.sendToServer(new Message("fight;action;switch"));
+			}
+		}, true);
 		
 		/*
 		 * add components to container
