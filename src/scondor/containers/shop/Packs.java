@@ -15,7 +15,7 @@ public class Packs {
 	private PackType type;
 
 	Texture closed = new Texture("card_gn_common");
-	Texture open = new Texture("arrow");
+	Texture open = new Texture("arrow"); //to be taken out of the atlas later on
 
 	public Packs(PackType type, CardData data, int x, int y, int width, int height) {
 		this.data = data;
