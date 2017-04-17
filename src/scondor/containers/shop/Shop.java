@@ -23,9 +23,9 @@ import scondor.util.Action;
 public class Shop extends Container {
 
 	private static final int PRIORITY = 1;
-	
-	private boolean shopButtonsActive=true;
-	
+
+	private boolean shopButtonsActive = true;
+
 	private OutlineEffect outline;
 	private GlowEffect glow;
 	private ShadowEffect shadow;
@@ -77,9 +77,8 @@ public class Shop extends Container {
 
 		exit = new TextButton("BACK", 810, 600, 5, 1, new Action() {
 			public void perform() {
-				if(shopButtonsActive) {
+				if (shopButtonsActive) {
 					Containers.show(Containers.getMain());
-					System.out.println("I bims ein scheiﬂ back-button und i geh obwoi i nd geh soit!");
 				}
 			}
 		}, true).setEffect(outline).setEffect(glow).setEffect(shadow).setDamper(0.2f);
@@ -89,24 +88,26 @@ public class Shop extends Container {
 
 		Packs pack2 = new Packs(PackType.I_OPEN, null, 350, 370, 25, 40);
 		Packs.allPacks.add(pack2);
-		
+
 		Packs pack3 = new Packs(PackType.X_CLOSED, null, 400, 370, 25, 40);
 		Packs.allPacks.add(pack3);
-		
-		preview = new Card(new TroopCardData(0, "EXAMPLE", "AAAAAAAAAAAAAAAAAAA", 1, ManaType.WILD, 1, 1, 1), 50, 550, 3, false);
-		
+
+		preview = new Card(new TroopCardData(0, "EXAMPLE", "AAAAAAAAAAAAAAAAAAA", 1, ManaType.WILD, 1, 2, 3), 50,
+				500, 3, false);
+
 		/*
 		 * showcase stuff
 		 */
-		
+
 		showcase = new ProductShowcase();
 		showcase.fade(0, 1, 0);
-		
+
 		/*
 		 * add components to container
 		 */
-		
-		for (Packs pack : Packs.allPacks) super.add(pack.getPicture());
+
+		for (Packs pack : Packs.allPacks)
+			super.add(pack.getPicture());
 
 		add(preview);
 		add(title);
@@ -118,7 +119,7 @@ public class Shop extends Container {
 		 * validate container
 		 */
 		super.validate();
-		
+
 	}
 
 	@Override
@@ -136,17 +137,17 @@ public class Shop extends Container {
 		}
 		showcase.update();
 	}
-	
+
 	@Override
 	public int getID() {
 		return Containers.SHOP;
 	}
-	
+
 	@Override
 	public void showup() {
 		preview.fade(0, 1, 0);
 	}
-	
+
 	@Override
 	public void discard() {
 		preview.fade(1, 0, 0);
@@ -156,11 +157,11 @@ public class Shop extends Container {
 		shopButtonsActive = false;
 		showcase.incomingData(cards, type);
 	}
-	
+
 	public boolean getShopButtonsActive() {
 		return shopButtonsActive;
 	}
-	
+
 	public void setShopButtonsActive(boolean shopButtonsActive) {
 		this.shopButtonsActive = shopButtonsActive;
 	}
