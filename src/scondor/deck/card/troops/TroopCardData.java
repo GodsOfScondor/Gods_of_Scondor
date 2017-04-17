@@ -24,7 +24,7 @@ public class TroopCardData extends CardData {
 		return attack;
 	}
 
-	public int getLive() {
+	public int getLife() {
 		return live;
 	}
 
