@@ -122,6 +122,10 @@ public class Battlefield extends Container {
 		return endofgame;
 	}
 	
+	public BattleMenu getBattleMenu() {
+		return menu;
+	}
+	
 	@Override
 	public void refresh() {
 		player_hand.update();
