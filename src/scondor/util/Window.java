@@ -14,7 +14,7 @@ public class Window {
 			if (mode.getFrequency()<30) mode = new DisplayMode(1920, 1080);
 			else Display.setFullscreen(true);
 			
-			Display.setDisplayMode(new DisplayMode(1200, 800));
+			Display.setDisplayMode(new DisplayMode(600, 400));
 			Display.setFullscreen(false);
 			
 			Display.setTitle("Gods of Scondor");

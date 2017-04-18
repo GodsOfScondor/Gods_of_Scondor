@@ -66,6 +66,8 @@ public class EndOfGame extends Container {
 	
 	public void show(EndOfGameType type) {
 		
+		Containers.getBattlefield().getBattleMenu().discard();
+		
 		open = true;
 		
 		switch (type) {

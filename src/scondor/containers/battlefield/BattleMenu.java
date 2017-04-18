@@ -31,7 +31,7 @@ public class BattleMenu extends Container {
 		
 		menu_button = new IconButton(Images.ICON_MENU, 10, 10, 60, 60, new Action() {
 			public void perform() {
-				show();
+				if (!Containers.getBattlefield().getEndOfGame().isOpen()) show();
 			}
 		}, true);
 		resume = new TextButton("RESUME GAME", 500, 300, 4f, 3, new Action() {
