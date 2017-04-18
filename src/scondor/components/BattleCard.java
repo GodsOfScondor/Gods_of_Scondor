@@ -28,8 +28,11 @@ public class BattleCard extends Component {
 		layout = new Image(Images.LAYOUT_GREEN_BATTLE, 0, 0, 0, 0, -1);
 		image = new Image(Images.TEST_IMG, 0, 0, 0, 0, -1);
 		attack = new Text("", 0, 0, 0, 1, -1);
+		attack.setColor(1, 0, 0);
 		life = new Text("", 0, 0, 0, 1, -1);
+		life.setColor(0, 1, 0);
 		countdown = new Text("", 0, 0, 0, 1, -1);
+		countdown.setColor(1, 1, 1);
 
 		setLayer(0.49f);
 
@@ -72,27 +75,27 @@ public class BattleCard extends Component {
 		super.setCompWidth((int) (80 * size));
 		super.setCompHeight((int) (120 * size));
 
-		layout.setX(x + (int) (0f * size));
-		layout.setY(y + (int) (0 * size));
-		layout.setWidth(super.getCompWidth());
-		layout.setHeight(super.getCompHeight());
+		layout.setX(x);
+		layout.setY(y);
+		layout.setWidth((int) super.getCompWidth());
+		layout.setHeight((int) super.getCompHeight());
 
-		image.setX(x + (int) (0f * size));
-		image.setY(y + (int) (0 * size));
-		image.setWidth((int) (super.getCompWidth()));
-		image.setHeight((int) (super.getCompHeight()));
+		image.setX(x + (int) (8f * size));
+		image.setY(y + (int) (12f * size * Maths.getScreenRatio()));
+		image.setWidth((int) (super.getCompWidth()*0.8));
+		image.setHeight((int) (super.getCompHeight()*0.8));
 
 		attack.setSize(size * 1.5f);
-		attack.setX(x + (int) (20 * size) - (attack.getWidth() / 2));
-		attack.setY(y + (int) (95 * size * Maths.getScreenRatio()));
-
-		life.setSize(size * 1.5f);
-		life.setX(x + (int) (42 * size) - (life.getWidth() / 2));
-		life.setY(y + (int) (95 * size * Maths.getScreenRatio()));
+		attack.setX(x + (int) (16 * size) - (attack.getWidth() / 2));
+		attack.setY(y + (int) (92 * size * Maths.getScreenRatio()));
 
 		countdown.setSize(size * 1.5f);
-		countdown.setX(x + (int) (63 * size) - (countdown.getWidth() / 2));
+		countdown.setX(x + (int) (42 * size) - (countdown.getWidth() / 2));
 		countdown.setY(y + (int) (95 * size * Maths.getScreenRatio()));
+
+		life.setSize(size * 1.5f);
+		life.setX(x + (int) (67 * size) - (life.getWidth() / 2));
+		life.setY(y + (int) (92 * size * Maths.getScreenRatio()));
 	}
 
 	public float getSize() {

@@ -93,7 +93,7 @@ public class Shop extends Container {
 		Packs.allPacks.add(pack3);
 
 		preview = new BattleCard(new ATCardData(0, "EXAMPLE", "AAAAAAAAAAAAAAAAAAA", 1, ManaType.WILD, 1, 2, 3), 50,
-				500, 3, false);
+				500, 0.8f, false);
 
 		/*
 		 * showcase stuff
