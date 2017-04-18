@@ -45,7 +45,7 @@ public class Images {
 		COLOR_BLUE = new Texture("colors/blue");
 		
 		LAYOUT_GREEN_COMMON = new Texture("card_gn_common");
-		LAYOUT_GREEN_COMMON = new Texture("card_gn_battle");
+		LAYOUT_GREEN_BATTLE = new Texture("card_gn_battle");
 		
 		TEST_IMG = new Texture("img_test");
 		

@@ -72,15 +72,15 @@ public class BattleCard extends Component {
 		super.setCompWidth((int) (80 * size));
 		super.setCompHeight((int) (120 * size));
 
-		layout.setX(x);
-		layout.setY(y);
+		layout.setX(x + (int) (0f * size));
+		layout.setY(y + (int) (0 * size));
 		layout.setWidth(super.getCompWidth());
 		layout.setHeight(super.getCompHeight());
 
-		image.setX(x + (int) (6f * size));
-		image.setY(y + (int) (12 * size));
-		image.setWidth((int) (super.getCompWidth() * 0.85));
-		image.setHeight((int) (super.getCompHeight() * 0.43));
+		image.setX(x + (int) (0f * size));
+		image.setY(y + (int) (0 * size));
+		image.setWidth((int) (super.getCompWidth()));
+		image.setHeight((int) (super.getCompHeight()));
 
 		attack.setSize(size * 1.5f);
 		attack.setX(x + (int) (20 * size) - (attack.getWidth() / 2));
