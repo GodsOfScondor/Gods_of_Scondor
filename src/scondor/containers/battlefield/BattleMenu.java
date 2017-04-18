@@ -5,7 +5,10 @@ import scondor.components.Containers;
 import scondor.components.IconButton;
 import scondor.components.Picture;
 import scondor.components.TextButton;
+import scondor.containers.battlefield.endofgame.EndOfGameType;
 import scondor.image.Images;
+import scondor.packets.Message;
+import scondor.server.Client;
 import scondor.util.Action;
 
 public class BattleMenu extends Container {
@@ -33,13 +36,18 @@ public class BattleMenu extends Container {
 		}, true);
 		resume = new TextButton("RESUME GAME", 500, 300, 4f, 3, new Action() {
 			public void perform() {
-				show();
+				if (open) show();
 			}
 		}, false);
 		resume.setCompX(500-(resume.getCompWidth()/2));
 		settings = new TextButton("SETTINGS", 500, 400, 4f, 3, null, false);
 		settings.setCompX(500-(settings.getCompWidth()/2));
-		surrender = new TextButton("SURRENDER", 500, 500, 4f, 3, null, false);
+		surrender = new TextButton("SURRENDER", 500, 500, 4f, 3, new Action() {
+			public void perform() {
+				Client.sendToServer(new Message("fight;action;surrender"));
+				Containers.getBattlefield().end(EndOfGameType.SURRENDER_LOSE);
+			}
+		}, false);
 		surrender.setCompX(500-(surrender.getCompWidth()/2));
 		black_fade = new Picture(Images.COLOR_BLACK, false);
 		
@@ -78,6 +86,10 @@ public class BattleMenu extends Container {
 		}
 	}
 	
+	public boolean isOpen() {
+		return open;
+	}
+	
 	@Override
 	public void showup() {
 		black_fade.fade(1, 0, 0);
@@ -85,6 +97,7 @@ public class BattleMenu extends Container {
 	
 	@Override
 	public void discard() {
+		black_fade.fade(1, 0, 0);
 		menu_button.fade(1, 0, 0);
 		resume.fade(1, 0, 0);
 		settings.fade(1, 0, 0);

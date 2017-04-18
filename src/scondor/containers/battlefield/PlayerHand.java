@@ -80,11 +80,14 @@ public class PlayerHand extends Container {
 	public void refresh() {
 		boolean onturn = Containers.getBattlefield().isOnTurn();
 		for (n = 0; n < MAX_CARDS; n++) if (n<amount) handcards[n].setCompY(onturn?860:920);
-		for (n = 0; n < MAX_CARDS; n++) if (n<amount) if (handcards[n].isMouseOver() && (n==amount-1 || !handcards[n+1].isMouseOver())) {
-			
-			handcards[n].setCompY(onturn?800:860);
-			if (Mouse.isButtonTyped(0)) preview.showCard(handcards[n].getData());
+		
+		if (!Containers.getBattlefield().getBattleMenu().isOpen() && !Containers.getBattlefield().getEndOfGame().isOpen()) {
+			for (n = 0; n < MAX_CARDS; n++) if (n<amount) if (handcards[n].isMouseOver() && (n==amount-1 || !handcards[n+1].isMouseOver())) {
+				handcards[n].setCompY(onturn?800:860);
+				if (Mouse.isButtonTyped(0)) preview.showCard(handcards[n].getData());
+			}
 		}
+		
 		preview.update();
 		preview.refresh();
 	}
