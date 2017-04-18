@@ -9,7 +9,7 @@ import scondor.components.Containers;
 import scondor.components.Label;
 import scondor.components.TextButton;
 import scondor.deck.card.CardData;
-import scondor.deck.card.troops.TroopCardData;
+import scondor.deck.card.troops.ATCardData;
 import scondor.font.effect.GlowEffect;
 import scondor.font.effect.OutlineEffect;
 import scondor.font.effect.ShadowEffect;
@@ -92,7 +92,7 @@ public class Shop extends Container {
 		Packs pack3 = new Packs(PackType.X_CLOSED, null, 400, 370, 25, 40);
 		Packs.allPacks.add(pack3);
 
-		preview = new Card(new TroopCardData(0, "EXAMPLE", "AAAAAAAAAAAAAAAAAAA", 1, ManaType.WILD, 1, 2, 3), 50,
+		preview = new Card(new ATCardData(0, "EXAMPLE", "AAAAAAAAAAAAAAAAAAA", 1, ManaType.WILD, 1, 2, 3), 50,
 				500, 3, false);
 
 		/*
@@ -129,7 +129,7 @@ public class Shop extends Container {
 			if (deck.getPicture().isMouseOver()) {
 				if (Mouse.isButtonTyped(0)) {
 
-					TroopCardData data = new TroopCardData(new Random().nextInt(10), "", "", 0, ManaType.WILD, 0, 0, 0);
+					ATCardData data = new ATCardData(new Random().nextInt(10), "", "", 0, ManaType.WILD, 0, 0, 0);
 					preview.changeData(data);
 					type = deck.getPackType();
 				}

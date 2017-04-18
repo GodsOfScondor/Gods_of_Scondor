@@ -5,7 +5,8 @@ import java.util.List;
 
 import scondor.deck.card.CardData;
 import scondor.deck.card.fieldcard.FieldCardData;
-import scondor.deck.card.troops.TroopCardData;
+import scondor.deck.card.troops.ATCardData;
+import scondor.deck.card.troops.DTCardData;
 import scondor.god.GodData;
 
 /**
@@ -26,12 +27,12 @@ public class PlayerSideData implements Serializable {
 	private List<CardData> stack;
 	private List<CardData> graveyard;
 	
-	private TroopCardData[] attackers;
-	private TroopCardData[] defenders;
+	private ATCardData[] attackers;
+	private DTCardData[] defenders;
 	
 	private GodData god;
 
-	public PlayerSideData(FieldCardData fieldcard, List<CardData> hand, List<CardData> stack, List<CardData> graveyard, TroopCardData[] attackers, TroopCardData[] defenders, GodData god) {
+	public PlayerSideData(FieldCardData fieldcard, List<CardData> hand, List<CardData> stack, List<CardData> graveyard, ATCardData[] attackers, DTCardData[] defenders, GodData god) {
 		this.fieldcard = fieldcard;
 		this.hand = hand;
 		this.stack = stack;
@@ -61,11 +62,11 @@ public class PlayerSideData implements Serializable {
 		return graveyard;
 	}
 
-	public TroopCardData[] getAttackers() {
+	public ATCardData[] getAttackers() {
 		return attackers;
 	}
 
-	public TroopCardData[] getDefenders() {
+	public DTCardData[] getDefenders() {
 		return defenders;
 	}
 

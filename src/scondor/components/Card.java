@@ -1,7 +1,7 @@
 package scondor.components;
 
 import scondor.deck.card.CardData;
-import scondor.deck.card.troops.TroopCardData;
+import scondor.deck.card.troops.ATCardData;
 import scondor.font.Text;
 import scondor.image.Image;
 import scondor.image.Images;
@@ -59,11 +59,11 @@ public class Card extends Component {
 			name.setText(data.getName());
 			description.setText(data.getDescription());
 
-			if (data instanceof TroopCardData) {
+			if (data instanceof ATCardData) {
 
-				int attack = ((TroopCardData) data).getAttack();
-				int life = ((TroopCardData) data).getLife();
-				int countdown = ((TroopCardData) data).getCountdown();
+				int attack = ((ATCardData) data).getAttack();
+				int life = ((ATCardData) data).getLife();
+				int countdown = ((ATCardData) data).getCountdown();
 
 				this.attack.setText("" + attack);
 				this.life.setText("" + life);

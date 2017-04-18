@@ -3,7 +3,7 @@ package scondor.deck.card.troops;
 import scondor.deck.card.CardData;
 import scondor.mana.ManaType;
 
-public class TroopCardData extends CardData {
+public class ATCardData extends CardData {
 	
 	private static final long serialVersionUID = -1758970014931750800L;
 	private int attack, live, countdown;
@@ -13,7 +13,7 @@ public class TroopCardData extends CardData {
 	 * repesents raw data of a troop card
 	 * 
 	 */
-	public TroopCardData(int id, String name, String description, int mana_cost, ManaType mana_type, int attack, int live, int countdown) {
+	public ATCardData(int id, String name, String description, int mana_cost, ManaType mana_type, int attack, int live, int countdown) {
 		super(id, name, description, mana_cost, mana_type);
 		this.attack = attack;
 		this.live = live;
@@ -46,7 +46,7 @@ public class TroopCardData extends CardData {
 
 	@Override
 	public CardData cloneCard() {
-		return new TroopCardData(attack, name, description, attack, mana_type, attack, live, countdown);
+		return new ATCardData(id, name, description, attack, mana_type, attack, live, countdown);
 	}
 	
 }
