@@ -17,6 +17,8 @@ public class EndOfGame extends Container {
 	private Picture black_fade;
 	private Label end_msg;
 	private TextButton back;
+
+	private boolean open;
 	
 	public EndOfGame() {
 		super(PRIORITY);
@@ -64,25 +66,34 @@ public class EndOfGame extends Container {
 	
 	public void show(EndOfGameType type) {
 		
+		open = true;
+		
 		switch (type) {
 		case LOSE:
 			break;
 		case QUIT:
-			black_fade.fade(0, 0.8f, 100);
 			end_msg.setText("Enemey disconnected!");
-			end_msg.setCompX(500-(end_msg.getCompWidth()/2));
-			end_msg.fade(0, 1, 100);
-			back.setCompX(500-(back.getCompWidth()/2));
-			back.fade(0, 1, 100);
 			break;
 		case SURRENDER_LOSE:
+			end_msg.setText("You have surrenderd!");
 			break;
 		case SURRENDER_WIN:
+			end_msg.setText("Enemey surrenderd!");
 			break;
 		case WIN:
 			break;
 		}
 		
+		black_fade.fade(0, 0.8f, 100);
+		end_msg.setCompX(500-(end_msg.getCompWidth()/2));
+		end_msg.fade(0, 1, 100);
+		back.setCompX(500-(back.getCompWidth()/2));
+		back.fade(0, 1, 100);
+		
+	}
+	
+	public boolean isOpen() {
+		return open;
 	}
 	
 	@Override
