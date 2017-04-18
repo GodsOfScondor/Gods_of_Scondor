@@ -13,6 +13,7 @@ public class Images {
 	public static Texture COLOR_BLUE;
 	
 	public static Texture LAYOUT_GREEN_COMMON;
+	public static Texture LAYOUT_GREEN_BATTLE;
 	
 	public static Texture TEST_IMG;
 	
@@ -44,6 +45,7 @@ public class Images {
 		COLOR_BLUE = new Texture("colors/blue");
 		
 		LAYOUT_GREEN_COMMON = new Texture("card_gn_common");
+		LAYOUT_GREEN_COMMON = new Texture("card_gn_battle");
 		
 		TEST_IMG = new Texture("img_test");
 		

@@ -25,7 +25,7 @@ public class BattleCard extends Component {
 		this.data = data;
 		this.size = size;
 
-		layout = new Image(Images.LAYOUT_GREEN_COMMON, 0, 0, 0, 0, -1);
+		layout = new Image(Images.LAYOUT_GREEN_BATTLE, 0, 0, 0, 0, -1);
 		image = new Image(Images.TEST_IMG, 0, 0, 0, 0, -1);
 		attack = new Text("", 0, 0, 0, 1, -1);
 		life = new Text("", 0, 0, 0, 1, -1);
