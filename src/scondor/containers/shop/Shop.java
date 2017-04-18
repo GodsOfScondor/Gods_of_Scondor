@@ -3,7 +3,7 @@ package scondor.containers.shop;
 import java.util.List;
 import java.util.Random;
 
-import scondor.components.Card;
+import scondor.components.BattleCard;
 import scondor.components.Container;
 import scondor.components.Containers;
 import scondor.components.Label;
@@ -35,7 +35,7 @@ public class Shop extends Container {
 
 	private TextButton shop, exit;
 
-	private Card preview;
+	private BattleCard preview;
 	private ProductShowcase showcase;
 
 	private PackType type = null;
@@ -92,7 +92,7 @@ public class Shop extends Container {
 		Packs pack3 = new Packs(PackType.X_CLOSED, null, 400, 370, 25, 40);
 		Packs.allPacks.add(pack3);
 
-		preview = new Card(new ATCardData(0, "EXAMPLE", "AAAAAAAAAAAAAAAAAAA", 1, ManaType.WILD, 1, 2, 3), 50,
+		preview = new BattleCard(new ATCardData(0, "EXAMPLE", "AAAAAAAAAAAAAAAAAAA", 1, ManaType.WILD, 1, 2, 3), 50,
 				500, 3, false);
 
 		/*
