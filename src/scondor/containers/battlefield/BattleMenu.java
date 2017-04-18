@@ -44,7 +44,7 @@ public class BattleMenu extends Container {
 		settings.setCompX(500-(settings.getCompWidth()/2));
 		surrender = new TextButton("SURRENDER", 500, 500, 4f, 3, new Action() {
 			public void perform() {
-				Client.sendToServer(new Message("fight;action;surrender"));
+				Client.sendToServer(new Message("fight;surrender"));
 				Containers.getBattlefield().end(EndOfGameType.SURRENDER_LOSE);
 			}
 		}, false);
