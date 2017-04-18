@@ -14,12 +14,13 @@ public class Window {
 			if (mode.getFrequency()<30) mode = new DisplayMode(1920, 1080);
 			else Display.setFullscreen(true);
 			
-			Display.setDisplayMode(new DisplayMode(600, 400));
+//			Display.setDisplayMode(new DisplayMode(1200, 1000));
+			Display.setDisplayMode(new DisplayMode(1920, 1080));
 			Display.setFullscreen(false);
 			
 			Display.setTitle("Gods of Scondor");
 			Display.setResizable(false);
-			Display.setVSyncEnabled(true);
+			Display.setVSyncEnabled(false);
 			Display.create(new PixelFormat(8, 8, 0, 8));
 		} catch (LWJGLException e) {
 			e.printStackTrace();
