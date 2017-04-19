@@ -22,12 +22,17 @@ public class FontRender implements Render{
 	}
 	
 	public void render(List<Text> list, int priority) {
+		
+		if (list.size()==0) return;
+		
 		prepare();
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		
 		shader.loadPriority(priority);
 		
 		for (Text text : list) {
+			
+			if (text.getTransparency()<0.01f) continue;
 			
 			text.update();
 			

@@ -27,6 +27,8 @@ public class ImageRender implements Render {
 
 	public void render(List<Image> list, int priority) {
 		
+		if (list.size()==0) return;
+		
 		GL30.glBindVertexArray(vao_id);
 		GL20.glEnableVertexAttribArray(0);
 		GL11.glEnable(GL11.GL_BLEND);
@@ -37,6 +39,9 @@ public class ImageRender implements Render {
 		shader.loadPriority(priority);
 		
 		for (Image img : list) {
+			
+			if (img.getTransparency()<0.01f) continue;
+			
 			img.update();
 			GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
 			GL13.glActiveTexture(GL13.GL_TEXTURE0);
