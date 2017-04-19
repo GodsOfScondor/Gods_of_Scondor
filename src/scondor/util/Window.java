@@ -13,7 +13,7 @@ public class Window {
 
 			Display.setTitle("Gods of Scondor");
 			Display.setResizable(false);
-			Display.setVSyncEnabled(true);
+			Display.setVSyncEnabled(false);
 			Display.create(new PixelFormat(8, 8, 0, 8));
 		} catch (LWJGLException e) {
 			e.printStackTrace();
