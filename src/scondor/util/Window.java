@@ -6,19 +6,11 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.PixelFormat;
 
 public class Window {
-	
+
 	public static void init() {
 		try {
-			DisplayMode mode = getBestMode();
-			
-			if (mode.getFrequency()<30) mode = new DisplayMode(1920, 1080);
-			else Display.setFullscreen(true);
-			
-//			Display.setDisplayMode(new DisplayMode(1200, 1000));
-//			Display.setDisplayMode(new DisplayMode(1920, 1080));
-			Display.setDisplayMode(new DisplayMode(600, 400));
-			Display.setFullscreen(false);
-			
+			Display.setFullscreen(true);
+
 			Display.setTitle("Gods of Scondor");
 			Display.setResizable(false);
 			Display.setVSyncEnabled(true);
@@ -27,36 +19,37 @@ public class Window {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void update() {
 		Display.sync(100);
 		Display.update();
 	}
-	
+
 	public static void close() {
 		Display.destroy();
 	}
-	
+
 	private static DisplayMode getBestMode() {
 		DisplayMode[] modes;
 		DisplayMode best = null;
 		try {
 			modes = Display.getAvailableDisplayModes();
-			
-			for (int i=0;i<modes.length;i++) {
-			    if (best != null) {
-			    	if (best.getWidth()*best.getHeight()<modes[i].getWidth()*modes[i].getHeight()) {
-			    		best = modes[i];
-			    		if (best.getWidth()*best.getHeight()==1920*1080) return best;
-			    	}
-			    } else {
-			    	best = modes[i];
-			    }
+
+			for (int i = 0; i < modes.length; i++) {
+				if (best != null) {
+					if (best.getWidth() * best.getHeight() < modes[i].getWidth() * modes[i].getHeight()) {
+						best = modes[i];
+						if (best.getWidth() * best.getHeight() == 1920 * 1080)
+							return best;
+					}
+				} else {
+					best = modes[i];
+				}
 			}
 		} catch (LWJGLException e) {
 			e.printStackTrace();
 		}
 		return best;
 	}
-	
+
 }
