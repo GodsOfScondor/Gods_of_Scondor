@@ -21,7 +21,7 @@ public class Window {
 	}
 
 	public static void update() {
-		Display.sync(100);
+		Display.sync(3000);
 		Display.update();
 	}
 
