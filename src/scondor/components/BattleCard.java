@@ -28,11 +28,11 @@ public class BattleCard extends Component {
 		layout = new Image(Images.LAYOUT_GREEN_BATTLE, 0, 0, 0, 0, -1);
 		image = new Image(Images.TEST_IMG, 0, 0, 0, 0, -1);
 		attack = new Text("", 0, 0, 0, 1, -1);
-		attack.setColor(1, 0, 0);
+		attack.setColor(0, 0, 0);
 		life = new Text("", 0, 0, 0, 1, -1);
-		life.setColor(0, 1, 0);
+		life.setColor(0, 0, 0);
 		countdown = new Text("", 0, 0, 0, 1, -1);
-		countdown.setColor(1, 1, 1);
+		countdown.setColor(0, 0, 0);
 
 		setLayer(0.49f);
 
