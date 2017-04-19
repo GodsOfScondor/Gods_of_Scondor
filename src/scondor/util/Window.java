@@ -2,7 +2,6 @@ package scondor.util;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.PixelFormat;
 
 public class Window {
@@ -21,35 +20,11 @@ public class Window {
 	}
 
 	public static void update() {
-		Display.sync(100);
+		Display.sync(500);
 		Display.update();
 	}
 
 	public static void close() {
 		Display.destroy();
 	}
-
-	private static DisplayMode getBestMode() {
-		DisplayMode[] modes;
-		DisplayMode best = null;
-		try {
-			modes = Display.getAvailableDisplayModes();
-
-			for (int i = 0; i < modes.length; i++) {
-				if (best != null) {
-					if (best.getWidth() * best.getHeight() < modes[i].getWidth() * modes[i].getHeight()) {
-						best = modes[i];
-						if (best.getWidth() * best.getHeight() == 1920 * 1080)
-							return best;
-					}
-				} else {
-					best = modes[i];
-				}
-			}
-		} catch (LWJGLException e) {
-			e.printStackTrace();
-		}
-		return best;
-	}
-
 }
