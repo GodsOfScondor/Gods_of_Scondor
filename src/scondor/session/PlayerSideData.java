@@ -8,6 +8,7 @@ import scondor.deck.card.fieldcard.FieldCardData;
 import scondor.deck.card.troops.ATCardData;
 import scondor.deck.card.troops.DTCardData;
 import scondor.god.GodData;
+import scondor.mana.ManaData;
 
 /**
  * 
@@ -31,8 +32,9 @@ public class PlayerSideData implements Serializable {
 	private DTCardData[] defenders;
 	
 	private GodData god;
+	private ManaData mana;
 
-	public PlayerSideData(FieldCardData fieldcard, List<CardData> hand, List<CardData> stack, List<CardData> graveyard, ATCardData[] attackers, DTCardData[] defenders, GodData god) {
+	public PlayerSideData(FieldCardData fieldcard, List<CardData> hand, List<CardData> stack, List<CardData> graveyard, ATCardData[] attackers, DTCardData[] defenders, GodData god, ManaData mana) {
 		this.fieldcard = fieldcard;
 		this.hand = hand;
 		this.stack = stack;
@@ -40,6 +42,7 @@ public class PlayerSideData implements Serializable {
 		this.attackers = attackers;
 		this.defenders = defenders;
 		this.god = god;
+		this.mana = mana;
 	}
 
 	public static long getSerialversionuid() {
@@ -72,6 +75,10 @@ public class PlayerSideData implements Serializable {
 
 	public GodData getGod() {
 		return god;
+	}
+	
+	public ManaData getMana() {
+		return mana;
 	}
 	
 }

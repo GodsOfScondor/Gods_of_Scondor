@@ -99,6 +99,11 @@ public class Image implements Comparable<Image>{
 	 */
 	public void fade(float start, float end, int time) {
 		
+		if (time==0) {
+			transparency = end;
+			return;
+		}
+		
 		if (transparency<0.001 && end < 0.001) return;
 		
 		b_tranyparency = transparency;

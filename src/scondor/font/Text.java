@@ -251,6 +251,12 @@ public class Text implements Comparable<Text> {
 	 * 
 	 */
 	public void fade(float start, float end, int time) {
+		
+		if (time==0) {
+			transparency = end;
+			return;
+		}
+		
 		b_transparency = transparency;
 		slide_transparency = new Slide((int)(1000*start), (int)(1000*end), time);
 		transparency = start;
