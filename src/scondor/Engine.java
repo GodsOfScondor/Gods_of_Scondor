@@ -15,7 +15,6 @@ public class Engine {
 	private static Connection connection;
 	private static boolean started = false;
 	private static long ago;
-	private static boolean skipping;
 	
 	
 	public static void init() {
@@ -41,19 +40,18 @@ public class Engine {
 			started = true;
 		}
 		
-		ago = System.currentTimeMillis();
-		
 		KeyBoard.update();
 		Mouse.update();
 		
 		Client.update();
 		Utils.update();
 		
+		System.out.println(System.currentTimeMillis()-ago+"ms");
+		ago = System.currentTimeMillis();
+		
 		RenderMaster.update();
 		
-		if (!skipping) Window.update();
-		
-		skipping = (System.currentTimeMillis()-ago) > 9;
+		Window.update();
 		
 	}
 	
