@@ -15,7 +15,8 @@ public class Window {
 			else Display.setFullscreen(true);
 			
 //			Display.setDisplayMode(new DisplayMode(1200, 1000));
-			Display.setDisplayMode(new DisplayMode(1920, 1080));
+//			Display.setDisplayMode(new DisplayMode(1920, 1080));
+			Display.setDisplayMode(new DisplayMode(600, 400));
 			Display.setFullscreen(false);
 			
 			Display.setTitle("Gods of Scondor");
