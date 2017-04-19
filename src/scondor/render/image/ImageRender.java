@@ -27,6 +27,8 @@ public class ImageRender implements Render {
 
 	public void render(List<Image> list, int priority) {
 		
+		if (list.size()==0) return;
+		
 		GL30.glBindVertexArray(vao_id);
 		GL20.glEnableVertexAttribArray(0);
 		GL11.glEnable(GL11.GL_BLEND);
