@@ -2,13 +2,17 @@ package scondor.util;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.PixelFormat;
 
 public class Window {
-
+	
+	public static final int FPS = 60;
+	
 	public static void init() {
 		try {
-			Display.setFullscreen(true);
+//			Display.setFullscreen(true);
+			Display.setDisplayMode(new DisplayMode(600, 400));
 
 			Display.setTitle("Gods of Scondor");
 			Display.setResizable(false);
@@ -20,7 +24,7 @@ public class Window {
 	}
 
 	public static void update() {
-		Display.sync(500);
+		Display.sync(FPS);
 		Display.update();
 	}
 

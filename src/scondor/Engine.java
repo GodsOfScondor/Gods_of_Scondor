@@ -14,8 +14,6 @@ public class Engine {
 	private static Client client;
 	private static Connection connection;
 	private static boolean started = false;
-	private static long ago;
-	
 	
 	public static void init() {
 		
@@ -45,9 +43,6 @@ public class Engine {
 		
 		Client.update();
 		Utils.update();
-		
-		System.out.println(System.currentTimeMillis()-ago+"ms");
-		ago = System.currentTimeMillis();
 		
 		RenderMaster.update();
 		
